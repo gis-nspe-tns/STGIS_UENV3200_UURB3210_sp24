@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.280">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2024-01-16">
+
+<title>Spatial Thinking with GIS: Course Introduction</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="STGIS_course-introduction_SP24_files/libs/clipboard/clipboard.min.js"></script>
+<script src="STGIS_course-introduction_SP24_files/libs/quarto-html/quarto.js"></script>
+<script src="STGIS_course-introduction_SP24_files/libs/quarto-html/popper.min.js"></script>
+<script src="STGIS_course-introduction_SP24_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="STGIS_course-introduction_SP24_files/libs/quarto-html/anchor.min.js"></script>
+<link href="STGIS_course-introduction_SP24_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="STGIS_course-introduction_SP24_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="STGIS_course-introduction_SP24_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="STGIS_course-introduction_SP24_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="STGIS_course-introduction_SP24_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<link rel="stylesheet" href="STGIS_course-introduction_SP24_files/styles.css">
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#faculty-instructor" id="toc-faculty-instructor" class="nav-link active" data-scroll-target="#faculty-instructor">Faculty Instructor</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#course-communication" id="toc-course-communication" class="nav-link" data-scroll-target="#course-communication">Course Communication</a></li>
+  <li><a href="#course-textbook" id="toc-course-textbook" class="nav-link" data-scroll-target="#course-textbook">Course Textbook</a></li>
+  <li><a href="#weekly-quizzes" id="toc-weekly-quizzes" class="nav-link" data-scroll-target="#weekly-quizzes">Weekly Quizzes</a></li>
+  <li><a href="#course-software" id="toc-course-software" class="nav-link" data-scroll-target="#course-software">Course Software</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Spatial Thinking with GIS: Course Introduction</h1>
+<p class="subtitle lead">Spring 2024 | <a href="https://courses.newschool.edu/courses/UENV3200/">UENV3200</a>, <a href="https://courses.newschool.edu/courses/UURB3210/">UURB3210</a></p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">January 16, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<p><img src="https://i.imgur.com/5XyTF2g.png" class="img-fluid" alt="Imgur"> <em>Source: https://atlas.developmentseed.org/all/ | Connectivity Atlas</em></p>
+<section id="faculty-instructor" class="level2">
+<h2 class="anchored" data-anchor-id="faculty-instructor">Faculty Instructor</h2>
+<ul>
+<li>Stephen Metts | The School for Public Engagement: Environmental Studies and Urban Studies</li>
+<li><a href="mailto:mettss@newschool.edu">Email</a></li>
+</ul>
+</section>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Welcome to <strong>Spatial Thinking with GIS, Spring Semester 2024</strong>.</p>
+<p>I’m looking forward to meeting you as follows on the first day of class:</p>
+<ul>
+<li>Date: Monday January 22, 2024</li>
+<li>Time: 4:00pm - 6:40pm (Lecture + Lab)</li>
+<li>Location: 6 East 16th Street | Room 706</li>
+</ul>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The revised location for our course is now <strong>6 East 16th Street | Room 706</strong>; this is different than the originally scheduled class location.</p>
+</div>
+</div>
+<p>During the first class lecture session, we will accomplish the following:</p>
+<ul>
+<li>Review course organization, essential materials and objectives.</li>
+<li>Lay theoretical groundwork for spatial thinking and analysis with GIS.</li>
+<li>Preview of the core ArcGIS Desktop interface necessary for the first lab session and the Class 1 | Week 1 assignment.</li>
+</ul>
+<p>To ensure you are ready, please review the following documents and bring any questions that you may have to the first class:</p>
+<ul>
+<li><a href="https://gis-nspe-tns.github.io/STGIS_UENV3200_UURB3210_sp24/materials/STGIS_course-introduction_SP24.html">Course Introduction (this document)</a></li>
+<li><a href="https://gis-nspe-tns.github.io/STGIS_UENV3200_UURB3210_sp24/materials/STGIS_syllabus_SP24.html">Course Syllabus</a></li>
+<li><a href="https://gis-nspe-tns.github.io/STGIS_UENV3200_UURB3210_sp24/materials/STGIS_course-expectations_SP24.html">Course Expectations &amp; Requirements</a></li>
+<li><a href="mailto:mettss@newschool.edu">Instructor Email</a></li>
+<li><a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vRAlL8PkLG3unSxZdkoFvoIs9CrkGHZlZHLiSwD33xjMJBF9EUq9VqXJmsyWXJR5sk-DvW5lqsRW8IL/pubhtml?gid=122342518&amp;single=true">Course Calendar</a></li>
+</ul>
+<p>The course interface will be accessed via CANVAS within <a href="https://my.newschool.edu/">My New School</a>. Here you will find:</p>
+<ul>
+<li>Core class documents</li>
+<li>Weekly content, data and assignments</li>
+<li>In-class quizzes &amp; labs</li>
+<li>Upload location for weekly assignments</li>
+<li>Weekly announcements</li>
+</ul>
+<p>Weekly materials will appear generally on Mondays at 7AM, on a weekly basis.</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Materials for Class 1 | Week 1 - lecture, lab and assignment - will appear 01/22/24 Monday at 7AM.</p>
+</div>
+</div>
+<p>The actual weekly content endpoints, accessed via CANVAS, are housed at <a href="https://github.com/gis-nspe-tns/STGIS_UENV3200_UURB3210_sp24">GitHub</a> which is fully accessible digitally, and can be downloaded on a weekly basis. If you would like to augment the online access for the course (available through 05/31/2024), you can easily print to PDF from the browser and save a copy of the assignment on your machine. You can also download the whole course repository at <a href="https://github.com/gis-nspe-tns/STGIS_UENV3200_UURB3210_sp24">GitHub</a>. If you do download the repository, wait until the last weeks of the course as weekly materials will be revised and updated throughout the course by the instructor.</p>
+</section>
+<section id="course-communication" class="level2">
+<h2 class="anchored" data-anchor-id="course-communication">Course Communication</h2>
+<p>For course communication, we will utilize <a href="https://slack.com/">Slack</a>. Our team name is <strong>stgis-sp24</strong> and can be accessed directly:</p>
+<ul>
+<li><a href="https://stgis-sp24.slack.com">stgis-sp24</a></li>
+</ul>
+<p>There is also a direct invite link to the Slack workspace (please do not share publicly with others outside the course) - <a href="https://join.slack.com/t/slack-t4b6830/shared_invite/zt-2ajsvl9mq-fE4ru9eXk6dsY4i4nPErXA">INVITE</a></p>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>this invite will expire quickly so if you are unable to access the team via the link, contact instructor for an updated invite link.</p>
+</div>
+</div>
+<p>If you are new to <a href="https://slack.com/">Slack</a>, there is a overview guide at <a href="lynda.com">lynda.com</a> available to New School students for free as follows:</p>
+<ul>
+<li><a href="https://get.slack.help/hc/en-us/articles/218080037-Getting-started-for-new-users">Slack’s New User Guide</a></li>
+<li><a href="https://www.linkedin.com/learning/slack-essential-training/communicate-and-collaborate-with-slack?autoplay=true&amp;u=75880858">Learning Slack</a></li>
+</ul>
+<p>Once you have navigated to the <a href="https://stgis-sp24.slack.com">Slack Team</a> and completed signup, send a hello to the class at the <strong>introductions</strong> channel. The following channels are available to the class, and each has a purpose as follows:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://i.imgur.com/T8ZYG20.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Slack Channels</em></figcaption><p></p>
+</figure>
+</div>
+<ul>
+<li><strong>general</strong> - location to post links, references, ect. that do not fit into more narrow channels.</li>
+<li><strong>introductions</strong> - location to initialize yourself to the course Slack, and introduce yourself to the class.</li>
+<li><strong>research-readings</strong> - location for research links, papers, references on a weekly basis</li>
+<li><strong>technical-qa</strong> - where the bulk of activity will happen over the course. here is the location to post technical questions that arise during weekly assignments. This channel is monitored by instructor; but students should be as active as possible here, helping fellow students solve technical issues as they arise.</li>
+<li><strong>weekly-notices</strong> - if there is an issue the needs to be addressed not tied to weekly technical issues or details in syllabus and course materials, it will be posted here.</li>
+</ul>
+<p>Throughout the course, we will utilize several <a href="https://www.google.com/drive/">Google Drive</a> features. Some of these features may not be fully available through a New School email address, so you will need to have a [gmail account]((https://accounts.google.com/signup) set up for the course if you do not have one. It is perfectly fine to use a personal gmail account that you have already.</p>
+<ul>
+<li>To set a gmail/google account, navigate to <a href="https://accounts.google.com/signup">Google Accounts signup</a> and create your account.</li>
+</ul>
+<p>In addition CANVAS and the Slack communication for the course, materials and software will be provided to complete all technical components of the course.</p>
+</section>
+<section id="course-textbook" class="level2">
+<h2 class="anchored" data-anchor-id="course-textbook">Course Textbook</h2>
+<p>The course will feature a theory framework in which each week’s technical work will be conducted. This component <em>will</em> require a textbook purchase. There are several delivery options available. The title is as follows. The purchase can be accomplished via the following share link:</p>
+<ul>
+<li><a href="https://students.flatworldknowledge.com/course/2607197">SHARE LINK</a></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://i.imgur.com/0L5uOet.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Course Textbook</em></figcaption><p></p>
+</figure>
+</div>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You are welcome to purchase the download and print versions; however, the only required purchase is the <em>online access</em> version priced at $35.95.</p>
+</div>
+</div>
+</section>
+<section id="weekly-quizzes" class="level2">
+<h2 class="anchored" data-anchor-id="weekly-quizzes">Weekly Quizzes</h2>
+<p>Weekly readings will be conducted within this <em>Essentials of Geographic Information Systems</em> textbook; most weeks will then feature a weekly quiz for each week’s theory readings in the textbook. Quizzes open each Monday, and will cover the previous week’s content. Students can take the quiz anytime on Mondays leading up to each week’s lecture session on Monday evenings.</p>
+</section>
+<section id="course-software" class="level2">
+<h2 class="anchored" data-anchor-id="course-software">Course Software</h2>
+<p>The primary course software will be <a href="https://www.esri.com/en-us/arcgis/products/arcgis-desktop/overview">ArcGIS Desktop</a>. In addition to this primary GIS software, we will utilize <a href="https://www.esri.com/en-us/c/product/arcgis-online">ArcGIS Online</a> as well as a series of open-source geospatial tools throughout the course.</p>
+<p><img src="https://i.imgur.com/I90ZjbE.png" class="img-fluid" alt="Imgur"> <em>Source: ESRI - ArcGIS Desktop</em></p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp(/^(?:http:|https:)\/\/www\.quarto\.org\/custom/);
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          // default icon
+          link.classList.add("external");
+      }
+    }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+<script src="STGIS_course-introduction_SP24_files/libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
