@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.280">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2024-01-17">
+
+<title>Class 1 Lecture Demonstration Lab</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="c1_lecture_demo_files/libs/clipboard/clipboard.min.js"></script>
+<script src="c1_lecture_demo_files/libs/quarto-html/quarto.js"></script>
+<script src="c1_lecture_demo_files/libs/quarto-html/popper.min.js"></script>
+<script src="c1_lecture_demo_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="c1_lecture_demo_files/libs/quarto-html/anchor.min.js"></script>
+<link href="c1_lecture_demo_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="c1_lecture_demo_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="c1_lecture_demo_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="c1_lecture_demo_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="c1_lecture_demo_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<link rel="stylesheet" href="c1_lecture_demo_files/styles.css">
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#recreating-john-snows-broad-street-pump-map" id="toc-recreating-john-snows-broad-street-pump-map" class="nav-link active" data-scroll-target="#recreating-john-snows-broad-street-pump-map">Recreating John Snow’s ‘Broad Street Pump’ Map</a></li>
+  <li><a href="#preamble" id="toc-preamble" class="nav-link" data-scroll-target="#preamble">Preamble</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
+  <li><a href="#step-1-load-data" id="toc-step-1-load-data" class="nav-link" data-scroll-target="#step-1-load-data">Step 1: Load Data</a></li>
+  <li><a href="#step-2-create-thiessen-polygons" id="toc-step-2-create-thiessen-polygons" class="nav-link" data-scroll-target="#step-2-create-thiessen-polygons">Step 2: Create Thiessen Polygons</a></li>
+  <li><a href="#step-3-report-cholera-deaths-within-each-pump-thiessen-polygon" id="toc-step-3-report-cholera-deaths-within-each-pump-thiessen-polygon" class="nav-link" data-scroll-target="#step-3-report-cholera-deaths-within-each-pump-thiessen-polygon">Step 3: Report Cholera Deaths within each pump thiessen polygon</a></li>
+  <li><a href="#step-4-create-a-summary-aggregation-for-total-cholera-deaths-within-each-thiessen-polygon" id="toc-step-4-create-a-summary-aggregation-for-total-cholera-deaths-within-each-thiessen-polygon" class="nav-link" data-scroll-target="#step-4-create-a-summary-aggregation-for-total-cholera-deaths-within-each-thiessen-polygon">Step 4: create a summary aggregation for total Cholera Deaths within each thiessen polygon</a></li>
+  <li><a href="#concluding-remarks" id="toc-concluding-remarks" class="nav-link" data-scroll-target="#concluding-remarks">Concluding Remarks</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Class 1 Lecture Demonstration Lab</h1>
+<p class="subtitle lead">Spring 2024 | <a href="https://courses.newschool.edu/courses/UENV3200/">UENV3200</a>, <a href="https://courses.newschool.edu/courses/UURB3210/">UURB3210</a></p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">January 17, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="recreating-john-snows-broad-street-pump-map" class="level2">
+<h2 class="anchored" data-anchor-id="recreating-john-snows-broad-street-pump-map">Recreating John Snow’s ‘Broad Street Pump’ Map</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://i.imgur.com/U1jtAIn.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Original map by John Snow showing the clusters of cholera cases in the London epidemic of 1854, drawn and lithographed by Charles Cheffins.</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c1_lecture_demo_files/img/1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Digitized Pumps and Deaths.</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="preamble" class="level2">
+<h2 class="anchored" data-anchor-id="preamble">Preamble</h2>
+<p>In this demonstration lab, we will first download the recreation data of John Snow’s ‘Broad Street Pump Map’ and run a series of GIS analysis tasks to derive insight and produce quantitative results about both the location of the pumps and the resulting deaths from the <code>Broad Street Pump</code> itself.</p>
+</section>
+<section id="data" class="level2">
+<h2 class="anchored" data-anchor-id="data">Data</h2>
+<p>The data for this demonstration lab comes from the QGIS project located <a href="https://docs.qgis.org/2.18/en/docs/training_manual/processing/john_snow.html">HERE</a>.</p>
+<p>To start, <a href="https://www.dropbox.com/s/no7rhxhzubh1o3c/demo_lab1-JS_data.zip?dl=1">directly download</a> a prepared, compressed directory which includes all necessary data as well as a ArcGIS <code>.mxd</code> project file.</p>
+<ul>
+<li><a href="https://www.dropbox.com/s/no7rhxhzubh1o3c/demo_lab1-JS_data.zip?dl=1">Direct Download</a></li>
+</ul>
+<p>Once complete, extract the zipped directory and open the directory folder. The results - including the project <code>.mxd</code> - should appear as follows:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c1_lecture_demo_files/img/2.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Directory Folder Uncompressed.</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="step-1-load-data" class="level2">
+<h2 class="anchored" data-anchor-id="step-1-load-data">Step 1: Load Data</h2>
+<ul>
+<li>Navigate to the directory folder <code>demo_lab1-JS_data</code> then <em>double-click</em> the <code>demo_lab_1_js.mxd</code> file. This will prompt ArcGIS Desktop to load the project on the machine. The <em>Table of Contents</em> should feature the following 2 vector layers and 1 raster layer (<code>.tif</code>):</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c1_lecture_demo_files/img/3.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Project Vector Files.</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c1_lecture_demo_files/img/4.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Data Frame View of Project Vector Files.</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="step-2-create-thiessen-polygons" class="level2">
+<h2 class="anchored" data-anchor-id="step-2-create-thiessen-polygons">Step 2: Create Thiessen Polygons</h2>
+<p>Thiessen polygon boundaries define the area closest to each feature relative to all other features. Thiessen polygons are generated from a set of three or more features. In this case, our features will be the <em>Pumps</em> points.</p>
+<p>Thiessen polygons are also referred to as spatial monopoly or Voronoi diagrams. This type of analysis assumes that there are clusters of features that are distinct within the larger dataset of features; again in this case, the <em>Pumps</em> points are our input features.</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This type of analysis needs planar units, not degrees, for valid output results. We will touch on this issue in class 2, and more in depth in class 6 - Map Projections. For now, note that the project utlizes the <code>British National Grid</code> with a linear unit of <code>meter</code>, thus we don’t need to adopt another map projection in order to proceed with analysis.</p>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c1_lecture_demo_files/img/6.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Project Map Projection = British National Grid.</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c1_lecture_demo_files/img/5.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Project Map Projection = British National Grid utilizes a planar unit of <code>meter</code>.</figcaption><p></p>
+</figure>
+</div>
+<p>ArcGIS Desktop provides many analysis tools via the <code>ArcToolbox</code> easily accessible on the top tool bar as the red ‘toolbox’:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c1_lecture_demo_files/img/9.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Top Tool Bar with red ‘toolbox’.</figcaption><p></p>
+</figure>
+</div>
+<p>However, the <code>Search</code> tool is a good way to navigate to analysis tools when you may be unsure of the exact tool or the exact name of the tool. Here we will enact <code>Search</code> and navigate to the correct tool by typing in <code>thiessen</code>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c1_lecture_demo_files/img/7.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Search on <code>thiessen</code>.</figcaption><p></p>
+</figure>
+</div>
+<p>Utilizing the <code>Create Thiessen Polygons</code> tool under the <code>Analysis</code> section of <code>ArcToolbox</code>, we will input the <em>Cholera Deaths</em> and output to the <code>Default.gdb</code> location:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c1_lecture_demo_files/img/8.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><code>Create Thiessen Polygons</code> Analysis Tool within the Proximity Toolbox.</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c1_lecture_demo_files/img/10.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><code>Create Thiessen Polygons</code> Analysis Tool.</figcaption><p></p>
+</figure>
+</div>
+<p>The results of the analysis tool should be a new polygon feature that represents the ‘clusters’ or ‘neighborhoods’ of distinct pump locations. If we open the attribute table of the new polygon feature, we can ascertain which polygon features the predominance of death locations via the <code>ID</code> attribute:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c1_lecture_demo_files/img/11.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><code>Create Thiessen Polygons</code> Analysis Tool - when complete will show a green checkbox with hammer.</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c1_lecture_demo_files/img/12.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Resulting Thiessen Polygon Feature in Table of Contents.</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c1_lecture_demo_files/img/13.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Polygon feature in the Data Frame and in Attribute Table views.</figcaption><p></p>
+</figure>
+</div>
+<p>The resulting Thiessen Polygons tell us the extent of distance, or travel, for each pump. This gives us an idea of how far (euclidean distance) one would travel efficiently within one polygon before crossing into another polygon where another pump would be most efficient to our travel.</p>
+<p>What this spatial analysis does NOT tell us is how many deaths have occurred within each pump’s ’neighborhood, i.e.&nbsp;its thiessen polygon. To do this analysis task, we will turn to Step 3 below.</p>
+</section>
+<section id="step-3-report-cholera-deaths-within-each-pump-thiessen-polygon" class="level2">
+<h2 class="anchored" data-anchor-id="step-3-report-cholera-deaths-within-each-pump-thiessen-polygon">Step 3: Report Cholera Deaths within each pump thiessen polygon</h2>
+<p>To do this next analysis step, we will utilize a overlay technique known as <code>Spatial Join</code>. In this process, we are able to transpose attributes from one vector layer into another. In our case, we want to aggregate the death counts at each point (at each of John Snow’s house census locations) and associate those counts with an unique ID from each thiessen polygon.</p>
+<p>To start, we can easily see just from the mapping thus far that the thiessen polygon for the ‘Broad Street Pump’ features a predominance of death points. We can assume that this concentration likely also contains the top aggregate count of deaths from those points within their respective thiessen polygon. So we can test this initial exploratory assumption by a <code>Spatial Join</code> followed by a <code>Table Summary</code>.</p>
+<p>Search for <code>Spatial Join</code> as we did for the previous tool. This will point to the following tool dialog box. Input <code>Cholera_Deaths</code> as the <em>Target Features</em> and the <code>Pumps_CreateThiessenPolygons</code> as the <em>Join Features</em>. We will use a <code>JOIN_ONE_TO_ONE</code> operation and accept the default output location.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c1_lecture_demo_files/img/14.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><code>Spatial Join</code> tool dialog box with correct order of inputs, accepting the default output location.</figcaption><p></p>
+</figure>
+</div>
+<p>Once the tool has run, we will receive a new points feature dataset that now has all the original Cholera Death points but also attributes from the thiessen polygons. We want to know for each death point, which thiessen polygon is it within? To help us understand which is which amongst the polygons, we can first label them by their <code>ID</code> value for display within the map data frame.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c1_lecture_demo_files/img/15.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Label Polygon features via <em>Right-Click on Layer &gt; Properties &gt; Labels</em>.</figcaption><p></p>
+</figure>
+</div>
+<p>Clearly, polygon ID 0 in the example contains the predominant death locations.</p>
+</section>
+<section id="step-4-create-a-summary-aggregation-for-total-cholera-deaths-within-each-thiessen-polygon" class="level2">
+<h2 class="anchored" data-anchor-id="step-4-create-a-summary-aggregation-for-total-cholera-deaths-within-each-thiessen-polygon">Step 4: create a summary aggregation for total Cholera Deaths within each thiessen polygon</h2>
+<p>Following a successful spatial join, we will now <code>Summarize</code> within the attribute table. Here we will target the death count using the <code>SUM</code> statistic for the <code>Input_FID</code> column. To start, we <em>right-click</em> on the <code>Input_FID</code> column, choose <code>Summarize</code> and point the field option to <code>Input_FID</code>. Keep in mind this column is thiessen polygon value that we gain through the spatial join to each Cholera Death point. Next, we choose <code>Count &gt; Sum</code> for the summary statistic. We accept the default output table location and run the tool.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c1_lecture_demo_files/img/16.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><code>Summarize</code> within the spatial join attribute table.</figcaption><p></p>
+</figure>
+</div>
+<p>As we review the result, we should see the following three column attributes returned via <code>Summarize</code>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c1_lecture_demo_files/img/17.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><code>Summarize</code> results table.</figcaption><p></p>
+</figure>
+</div>
+<ul>
+<li><code>Input_FID</code>: this is the original thiessen polygon ID.</li>
+<li><code>Count_Input_FID</code>: this is the count of Cholera Death points per <code>Input_FID</code>.</li>
+<li><code>Sum_COUNT</code>: this is the new aggregated count of ALL deaths, regardless of the number of Cholera Death points, per each <code>Input_FID</code> thiessen polygon.</li>
+</ul>
+</section>
+<section id="concluding-remarks" class="level2">
+<h2 class="anchored" data-anchor-id="concluding-remarks">Concluding Remarks</h2>
+<p>In this exploratory analysis, we were able to derive an important new geometry (thiessen polygons) based on distances <em>between</em> the distribution of water pumps within the John Snow study area. Further, we were able to quantify the total deaths per our distance areas (thiessen polygons). In our findings, we see that the thiessen polygon for the central ‘Broad Street Pump’ by far contains both the most Cholera Death locations and Cholera Death occurrences.</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp(/^(?:http:|https:)\/\/www\.quarto\.org\/custom/);
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          // default icon
+          link.classList.add("external");
+      }
+    }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+<script src="c1_lecture_demo_files/libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
