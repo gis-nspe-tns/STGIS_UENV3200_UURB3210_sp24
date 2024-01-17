@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.280">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2024-01-17">
+
+<title>Class 1 Lab: Orientation to ArcGIS Interface</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="STGIS_lab-1_SP24_files/libs/clipboard/clipboard.min.js"></script>
+<script src="STGIS_lab-1_SP24_files/libs/quarto-html/quarto.js"></script>
+<script src="STGIS_lab-1_SP24_files/libs/quarto-html/popper.min.js"></script>
+<script src="STGIS_lab-1_SP24_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="STGIS_lab-1_SP24_files/libs/quarto-html/anchor.min.js"></script>
+<link href="STGIS_lab-1_SP24_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="STGIS_lab-1_SP24_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="STGIS_lab-1_SP24_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="STGIS_lab-1_SP24_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="STGIS_lab-1_SP24_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<link rel="stylesheet" href="STGIS_lab-1_SP24_files/styles.css">
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#preamble" id="toc-preamble" class="nav-link active" data-scroll-target="#preamble">Preamble</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
+  <li><a href="#step-1" id="toc-step-1" class="nav-link" data-scroll-target="#step-1">Step 1</a></li>
+  <li><a href="#step-2" id="toc-step-2" class="nav-link" data-scroll-target="#step-2">Step 2</a></li>
+  <li><a href="#step-3" id="toc-step-3" class="nav-link" data-scroll-target="#step-3">Step 3</a></li>
+  <li><a href="#step-4" id="toc-step-4" class="nav-link" data-scroll-target="#step-4">Step 4</a></li>
+  <li><a href="#step-5" id="toc-step-5" class="nav-link" data-scroll-target="#step-5">Step 5</a></li>
+  <li><a href="#step-6" id="toc-step-6" class="nav-link" data-scroll-target="#step-6">Step 6</a></li>
+  <li><a href="#step-7" id="toc-step-7" class="nav-link" data-scroll-target="#step-7">Step 7</a></li>
+  <li><a href="#step-8" id="toc-step-8" class="nav-link" data-scroll-target="#step-8">Step 8</a></li>
+  <li><a href="#step-9" id="toc-step-9" class="nav-link" data-scroll-target="#step-9">Step 9</a></li>
+  <li><a href="#step-10" id="toc-step-10" class="nav-link" data-scroll-target="#step-10">Step 10</a></li>
+  <li><a href="#concluding-remarks" id="toc-concluding-remarks" class="nav-link" data-scroll-target="#concluding-remarks">Concluding Remarks</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Class 1 Lab: Orientation to ArcGIS Interface</h1>
+<p class="subtitle lead">Spring 2024 | <a href="https://courses.newschool.edu/courses/UENV3200/">UENV3200</a>, <a href="https://courses.newschool.edu/courses/UURB3210/">UURB3210</a></p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">January 17, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="preamble" class="level2">
+<h2 class="anchored" data-anchor-id="preamble">Preamble</h2>
+<p>In this first technical lab, we will complete any remaining steps of the first demonstration lab then turn to an orientation of the ArcGIS Desktop Interface. This orientation should be used extensively to aid with the completion of the first assignment due Sunday evening at 11:59pm.</p>
+<ul>
+<li><a href="https://gis-nspe-tns.github.io/STGIS_UENV3200_UURB3210_sp24/demos/c1_lecture_demo.html">Class 1 Demonstration Lab</a></li>
+<li><a href="https://gis-nspe-tns.github.io/STGIS_UENV3200_UURB3210_sp24/assignments/STGIS_assignment-1_SP24.html">Class 1 Assignment</a></li>
+<li><a href="https://st-gis-materials.s3.us-east-2.amazonaws.com/STGIS_lab1-handout.pdf">ArcGIS Interface Handout PDF</a></li>
+</ul>
+</section>
+<section id="data" class="level2">
+<h2 class="anchored" data-anchor-id="data">Data</h2>
+<p>The data for this demonstration lab comes from the Natural Earth project located <a href="https://www.naturalearthdata.com/">HERE</a>.</p>
+<p>To start, download the data either from Natural Earth or via ‘direct download’:</p>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Use the ‘direct download’ if the Start Kit from Natural Earth takes too long - or not at all.</p>
+</div>
+</div>
+<ul>
+<li><p><a href="https://naciscdn.org/naturalearth/packages/Natural_Earth_quick_start.zip">Natural Earth Start Kit</a></p></li>
+<li><p><a href="https://www.dropbox.com/s/zatomws9d5ttufl/Natural_Earth_quick_start.zip?dl=1">Direct Download</a></p></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-1_SP24_files/img/1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Get Natural Earth Data from the green link.</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-1_SP24_files/img/2.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Natural Earth quick starter kit.</figcaption><p></p>
+</figure>
+</div>
+<p>Once complete, extract the zipped directory and open the directory folder. The results - including the project <code>.mxd</code> - are located in the unzipped directory:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-1_SP24_files/img/3.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Extract the zipped directory.</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="step-1" class="level2">
+<h2 class="anchored" data-anchor-id="step-1">Step 1</h2>
+<ul>
+<li>Navigate to the directory folder <code>Natural_Earth_quick_start</code> then <em>double-click</em> the <code>Natural_Earth_quick_start_for_ArcMap</code> file. This will prompt ArcGIS Desktop to load the project on the machine. The <em>Table of Contents</em> should feature both vector layers and raster layers (<code>.tif</code>):</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-1_SP24_files/img/4.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Starter Kit Directory with <code>.mxd</code> highlighted.</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="step-2" class="level2">
+<h2 class="anchored" data-anchor-id="step-2">Step 2</h2>
+<p>The <em>Table of Contents</em> should feature the following vector layers and raster layers:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-1_SP24_files/img/5.gif" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Scroll through Table of Contents, then notice cursor at Data Frame and Decimal Degrees at lower right.</figcaption><p></p>
+</figure>
+</div>
+<p>With the starter data loaded correctly, we will turn to reviewing the ArcGIS Desktop (ArcMap) interface. Utilize the handout PDF to assist with orienting to the interface.</p>
+<ul>
+<li><a href="https://st-gis-materials.s3.us-east-2.amazonaws.com/STGIS_lab1-handout.pdf">ArcGIS Interface Handout PDF</a></li>
+</ul>
+</section>
+<section id="step-3" class="level2">
+<h2 class="anchored" data-anchor-id="step-3">Step 3</h2>
+<p>Together as a group, we will review the core components of the interface, including the following:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-1_SP24_files/img/6.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Data View Interface.</figcaption><p></p>
+</figure>
+</div>
+<ul>
+<li>1 Table of Contents - Layers</li>
+<li>2 Data View vs Layout View tabs</li>
+<li>3 Status Bar + Map Coordinates</li>
+<li>4 Data View Pane</li>
+<li>5 Standard Toolbar(s)</li>
+<li>6 Main Menu Ribbon</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-1_SP24_files/img/7.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Layout View Interface.</figcaption><p></p>
+</figure>
+</div>
+<ul>
+<li>1 Layout Toolbar</li>
+<li>2 Layout View Pane</li>
+<li>3 Layout Canvas</li>
+</ul>
+</section>
+<section id="step-4" class="level2">
+<h2 class="anchored" data-anchor-id="step-4">Step 4</h2>
+<p>We will <em>remove</em> all layers except those on the <code>110m_physical</code> and <code>110m_cultural</code> file paths. Will also discuss the damaged Data Source paths noted as red exclamation marks:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-1_SP24_files/img/8.gif" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Removing data from *Table of Contents; corrupted file paths as red exclamation marks.</figcaption><p></p>
+</figure>
+</div>
+<p>Next, we will preview the various display modes in <em>Table of Contents</em>; reorganize layers in order to stack the raster 50m at top of <em>Table of Contents</em>; and view data connection to <em>ArcCatalog</em>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-1_SP24_files/img/9.gif" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Remove layers and explore <em>Table of Contents</em>.</figcaption><p></p>
+</figure>
+</div>
+<p>Next we will create a new project and explore the <em>ArcCatalog</em> (file cabinet icon on standard tool bar) procedure to connect to a data source then load new layers of data individually. Once loaded, we will symbolize a layer, followed by a layer export/save to the data source directory:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-1_SP24_files/img/10.gif" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Using ArcCatalog to load and save vector layers.</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="step-5" class="level2">
+<h2 class="anchored" data-anchor-id="step-5">Step 5</h2>
+<p>Next, create a new <code>.mxd</code> project and import <code>ne_50m_land</code> via the <em>ArcCatalog</em>. We will create a <em>Spatial Bookmark</em> for New York City and explore options for <em>Spatial Bookmarks</em> within an <code>.mxd</code> project.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-1_SP24_files/img/11.gif" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Creating Spatial Bookmarks within a project <code>.mxd</code>.</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="step-6" class="level2">
+<h2 class="anchored" data-anchor-id="step-6">Step 6</h2>
+<p>With <code>ne_50m_land</code> loaded, we will review vector symbology options via <code>Right-Click Layer &gt; Properties &gt; Symbology</code>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-1_SP24_files/img/12.gif" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Layer Symbology via <em>Table of Contents</em>.</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="step-7" class="level2">
+<h2 class="anchored" data-anchor-id="step-7">Step 7</h2>
+<p>With <code>ne_50m_land</code> loaded, we will <code>zoom to layer</code> scale. We will then save the <code>.mxd</code> before proceeding to <em>Layout View</em> to begin cartographic output for this one vector layer.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-1_SP24_files/img/13.gif" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Saving an <code>.mxd</code> and reviewing <em>Layout View</em>.</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-1_SP24_files/img/14.gif" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Handling Paper Size in <em>Layout View</em>.</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="step-8" class="level2">
+<h2 class="anchored" data-anchor-id="step-8">Step 8</h2>
+<p>In the assignment for this first week, we will be creating and exporting a map utilizing <em>any</em> Natural Earth features of your choosing. You can also choose at which scale you would like to produce your map. If you do choose to create a map at a global scale, it is recommended that you change the <em>Data Frame</em> coordinate properties to a map projection that works well at the global scale. The recommended map projection for this week’s assignment at the global scale will be <code>Robinson projection</code>. Here we will change the map layout coordinate system to <code>Robinson projection</code>. Make sure to <code>Double-click &gt; Properties &gt; Coordinate Systems &gt; Enter Robinson in Search</code> <em>inside</em> the map layer frame, not outside:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-1_SP24_files/img/15.gif" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Robinson Projection set at dataframe properties within layout view</figcaption><p></p>
+</figure>
+</div>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Robinson_projection">More information on Robinson Projection</a></li>
+</ul>
+</section>
+<section id="step-9" class="level2">
+<h2 class="anchored" data-anchor-id="step-9">Step 9</h2>
+<p>We will turn now to the creation of legend items. Note that legends are grayed out in <em>Data View</em> and only become available and active in <em>Layout View</em>. Also note <em>Legend Properties</em> dialog box which is the location to access all editable component of a map legend.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-1_SP24_files/img/16.gif" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Developing a map legend within <em>Layout View</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-1_SP24_files/img/17.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">5 Legend Properties available from <em>Legend Properties</em> dialog box.</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="step-10" class="level2">
+<h2 class="anchored" data-anchor-id="step-10">Step 10</h2>
+<p>Finally we will explore cartographic export options from a project <code>.mxd</code>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-1_SP24_files/img/18.gif" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Various export formats from a project <code>.mxd</code></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="concluding-remarks" class="level2">
+<h2 class="anchored" data-anchor-id="concluding-remarks">Concluding Remarks</h2>
+<p>In this ArcGIS Desktop orientation, we were able to load data and create a final cartographic output. We utilized many of the core components of the software interface necessary for creating basic cartographic outputs. These components will be used to complete the first week assignment in which we will use the same <a href="https://www.naturalearthdata.com/">Natural Earth</a> dataset, designing a map featuring thematic layers of your own choosing.</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp(/^(?:http:|https:)\/\/www\.quarto\.org\/custom/);
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          // default icon
+          link.classList.add("external");
+      }
+    }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+<script src="STGIS_lab-1_SP24_files/libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
