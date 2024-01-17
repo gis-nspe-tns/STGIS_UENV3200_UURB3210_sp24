@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.280">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2024-01-17">
+
+<title>Class 1 Assignment: Cartographic Output with the ArcGIS Interface</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="STGIS_assignment-1_SP24_files/libs/clipboard/clipboard.min.js"></script>
+<script src="STGIS_assignment-1_SP24_files/libs/quarto-html/quarto.js"></script>
+<script src="STGIS_assignment-1_SP24_files/libs/quarto-html/popper.min.js"></script>
+<script src="STGIS_assignment-1_SP24_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="STGIS_assignment-1_SP24_files/libs/quarto-html/anchor.min.js"></script>
+<link href="STGIS_assignment-1_SP24_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="STGIS_assignment-1_SP24_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="STGIS_assignment-1_SP24_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="STGIS_assignment-1_SP24_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="STGIS_assignment-1_SP24_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<link rel="stylesheet" href="STGIS_assignment-1_SP24_files/styles.css">
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#preamble" id="toc-preamble" class="nav-link active" data-scroll-target="#preamble">Preamble</a></li>
+  <li><a href="#video-guide" id="toc-video-guide" class="nav-link" data-scroll-target="#video-guide">Video Guide</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
+  <li><a href="#class-1-readings" id="toc-class-1-readings" class="nav-link" data-scroll-target="#class-1-readings">Class 1 Readings:</a></li>
+  <li><a href="#assignment-step-1" id="toc-assignment-step-1" class="nav-link" data-scroll-target="#assignment-step-1">Assignment Step 1</a></li>
+  <li><a href="#assignment-step-2" id="toc-assignment-step-2" class="nav-link" data-scroll-target="#assignment-step-2">Assignment Step 2</a></li>
+  <li><a href="#assignment-step-3" id="toc-assignment-step-3" class="nav-link" data-scroll-target="#assignment-step-3">Assignment Step 3</a></li>
+  <li><a href="#assignment-step-4" id="toc-assignment-step-4" class="nav-link" data-scroll-target="#assignment-step-4">Assignment Step 4</a></li>
+  <li><a href="#concluding-remarks" id="toc-concluding-remarks" class="nav-link" data-scroll-target="#concluding-remarks">Concluding Remarks</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Class 1 Assignment: Cartographic Output with the ArcGIS Interface</h1>
+<p class="subtitle lead">Spring 2024 | <a href="https://courses.newschool.edu/courses/UENV3200/">UENV3200</a>, <a href="https://courses.newschool.edu/courses/UURB3210/">UURB3210</a></p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">January 17, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="preamble" class="level2">
+<h2 class="anchored" data-anchor-id="preamble">Preamble</h2>
+<p>In this first assignment, you will utilize the <a href="https://gis-nspe-tns.github.io/STGIS_UENV3200_UURB3210_sp24/labs/STGIS_lab-1_SP24.html">Class 1 Technical Lab</a> as a guide to complete your first map utilizing the Natural Earth dataset.</p>
+<p>The <a href="https://gis-nspe-tns.github.io/STGIS_UENV3200_UURB3210_sp24/labs/STGIS_lab-1_SP24.html">Class 1 Technical Lab</a> should be used extensively to aid with the completion of the first assignment due Sunday evening (01/28/24) at 11:59pm.</p>
+<p>Unlike the lab, you are tasked with choosing an unique approach to this first map. Your map should feature consideration of the following:</p>
+<ul>
+<li><strong>Map Scale</strong>: do you want to create a global map (small scale), or a regional map (‘larger’ scale) - corridor, region, state, continent ?</li>
+<li><strong>Map Theme(s)</strong>: do you want to create a simple map theme or one that is more complex, i.e.&nbsp;more than 1 or 2 vector layers?</li>
+<li><strong>Page/paper orientation and size</strong>: will your final output be landscape or portrait orientation? Either letter or tabloid, landscape or portrait is acceptable for this first mapping assignment.</li>
+</ul>
+</section>
+<section id="video-guide" class="level2">
+<h2 class="anchored" data-anchor-id="video-guide">Video Guide</h2>
+<p>Use the following video guide to augment the steps of the assignment as needed:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://capture.dropbox.com/7sHnI0EBSTbKNrvp"><img src="STGIS_assignment-1_SP24_files/img/video.png" class="img-fluid figure-img"></a></p>
+<p></p><figcaption class="figure-caption">Video Guide - Class 1 Assignment</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="data" class="level2">
+<h2 class="anchored" data-anchor-id="data">Data</h2>
+<p>Like the technical lab, utilize the Natural Earth project located <a href="https://www.naturalearthdata.com/">HERE</a>.</p>
+<p>To start, download the data either from Natural Earth or via ‘direct download’:</p>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Use the ‘direct download’ if the Start Kit from Natural Earth takes too long - or not at all.</p>
+</div>
+</div>
+<ul>
+<li><p><a href="https://naciscdn.org/naturalearth/packages/Natural_Earth_quick_start.zip">Natural Earth Start Kit</a></p></li>
+<li><p><a href="https://www.dropbox.com/s/zatomws9d5ttufl/Natural_Earth_quick_start.zip?dl=1">Direct Download</a></p></li>
+</ul>
+</section>
+<section id="class-1-readings" class="level2">
+<h2 class="anchored" data-anchor-id="class-1-readings">Class 1 Readings:</h2>
+<ul>
+<li><p>This week’s first reading will be from the <a href="https://students.flatworldknowledge.com/course/2607197">Essentials of Geographic Information Systems textbook</a>.</p></li>
+<li><p>The Class 1 quiz (01/29/2024 - open at 7AM) will features 10 questions covering content in the textbook reading.</p></li>
+<li><p>An optional, recommended reading is listed below for further context of John Snow’s ‘Broad Street Cholera Map’. This reading will NOT be featured on the quiz.</p></li>
+<li><p>Readings:</p>
+<ul>
+<li>Essentials of Geographic Information Systems textbook - <strong>Chapter 1 - Introduction, pages 11 - 28</strong>.</li>
+<li>Cholera &amp; the Map that Stopped It (Chapter 13) - On the Map, Simon Garfield. Accessible <a href="https://weekly-reading-research.s3.amazonaws.com/c2.Chapter13.pdf">HERE</a>.</li>
+</ul></li>
+</ul>
+</section>
+<section id="assignment-step-1" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-1">Assignment Step 1</h2>
+<ul>
+<li>Navigate to the directory folder <code>Natural_Earth_quick_start</code> then <em>double-click</em> the <code>Natural_Earth_quick_start_for_ArcMap</code> file. Conversely, utilize the <em>ArcCatalog</em> to connect to the <code>Natural_Earth_quick_start</code> directory and add in your thematic vector layers one-by-one into the <em>Table of Contents</em>.</li>
+</ul>
+</section>
+<section id="assignment-step-2" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-2">Assignment Step 2</h2>
+<ul>
+<li>Determine your mapping theme(s) and begin to consider your map scale. Utilize <em>Spatial Bookmarks</em> in your <code>.mxd</code> project at the <em>Data Frame</em> to establish your location, scale, theme(s) that you will refine in <em>Layout View</em>. Keep in mind, cartographic design can go wrong with either too few or too many thematic layers; map legibility is the goal.</li>
+</ul>
+</section>
+<section id="assignment-step-3" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-3">Assignment Step 3</h2>
+<ul>
+<li>Use <em>Map Symbology</em> for your thematic layer(s) to create balance and map legibility.</li>
+</ul>
+</section>
+<section id="assignment-step-4" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-4">Assignment Step 4</h2>
+<ul>
+<li><p>Finalize your map in <em>Layout View</em> and incorporate a <em>title</em> and <em>legend</em> into the final design. Also include a small tag in your map notating yourself as the author of the map.</p></li>
+<li><p>Output your final map as letter or tabloid, landscape or portrait orientation, as PDF or PNG. Both file types will be accepted at the CANVAS assignment submission location.</p></li>
+<li><p>Make sure to continuously save your assignment <code>.mxd</code> and maintain good file management within your project directory.</p></li>
+</ul>
+</section>
+<section id="concluding-remarks" class="level2">
+<h2 class="anchored" data-anchor-id="concluding-remarks">Concluding Remarks</h2>
+<p>Utilize the example maps below for the required map elements - map title, author notation, legend and the map itself. Note that the example maps feature just 2 thematic layers - the <em>Natural Earth countries</em> feature and <em>Natural Earth populated places</em>. Your mapping doesn’t necessarily have to be limited to just to themes.</p>
+<p>Upload your <code>assignment.1.pdf</code> to the CANVAS location for the first class assignment. Save the project directory with all project materials in a location you’ve set aside for completed assignments for the course.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://i.imgur.com/dR7HhUC.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Class 1 Assignment Map Anatomy Example</figcaption><p></p>
+</figure>
+</div>
+<ul>
+<li><a href="https://mapexamples.s3.us-east-2.amazonaws.com/c1/c1.v2.map.submission.examples.pdf">Class 1 Map Submission Examples</a></li>
+</ul>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp(/^(?:http:|https:)\/\/www\.quarto\.org\/custom/);
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          // default icon
+          link.classList.add("external");
+      }
+    }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+<script src="STGIS_assignment-1_SP24_files/libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
