@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.280">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2024-01-26">
+
+<title>Class 2 Lecture Demonstration Lab</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="c2_lecture_demo_files/libs/clipboard/clipboard.min.js"></script>
+<script src="c2_lecture_demo_files/libs/quarto-html/quarto.js"></script>
+<script src="c2_lecture_demo_files/libs/quarto-html/popper.min.js"></script>
+<script src="c2_lecture_demo_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="c2_lecture_demo_files/libs/quarto-html/anchor.min.js"></script>
+<link href="c2_lecture_demo_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="c2_lecture_demo_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="c2_lecture_demo_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="c2_lecture_demo_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="c2_lecture_demo_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<link rel="stylesheet" href="c2_lecture_demo_files/styles.css">
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#geographic-coordinate-systems" id="toc-geographic-coordinate-systems" class="nav-link active" data-scroll-target="#geographic-coordinate-systems">Geographic Coordinate System(s)</a></li>
+  <li><a href="#preamble" id="toc-preamble" class="nav-link" data-scroll-target="#preamble">Preamble</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
+  <li><a href="#part-i-digital-numbers-latitude-and-longitude-and-three-spatial-formats" id="toc-part-i-digital-numbers-latitude-and-longitude-and-three-spatial-formats" class="nav-link" data-scroll-target="#part-i-digital-numbers-latitude-and-longitude-and-three-spatial-formats">Part I: Digital Numbers, Latitude and Longitude; and three spatial formats</a></li>
+  <li><a href="#part-ii-exploring-the-geographic-coordinate-system-gcs-in-arcgis" id="toc-part-ii-exploring-the-geographic-coordinate-system-gcs-in-arcgis" class="nav-link" data-scroll-target="#part-ii-exploring-the-geographic-coordinate-system-gcs-in-arcgis">Part II: Exploring the Geographic Coordinate System (GCS) in ArcGIS</a></li>
+  <li><a href="#part-iii-delimited-text-and-spatial-operations-in-arcgis" id="toc-part-iii-delimited-text-and-spatial-operations-in-arcgis" class="nav-link" data-scroll-target="#part-iii-delimited-text-and-spatial-operations-in-arcgis">Part III: Delimited Text and Spatial Operations in ArcGIS</a></li>
+  <li><a href="#concluding-remarks" id="toc-concluding-remarks" class="nav-link" data-scroll-target="#concluding-remarks">Concluding Remarks</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Class 2 Lecture Demonstration Lab</h1>
+<p class="subtitle lead">Spring 2024 | <a href="https://courses.newschool.edu/courses/UENV3200/">UENV3200</a>, <a href="https://courses.newschool.edu/courses/UURB3210/">UURB3210</a></p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">January 26, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="geographic-coordinate-systems" class="level2">
+<h2 class="anchored" data-anchor-id="geographic-coordinate-systems">Geographic Coordinate System(s)</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c2_lecture_demo_files/img/M1U1-Fig1-10%20LatitudeRadius.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Latitude (and Longitude) measured and expressed as degrees.</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="preamble" class="level2">
+<h2 class="anchored" data-anchor-id="preamble">Preamble</h2>
+<p>When location on the Earth is described in spherical coordinates it is called Geographic, or Un-projected. The most common system for locating points on the earth is with “Longitudes” and “Latitudes”. In the following demonstrations, we will <strong>first</strong> test how coordinates are expressed in digital format, and how they are stored in three common spatial data types:</p>
+<ul>
+<li>Shapefiles (<code>.shp</code>)</li>
+<li>Geojson (<code>.json</code> or <code>.geojson</code>)</li>
+<li>Delimited Text (<code>.txt</code> or <code>.cvs</code>)</li>
+</ul>
+<p><strong>Second</strong>, we will preview how ArcGIS handles the <em>Geographic Coordinate System</em>.</p>
+<p><strong>Third</strong>, we will explore how ArcGIS transforms digital number pairs representing latitude and longitude (ofen expressed as <code>lat/lon</code> or <code>lat/long</code>) into geometry for mapping. Following this transformation, we will run a spatial process to count points within polygons which is a similar but different procedure and outcome than our first class <code>spatial join</code> between John Snow’s pump thiessen polygons and Cholera deaths data.</p>
+</section>
+<section id="data" class="level2">
+<h2 class="anchored" data-anchor-id="data">Data</h2>
+<p>In Part I, we will generally create our own data utilizing the online utility <a href="https://geojson.io/#map=2/0/20">geojson.io</a>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c2_lecture_demo_files/img/geojson.io.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">geojson.io</figcaption><p></p>
+</figure>
+</div>
+<p>In Part II, we will download and utilize the following directory:</p>
+<ul>
+<li><a href="https://www.dropbox.com/s/azuiphrtfalre1h/c2.demo.1_stgis.zip?dl=1">Directory Direct Download</a></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c2_lecture_demo_files/img/gcs_desktop.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">GCS in ArcGIS</figcaption><p></p>
+</figure>
+</div>
+<p>In Part III, we will utilize data from <a href="https://firms.modaps.eosdis.nasa.gov/">Nasa’s Fire Information for Resource Management System (FIRMS)</a> to transform delimited text into points geometry and run a spatial process to aggregate and summarize called <a href="https://pro.arcgis.com/en/pro-app/latest/tool-reference/analysis/tabulate-intersection.htm">Tabulate Intersection</a>.</p>
+<p><a href="https://www.dropbox.com/s/hirc0qti5pupbvr/c2.demo.3.zip?dl=1">Part III Data Download</a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c2_lecture_demo_files/img/firms.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">FIRMS Data</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="part-i-digital-numbers-latitude-and-longitude-and-three-spatial-formats" class="level2">
+<h2 class="anchored" data-anchor-id="part-i-digital-numbers-latitude-and-longitude-and-three-spatial-formats">Part I: Digital Numbers, Latitude and Longitude; and three spatial formats</h2>
+<p>To start, we will utilize <a href="https://www.google.com/maps">Google Maps</a> to explore how interactive maps generally handle a digital number as lat/lon coordinates.</p>
+<ul>
+<li>Copy/Paste <code>40.690022, -74.045303</code> into the google maps search box at upper left of interactive map:</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c2_lecture_demo_files/img/Screen%20Shot%202023-01-27%20at%2010.18.58%20AM.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Google Maps Search Box</figcaption><p></p>
+</figure>
+</div>
+<ul>
+<li><p>Next, download the following <code>.cvs</code> that first represents the Statue of Liberty, followed by a series of shortened decimal digits. When loaded to <a href="https://geojson.io/#map=2/0/20">geojson.io</a>, explore how these points behave in the geojson interactive map:</p>
+<ul>
+<li><a href="https://www.dropbox.com/s/lg6nfrwd4e2cmu6/sol_lat_lon.csv?dl=1">.cvs for Statue of Liberty</a></li>
+</ul></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c2_lecture_demo_files/img/Screen%20Shot%202023-01-27%20at%2010.25.40%20AM.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Statue of Liberty - lat/lon pairs</figcaption><p></p>
+</figure>
+</div>
+<ul>
+<li>With the <code>.csv</code> downloaded, import this file to <a href="https://geojson.io/#map=2/0/20">geojson.io</a> utilizing the <code>open</code> tab upper left:</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c2_lecture_demo_files/img/Screen%20Shot%202023-01-27%20at%2010.55.30%20AM.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">geojson.io open file</figcaption><p></p>
+</figure>
+</div>
+<p>Together we will explore how <a href="https://geojson.io/#map=2/0/20">geojson.io</a> handles the original lat/lon digital number pairs into the <code>.geojson</code> file format:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c2_lecture_demo_files/img/Screen%20Shot%202023-01-27%20at%2010.55.39%20AM.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">geojson.io digital number expression as <code>.geojson</code></figcaption><p></p>
+</figure>
+</div>
+<p>Next, at <a href="https://geojson.io/#map=2/0/20">geojson.io</a>, save the Statue of Liberty data first as a <code>.csv</code>, followed by <code>.geojson</code> followed by <code>.shp</code>. Download these three files into a directory that you make entitled <code>geojson.io.downloads</code>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c2_lecture_demo_files/img/Screen%20Shot%202023-01-27%20at%2011.02.41%20AM.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">geojson.io - save into common spatial formats</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c2_lecture_demo_files/img/Screenshot%202023-01-27%20at%2011.06.29%20AM.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">geojson.io - saving into common spatial formats</figcaption><p></p>
+</figure>
+</div>
+<p>Next, unzip and extract the <code>download</code> directory so that you have access to the <code>point.shp</code>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c2_lecture_demo_files/img/Screenshot%202023-01-27%20at%2011.10.44%20AM.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">extract the <code>POINT.shp</code> from the <code>download</code> compressed directory</figcaption><p></p>
+</figure>
+</div>
+<p>Next open ArcGIS with a new <code>.mxd</code> and utilize <em>ArcCatalog</em> to connect to the directory <code>geojson.io.downloads</code>. Once complete, we will first transform the <code>points.csv</code> from a delimited text file to a feature that ArcGIS can utilize as both spatial geometry and attribute data (Feature Class):</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c2_lecture_demo_files/img/xy1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">ArcCatalog &gt; XY Table to Feature Class</figcaption><p></p>
+</figure>
+</div>
+<p>Next, a coordinate system for the XY Table must be specified. Here we will point to <code>WGS84</code> and view the results:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c2_lecture_demo_files/img/xy2.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">ArcCatalog &gt; XY Table to Feature Class</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c2_lecture_demo_files/img/Screenshot%202023-01-27%20at%2011.21.43%20AM.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">ArcCatalog &gt; XY Table to Feature Class</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c2_lecture_demo_files/img/Screenshot%202023-01-27%20at%2011.22.20%20AM.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">ArcCatalog &gt; XY Table to Feature Class</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="part-ii-exploring-the-geographic-coordinate-system-gcs-in-arcgis" class="level2">
+<h2 class="anchored" data-anchor-id="part-ii-exploring-the-geographic-coordinate-system-gcs-in-arcgis">Part II: Exploring the Geographic Coordinate System (GCS) in ArcGIS</h2>
+<p>Open the project <code>.mxd</code> following a sucessful unzip from the <a href="https://www.dropbox.com/s/azuiphrtfalre1h/c2.demo.1_stgis.zip?dl=1">Part II Data</a></p>
+<p>Once complete, <code>c2_gcs_demo.mxd</code> should appear as follows at the TOC:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c2_lecture_demo_files/img/Screenshot_20230127_100003.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Part II TOC</figcaption><p></p>
+</figure>
+</div>
+<p>Together we will review how ArcGIS generally handles Geographic Coordinate Systems (unprojected data).</p>
+</section>
+<section id="part-iii-delimited-text-and-spatial-operations-in-arcgis" class="level2">
+<h2 class="anchored" data-anchor-id="part-iii-delimited-text-and-spatial-operations-in-arcgis">Part III: Delimited Text and Spatial Operations in ArcGIS</h2>
+<p>In this final part III, FIRMS fire data for the United States is located within a <code>.csv</code> with locational lat/lon fields. We will first utilize <em>ArcCatalog &gt; XY Table &gt; Feature Class</em> to transform the delimited text to spatial data. Once complete, we will run a <em>Tabulate Intersection</em> tool between California Counties and the FIRMS fire points in order to achieve an aggregated count summary with percentage breakdown per county.</p>
+<p>Learning this step will aid in the second assignment which we will cover in depth in <a href="https://gis-nspe-tns.github.io/STGIS_UENV3200_UURB3210_sp23/labs/STGIS_lab-2_SP23.html">Class 2, Lab 2 on Wednesday</a>.</p>
+<p>First unzip the <a href="https://www.dropbox.com/s/hirc0qti5pupbvr/c2.demo.3.zip?dl=1">Part III data</a> and open the <code>fire_points.mxd</code>. Make sure the <em>ArcCatalog</em> connection is available in the <code>fire_points.mxd</code>. If not, make that connection now.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c2_lecture_demo_files/img/Screenshot%202023-01-27%20at%2011.42.58%20AM.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Part III Data</figcaption><p></p>
+</figure>
+</div>
+<p>Next, as in Part II, <em>ArcCatalog &gt; XY Table &gt; Feature Class</em> the <code>MODIS_C6_USA...</code> file into a feature class. Add both the new feature class and <code>CA_Counties_TIGER2016.shp</code> to the TOC, view results.</p>
+<p>Next Zoom <em>Data Frame</em> to Calfornia:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c2_lecture_demo_files/img/Screenshot%202023-01-27%20at%2011.46.30%20AM.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Part III TOC</figcaption><p></p>
+</figure>
+</div>
+<p>Next, search for <code>Tabulate Intersection</code> in <em>Search</em> and populate the tool as follows:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c2_lecture_demo_files/img/Screenshot%202023-01-27%20at%2011.57.57%20AM.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Tabulate Intersection</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c2_lecture_demo_files/img/Screenshot%202023-01-27%20at%2011.58.43%20AM.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Tabulate Intersection - populate toolset</figcaption><p></p>
+</figure>
+</div>
+<p>Review results of <code>Tabulate Intersection</code>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c2_lecture_demo_files/img/Screenshot%202023-01-27%20at%2011.59.53%20AM.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Tabulate Intersection - Results</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="concluding-remarks" class="level2">
+<h2 class="anchored" data-anchor-id="concluding-remarks">Concluding Remarks</h2>
+<p>In this exploratory analysis for tabular data with geographic coordinates (lat/lon), we saw how digital number digits are important for the conformity of map points to their representative location on the Earth’s surface. We then worked with several file formats typical in the GIS realm to represent points features. Finally we tabulated a spatial relationship between points and polygons in an overlay relationship in order aggregate and summarize in a meaningful way. We will use this part III tabulation process in this week’s upcoming assignment, detailed in more depth in <a href="https://gis-nspe-tns.github.io/STGIS_UENV3200_UURB3210_sp24/labs/STGIS_lab-2_SP24.html">Class 2, Technical Lab 2</a>.</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp(/^(?:http:|https:)\/\/www\.quarto\.org\/custom/);
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          // default icon
+          link.classList.add("external");
+      }
+    }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+<script src="c2_lecture_demo_files/libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
