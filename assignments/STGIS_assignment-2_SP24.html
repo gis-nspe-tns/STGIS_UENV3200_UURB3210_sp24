@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.280">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2024-01-26">
+
+<title>Class 2 Assignment: Mapping NYC 311 Service Dataset</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="STGIS_assignment-2_SP24_files/libs/clipboard/clipboard.min.js"></script>
+<script src="STGIS_assignment-2_SP24_files/libs/quarto-html/quarto.js"></script>
+<script src="STGIS_assignment-2_SP24_files/libs/quarto-html/popper.min.js"></script>
+<script src="STGIS_assignment-2_SP24_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="STGIS_assignment-2_SP24_files/libs/quarto-html/anchor.min.js"></script>
+<link href="STGIS_assignment-2_SP24_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="STGIS_assignment-2_SP24_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="STGIS_assignment-2_SP24_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="STGIS_assignment-2_SP24_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="STGIS_assignment-2_SP24_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<link rel="stylesheet" href="STGIS_assignment-2_SP24_files/styles.css">
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#preamble" id="toc-preamble" class="nav-link active" data-scroll-target="#preamble">Preamble</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
+  <li><a href="#class-2-readings" id="toc-class-2-readings" class="nav-link" data-scroll-target="#class-2-readings">Class 2 Readings:</a></li>
+  <li><a href="#assignment-step-1" id="toc-assignment-step-1" class="nav-link" data-scroll-target="#assignment-step-1">Assignment Step 1</a></li>
+  <li><a href="#assignment-step-2" id="toc-assignment-step-2" class="nav-link" data-scroll-target="#assignment-step-2">Assignment Step 2</a></li>
+  <li><a href="#assignment-step-3" id="toc-assignment-step-3" class="nav-link" data-scroll-target="#assignment-step-3">Assignment Step 3</a></li>
+  <li><a href="#assignment-step-4" id="toc-assignment-step-4" class="nav-link" data-scroll-target="#assignment-step-4">Assignment Step 4</a></li>
+  <li><a href="#assignment-step-5" id="toc-assignment-step-5" class="nav-link" data-scroll-target="#assignment-step-5">Assignment Step 5</a></li>
+  <li><a href="#concluding-remarks" id="toc-concluding-remarks" class="nav-link" data-scroll-target="#concluding-remarks">Concluding Remarks</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Class 2 Assignment: Mapping NYC 311 Service Dataset</h1>
+<p class="subtitle lead">Spring 2024 | <a href="https://courses.newschool.edu/courses/UENV3200/">UENV3200</a>, <a href="https://courses.newschool.edu/courses/UURB3210/">UURB3210</a></p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">January 26, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="preamble" class="level2">
+<h2 class="anchored" data-anchor-id="preamble">Preamble</h2>
+<p>In this second assignment, you will utilize the <a href="https://gis-nspe-tns.github.io/STGIS_UENV3200_UURB3210_sp24/labs/STGIS_lab-2_SP24.html">Class 2 Technical Lab</a> as a guide to complete your second mapping project utilizing the <a href="https://opendata.cityofnewyork.us/how-to/">311 NYC Dataset</a>.</p>
+<p>The <a href="https://gis-nspe-tns.github.io/STGIS_UENV3200_UURB3210_sp24/labs/STGIS_lab-2_SP24.html">Class 2 Technical Lab</a> should be used extensively to aid with the completion of the second assignment due Sunday evening (02/04/24) at 11:59pm.</p>
+<p>Unlike the lab, you are tasked with choosing an unique filter approach to this second map. Your map should feature consideration of the following:</p>
+<ul>
+<li><p><strong>Filter Condition 1</strong>: What will be the time dimension (<code>Create Date</code>) of your mapping? Is a certain time duration important to the mapping, i.e.&nbsp;events tied to a certain NYC policy, natural disaster or weather period?</p></li>
+<li><p><strong>Filter Condition 2</strong>: What will be the 311 <code>Complaint Type</code> theme of your mapping?</p></li>
+<li><p><strong>Filter Condition 3</strong>: As a further option, consider a filter on the <code>Descriptor</code> dimension to narrow yet further the return requests.</p></li>
+<li><p><strong>Page/paper orientation and size</strong>: will your final output be landscape or portrait orientation? Either letter or tabloid, landscape or portrait is acceptable for this second mapping assignment.</p></li>
+</ul>
+<p>To help with the filter conditions, review this short video below (<strong>Password = 311</strong>):</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://vimeo.com/795354525"><img src="STGIS_assignment-2_SP24_files/img/311.png" class="img-fluid figure-img"></a></p>
+<p></p><figcaption class="figure-caption">311 NYC Data Filters</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="data" class="level2">
+<h2 class="anchored" data-anchor-id="data">Data</h2>
+<p>Like the technical lab, utilize the <a href="https://opendata.cityofnewyork.us/how-to/">311 How To Guide</a> to start your filter process.</p>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Make sure to apply filters to your data query; tens of thousands of event points is better for the mapping than hundreds of thousands. ‘Constraining’ the data is an efficiency method in this assignment.</p>
+</div>
+</div>
+<p>You will also need to access and download the NYC borough polygons as your basemap thematic layer for your event points. Refer to the technical lab for this process, direct download as follows:</p>
+<ul>
+<li><a href="https://s-media.nyc.gov/agencies/dcp/assets/files/zip/data-tools/bytes/nybb_22c.zip">NYC Borough Polygons</a></li>
+</ul>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Remember the borough polygons will be compressed as a zip directory; you need to first uncompress and place into your assignment folder and connect the data via ArcCatalog for your assignment <code>.mxd</code>.</p>
+</div>
+</div>
+</section>
+<section id="class-2-readings" class="level2">
+<h2 class="anchored" data-anchor-id="class-2-readings">Class 2 Readings:</h2>
+<ul>
+<li><p>This week’s second reading will be from the <a href="https://students.flatworldknowledge.com/course/2607197">Essentials of Geographic Information Systems textbook</a>.</p></li>
+<li><p>The Class 1 quiz (02/05/2024 - open at 7AM) will features 10 questions covering content in the textbook reading.</p></li>
+<li><p>Reading:</p>
+<ul>
+<li>Essentials of Geographic Information Systems textbook - <strong>Chapter 2 - Data, Information, and Where to Find Them, pages 29 - 43</strong>.</li>
+</ul></li>
+</ul>
+</section>
+<section id="assignment-step-1" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-1">Assignment Step 1</h2>
+<ul>
+<li>Navigate to a directory folder that you make for assignment 2; create an assignment <code>.mxd</code>, placing it within your assignment 2 directory. Establish an <em>ArcCatalog</em> connection to the assignment 2 folder - the location where you will place both the delimited text (<code>.csv</code>) and the NYC Borough Polygons.</li>
+</ul>
+</section>
+<section id="assignment-step-2" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-2">Assignment Step 2</h2>
+<ul>
+<li>Determine your mapping theme and conduct the filtering process at the data source discussed and prompted in the <em>preamble</em> section above. Download the resulting <code>.csv</code> into your assignment directory. Connect the data via <em>ArcCatalog</em>. Do the same for NYC Borough Polygons.</li>
+</ul>
+</section>
+<section id="assignment-step-3" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-3">Assignment Step 3</h2>
+<ul>
+<li>Load you <code>.csv</code> into your assignment <code>.mxd</code>; do the same for the NYC Borough Polygons. Map the delimited text <code>.csv</code> to points features; overlay them to the NYC Borough Polygons, adjust the map projection for the <em>Data Frame</em>, and finally save the <code>.mxd</code>.</li>
+</ul>
+</section>
+<section id="assignment-step-4" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-4">Assignment Step 4</h2>
+<ul>
+<li>Spend time manipulating the size and color of your event points relative to the NYC Borough Polygons. Begin to work and preview in <em>Layout View</em> as well as <em>Data View</em>. The cartographic design goal is to display all your event points so that the larger pattern of the data is clear, minimizing ‘clumping’ of numerous event points. Utilize <em>bookmarks</em> throughout your design process.</li>
+</ul>
+</section>
+<section id="assignment-step-5" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-5">Assignment Step 5</h2>
+<ul>
+<li>With your points and polygons ordered and designed for best cartographic presentation, move to the <em>Tabulate Intersection</em> tool process to summarize your results in table format. Also create a <em>rate</em> for your event points per borough in you table. Import your final table into your map output. When complete, move along to the final cartographic and table design, outputting your work to PDF for submission in Canvas for assignment 2.</li>
+</ul>
+</section>
+<section id="concluding-remarks" class="level2">
+<h2 class="anchored" data-anchor-id="concluding-remarks">Concluding Remarks</h2>
+<p>Utilize the example maps below for the required map elements - map title, author notation, legend, table and the map itself.</p>
+<p>Upload your <code>assignment.2.pdf</code> to the CANVAS location for the second class assignment. Save the project directory with all project materials in a location you’ve set aside for completed assignments for the course.</p>
+<p>Class 2 Assignment Example:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_assignment-2_SP24_files/img/c2assignment.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Class 2 Assignment Example</figcaption><p></p>
+</figure>
+</div>
+<p>c2assignment.png</p>
+<ul>
+<li><a href="https://st-gis-materials.s3.us-east-2.amazonaws.com/STGIS_c2_example.pdf">Class 2 Map Submission Example PDF</a></li>
+</ul>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp(/^(?:http:|https:)\/\/www\.quarto\.org\/custom/);
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          // default icon
+          link.classList.add("external");
+      }
+    }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+<script src="STGIS_assignment-2_SP24_files/libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
