@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.280">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2024-02-04">
+
+<title>Class 3 Lab: Introduction to Cartographic Principles + Thematic Mapping - Part I</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="STGIS_lab-3_SP24_files/libs/clipboard/clipboard.min.js"></script>
+<script src="STGIS_lab-3_SP24_files/libs/quarto-html/quarto.js"></script>
+<script src="STGIS_lab-3_SP24_files/libs/quarto-html/popper.min.js"></script>
+<script src="STGIS_lab-3_SP24_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="STGIS_lab-3_SP24_files/libs/quarto-html/anchor.min.js"></script>
+<link href="STGIS_lab-3_SP24_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="STGIS_lab-3_SP24_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="STGIS_lab-3_SP24_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="STGIS_lab-3_SP24_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="STGIS_lab-3_SP24_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<link rel="stylesheet" href="STGIS_lab-3_SP24_files/styles.css">
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#preamble" id="toc-preamble" class="nav-link active" data-scroll-target="#preamble">Preamble</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
+  <li><a href="#step-1" id="toc-step-1" class="nav-link" data-scroll-target="#step-1">Step 1</a></li>
+  <li><a href="#step-2" id="toc-step-2" class="nav-link" data-scroll-target="#step-2">Step 2</a></li>
+  <li><a href="#step-3" id="toc-step-3" class="nav-link" data-scroll-target="#step-3">Step 3</a></li>
+  <li><a href="#step-4" id="toc-step-4" class="nav-link" data-scroll-target="#step-4">Step 4</a></li>
+  <li><a href="#step-5" id="toc-step-5" class="nav-link" data-scroll-target="#step-5">Step 5</a></li>
+  <li><a href="#step-6" id="toc-step-6" class="nav-link" data-scroll-target="#step-6">Step 6</a></li>
+  <li><a href="#step-7" id="toc-step-7" class="nav-link" data-scroll-target="#step-7">Step 7</a></li>
+  <li><a href="#step-8" id="toc-step-8" class="nav-link" data-scroll-target="#step-8">Step 8</a></li>
+  <li><a href="#concluding-remarks" id="toc-concluding-remarks" class="nav-link" data-scroll-target="#concluding-remarks">Concluding Remarks</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Class 3 Lab: Introduction to Cartographic Principles + Thematic Mapping - Part I</h1>
+<p class="subtitle lead">Spring 2024 | <a href="https://courses.newschool.edu/courses/UENV3200/">UENV3200</a>, <a href="https://courses.newschool.edu/courses/UURB3210/">UURB3210</a></p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">February 4, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="preamble" class="level2">
+<h2 class="anchored" data-anchor-id="preamble">Preamble</h2>
+<p>In this third technical lab, we will complete any remaining steps of Monday’s demonstration lab then turn to steps necessary for the third assignment. These lab steps should be used extensively to aid with the completion of the second assignment due Sunday evening at 11:59pm.</p>
+<ul>
+<li><a href="https://gis-nspe-tns.github.io/STGIS_UENV3200_UURB3210_sp24/demos/c3_lecture_demo.html">Class 3 Demonstration Lab</a></li>
+<li><a href="https://gis-nspe-tns.github.io/STGIS_UENV3200_UURB3210_sp23/assignments/STGIS_assignment-3_SP24.html">Class 3 Assignment</a></li>
+</ul>
+</section>
+<section id="data" class="level2">
+<h2 class="anchored" data-anchor-id="data">Data</h2>
+<p>The data for this demonstration lab comes from the <a href="https://gis-nspe-tns.github.io/STGIS_UENV3200_UURB3210_sp24/assignments/STGIS_assignment-3_SP24.html">Class 3 Assignment</a>.</p>
+<p>Once the download is complete, place the <code>.zip</code> into a directory you make entitled <code>c3lab3</code>. Make sure to fully unzip the data folder.</p>
+<p>Connect a new <code>.mxd</code> via ArcCatalog to the new <code>c3lab3</code> directory and save that new <code>.mxd</code> as <code>c3lab.mxd</code></p>
+<p>Utilize the <a href="https://www.dropbox.com/s/7lak8642qqbv5dk/c3.data.zip?dl=1">Class 3 Starter Data</a>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-3_SP24_files/img/3.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Class 3 Starter Data</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="step-1" class="level2">
+<h2 class="anchored" data-anchor-id="step-1">Step 1</h2>
+<ul>
+<li><p>Make sure to connect the <code>c3lab.mxd</code> to the <a href="https://www.dropbox.com/s/7lak8642qqbv5dk/c3.data.zip?dl=1">Class 3 Starter Data</a> as downloaded and uncompressed.</p></li>
+<li><p>For demonstration purposes, the assignment guide and the technical lab will utilize the country of Ukraine as the project Area of Interest. To select an Area of Interest from 1 of the 3 geographic scale levels, first label the respective feature polygon layer as follows:</p></li>
+</ul>
+<p><code>Right-click Feature Layer at Table of Contents (TOC) &gt; Properties &gt; Labels &gt; Label Field</code></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-3_SP24_files/img/step.1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Label Field</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="step-2" class="level2">
+<h2 class="anchored" data-anchor-id="step-2">Step 2</h2>
+<ul>
+<li>Next, make a subset selection within the attribute table to select the feature - in this case Ukraine. Here will will make a simple SQL (Structured Query Language) declaration to select Ukraine (replace Ukraine with your choice of geography).</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-3_SP24_files/img/step.2.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Select by Attribute</figcaption><p></p>
+</figure>
+</div>
+<ul>
+<li>Once the selection is complete (cyan colored outline will appear on map for the selected feature(s)), export to a folder you make entitled <code>exports</code> within your lab directory.</li>
+</ul>
+</section>
+<section id="step-3" class="level2">
+<h2 class="anchored" data-anchor-id="step-3">Step 3</h2>
+<ul>
+<li>Next map the <code>XY Table &gt; Feature Class</code> for the Global Power Plant Database. Your results when mapped should be atop Ukraine in this example:</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-3_SP24_files/img/step.3.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><code>XY Table &gt; Feature Class</code> Global Power Plant Database</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-3_SP24_files/img/8.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><code>XY Table &gt; Feature Class</code> Global Power Plant Database</figcaption><p></p>
+</figure>
+</div>
+<ul>
+<li>Once complete, proceed to <code>Select by Location</code>, inputting the tool, and outputting the results correctly into the <code>exports</code> folder within your assignment directory:</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-3_SP24_files/img/step.4.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Select by Location</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="step-4" class="level2">
+<h2 class="anchored" data-anchor-id="step-4">Step 4</h2>
+<ul>
+<li>Remove the original Global Power Plant Feature Class from your TOC; create a <em>spatial bookmark</em>, centering your <em>Data Frame</em> to Ukraine in the example. Save the project <code>.mxd</code>:</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-3_SP24_files/img/11.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Geographic Focus for Main Map Frame</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="step-5" class="level2">
+<h2 class="anchored" data-anchor-id="step-5">Step 5</h2>
+<ul>
+<li><p>Next symbolize the Power Plant Feature Points across two dimensions:</p></li>
+<li><p>Categorical color for <code>Fuel Type</code></p></li>
+<li><p>Proportional size for <code>Power Capacity</code></p></li>
+<li><p>Utilize the <code>Multiple Attributes</code> toolset under <code>Symbology</code> to first apply categorical colors, then within the tool again apply <code>Symbol Size</code> to the layer using the default <em>5 Class Natural Breaks</em> Classification.</p></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-3_SP24_files/img/step.5.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Apply <code>Multiple Attribute</code> Symbology to the Power Plant Points within the geographic feature</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-3_SP24_files/img/step.6.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Apply <code>Multiple Attribute</code> Symbology to the Power Plant Points within the geographic feature: adding <code>Symbol Size</code></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="step-6" class="level2">
+<h2 class="anchored" data-anchor-id="step-6">Step 6</h2>
+<ul>
+<li>While the appearance is now correct at the Data Frame, the current legend item in the TOC shows each fuel type separately as 5 size classes. This legend appearance can be revised further for a better final legend. Here we will keep the current layer in the TOC, but we will save each color style for each fuel in the mapping to the <em>Styles Manager</em>.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-3_SP24_files/img/step.7.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Each fuel type separated as 5 size classes</figcaption><p></p>
+</figure>
+</div>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Increase the icon size and/or change the icon shape so that the legend item in the final layout is more prominent than the default point style. Further, apply transparency to the <code>Multiple Attributes</code> layer if you want to see overlapping points in your final mapping.</p>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-3_SP24_files/img/step.8.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Saving individual colorized symbols to the <em>Styles Manager</em></figcaption><p></p>
+</figure>
+</div>
+<ul>
+<li>Next, <em>Tooggle OFF</em> the primary layer and import a new instance of the layer and make additions from the <em>Styles Manager</em>.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-3_SP24_files/img/step.9.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Managing the <em>Styles Manager</em></figcaption><p></p>
+</figure>
+</div>
+<ul>
+<li><p>Next, import another instance of the layer, and apply the proportional sizes to the layer, keeping only the symbol outline, not the default color. Make sure to continue to use <em>5 Class Natural Breaks</em> as the method in order to match with the main map symbolization for Power Plant capacity size:</p></li>
+<li><p>Finally, detach the legend from the map items in the TOC by making the legend a <em>graphics feature</em>. This allows you to then <em>Toogle OFF</em> the symbolization layers in the TOC and allow the primary layer to be displayed in the map without complication from the overlapping symbolization layers:</p></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-3_SP24_files/img/step.x.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Transform Legend Item to a Graphics Feature</figcaption><p></p>
+</figure>
+</div>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Note that once the Legend Item becomes a Graphics Feature, you cannot effectively edit the legend. Make sure to make all revisions to the legend prior to making it a Graphics Feature.</p>
+</div>
+</div>
+</section>
+<section id="step-7" class="level2">
+<h2 class="anchored" data-anchor-id="step-7">Step 7</h2>
+<ul>
+<li><p>Before proceeding to the scale bar creation and inset map, save the <code>.mxd</code>.</p></li>
+<li><p>To create the scale bar, navigate to <em>Items</em> on the top menu bar and choose a bar style. Note that there are many parameters to scale bars that can be revised to get exactly the appearance and measurements that best suit your main map frame. We will review these parameters here.</p></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-3_SP24_files/img/step.10.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Insert Scale Bar Item into Map Layout</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="step-8" class="level2">
+<h2 class="anchored" data-anchor-id="step-8">Step 8</h2>
+<ul>
+<li><p>Following the scale bar item, move to the inset map item. Here are two options to create this item.</p>
+<ul>
+<li><ol type="1">
+<li>Create a <em>Bounding Box Geometry</em> for either the subset power plant data or the polygon feature that you are using as your map focus.</li>
+</ol></li>
+<li><ol start="2" type="1">
+<li>Utilize the <em>Extent Indicator</em> function to create a polygon representation of the <em>Main Map Data Frame</em>.</li>
+</ol></li>
+</ul></li>
+<li><p>We will review these two options in some depth together.</p></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-3_SP24_files/img/step.12.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Insert New Data Frame into Map Layout</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-3_SP24_files/img/step.11.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Insert Bounding Box Geometry into New Data Frame (Option 1)</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-3_SP24_files/img/step.13.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Insert Extent Indicator into New Data Frame (Option 2)</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="concluding-remarks" class="level2">
+<h2 class="anchored" data-anchor-id="concluding-remarks">Concluding Remarks</h2>
+<p>In this tutorial lab for the <a href="https://datasets.wri.org/dataset/globalpowerplantdatabase">WRI Global Power Plant Dataset</a>, we introduced new selection methods - <code>Select by Attributes</code> and <code>Select by Location</code>. We utilized the <code>XY Table to Feature Class</code> method for points data. Once our data was prepared for mapping, we created a complex multiple attribute (bivariate mapping) mapping and developed a further layout dimension through good cartographic conventions for map scale and insets for an extent indicator.</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp(/^(?:http:|https:)\/\/www\.quarto\.org\/custom/);
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          // default icon
+          link.classList.add("external");
+      }
+    }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+<script src="STGIS_lab-3_SP24_files/libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
