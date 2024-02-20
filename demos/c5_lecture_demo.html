@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.280">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2024-02-20">
+
+<title>Class 5 Lecture Demonstration Lab</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="c5_lecture_demo_files/libs/clipboard/clipboard.min.js"></script>
+<script src="c5_lecture_demo_files/libs/quarto-html/quarto.js"></script>
+<script src="c5_lecture_demo_files/libs/quarto-html/popper.min.js"></script>
+<script src="c5_lecture_demo_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="c5_lecture_demo_files/libs/quarto-html/anchor.min.js"></script>
+<link href="c5_lecture_demo_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="c5_lecture_demo_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="c5_lecture_demo_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="c5_lecture_demo_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="c5_lecture_demo_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<style>html{ scroll-behavior: smooth; }</style>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="c5_lecture_demo_files/styles.css">
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction-to-raster-data-gridded-world-population" id="toc-introduction-to-raster-data-gridded-world-population" class="nav-link active" data-scroll-target="#introduction-to-raster-data-gridded-world-population">Introduction to Raster Data: Gridded World Population</a></li>
+  <li><a href="#preamble" id="toc-preamble" class="nav-link" data-scroll-target="#preamble">Preamble</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
+  <li><a href="#step-1" id="toc-step-1" class="nav-link" data-scroll-target="#step-1">Step 1:</a></li>
+  <li><a href="#step-2" id="toc-step-2" class="nav-link" data-scroll-target="#step-2">Step 2:</a></li>
+  <li><a href="#step-3" id="toc-step-3" class="nav-link" data-scroll-target="#step-3">Step 3:</a></li>
+  <li><a href="#step-4" id="toc-step-4" class="nav-link" data-scroll-target="#step-4">Step 4:</a></li>
+  <li><a href="#step-5" id="toc-step-5" class="nav-link" data-scroll-target="#step-5">Step 5:</a></li>
+  <li><a href="#concluding-remarks" id="toc-concluding-remarks" class="nav-link" data-scroll-target="#concluding-remarks">Concluding Remarks</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Class 5 Lecture Demonstration Lab</h1>
+<p class="subtitle lead">Spring 2024 | <a href="https://courses.newschool.edu/courses/UENV3200/">UENV3200</a>, <a href="https://courses.newschool.edu/courses/UURB3210/">UURB3210</a></p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">February 20, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="introduction-to-raster-data-gridded-world-population" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-to-raster-data-gridded-world-population">Introduction to Raster Data: Gridded World Population</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c5_lecture_demo_files/img/1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Global Population Distribution - JRC/GHSL/P2016/POP_GPW_GLOBE_V1 - accessed via Google Earth Engine</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="preamble" class="level2">
+<h2 class="anchored" data-anchor-id="preamble">Preamble</h2>
+<p>The field of human population mapping is constantly evolving, leveraging the increasing availability of high-resolution satellite imagery and the advancements in the field of machine learning. In recent years, the emergence of global built-area datasets that accurately describe the extent, location, and characteristics of human settlements has facilitated the production of new population grids, with improved quality, accuracy, and spatial resolution.</p>
+<p>In this demonstration lab, we will utilize the <a href="https://sedac.ciesin.columbia.edu/data/collection/gpw-v4">GPW v4 Population Count Dataset</a> hosted by Columbia University. This dataset features a estimated population value (count) per grid cell of approximately 5km spatial resolution (2.5 minute). The following short video introduces the data and its production methodology:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://youtu.be/aSjuFXX7CNM"><img src="c5_lecture_demo_files/img/2.png" class="img-fluid figure-img"></a></p>
+<p></p><figcaption class="figure-caption"><em>GPW Introduction</em></figcaption><p></p>
+</figure>
+</div>
+<p>We will explore raster symbolization and utilize the <em>Raster Calculator</em> to produce a difference value between 2010 and 2020 across the GPW dataset. Once we achieve our raster result, we will then classify the raster values into an ordinal scale of population decline/growth between the years 2010 and 2020.</p>
+</section>
+<section id="data" class="level2">
+<h2 class="anchored" data-anchor-id="data">Data</h2>
+<ul>
+<li><p><a href="https://www.dropbox.com/s/9ep1i6w8l6f2fwa/c5.lab.data.gpw-v4-pop_count_2010_2020.zip?dl=1">Demonstration Lab Data</a></p></li>
+<li><p>There are two raster datasets in the data directory. They originate from the <a href="https://sedac.ciesin.columbia.edu/data/set/gpw-v4-population-count-rev11/data-download">Gridded Population of the World V4 (GPW)</a> based on two temporal variables - 2010 and 2020 population counts (number of persons per pixel).</p></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c5_lecture_demo_files/img/3.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Gridded GPW Interface</em></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="step-1" class="level2">
+<h2 class="anchored" data-anchor-id="step-1">Step 1:</h2>
+<p>Open ArcGIS and point <em>ArcCatalog</em> to the <code>c5.lab.data.gpw-v4-pop_count_2010_2020</code> lab data. Remember to uncompress (unzip) the data directory before proceeding. Unlike previous week’s <em>Vector</em> and <em>Delimited Text</em> file types, we will be loading <em>Rasters</em> this week.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c5_lecture_demo_files/img/1_esri.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Point Data Source Manager to <code>Raster</code></em></figcaption><p></p>
+</figure>
+</div>
+<p><strong>Import</strong> both <code>2010</code> and <code>2020</code> Gridded Population Rasters into <em>TOC</em>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c5_lecture_demo_files/img/2_esri.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Rasters imported to ArcGIS project</em></figcaption><p></p>
+</figure>
+</div>
+<p><strong>Activate</strong> the <em>Pixel Inspector</em> tool from <em>main menu &gt; customize mode &gt; commands &gt; Pixel Inspector</em>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c5_lecture_demo_files/img/2_esri.gif" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Pixel Inspector Tool</em></figcaption><p></p>
+</figure>
+</div>
+<p>With both rasters loaded, install the tool and enable it into a main tool bar (it will install into any of the main toolbars). Find cell areas at/near a large urban area and move the tool over this geography:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c5_lecture_demo_files/img/3_esri.gif" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Pixel Inspector Tool</em></figcaption><p></p>
+</figure>
+</div>
+<p>In this demonstration lab, this difference between <code>2010</code> and <code>2020</code> across both raster extents will be derived and mapped. Prior to calculating difference, symbolization will be explored.</p>
+</section>
+<section id="step-2" class="level2">
+<h2 class="anchored" data-anchor-id="step-2">Step 2:</h2>
+<p>Within the 2010 layer, <strong>navigate</strong> to <em>Layer Properties &gt; Symbology</em>. Choose <em>Stretched</em>. Point the <em>Stretch Type</em> setting to the <code>Percent Clip</code> option. A standard data range is set from 2% to 98% of the data values, meaning that the outliers will not be used to set the minimum and maximum values, resulting in a much more representative visualization.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c5_lecture_demo_files/img/3_esri.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Continuous Value Symbolization</em></figcaption><p></p>
+</figure>
+</div>
+<p>Next, run the same symbolization for the 2020 layer, then <strong>check</strong> results:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c5_lecture_demo_files/img/4_esri.gif" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Stretched Symbolization Result</em></figcaption><p></p>
+</figure>
+</div>
+<p>If desired, raster values can also be symbolized just like the standard vector classification methods covered in Class 4. Point to <em>Classified</em> type, and apply a <em>Natural Breaks</em> 5 class method to the 2010 layer:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c5_lecture_demo_files/img/4_esri.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Classified Result</em></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="step-3" class="level2">
+<h2 class="anchored" data-anchor-id="step-3">Step 3:</h2>
+<p>Make sure both <code>2010</code> and <code>2020</code> population rasters are still loaded; the symbolization of the raster layers does not matter at this step:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c5_lecture_demo_files/img/2_esri.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Rasters imported to ArcGIS project</em></figcaption><p></p>
+</figure>
+</div>
+<p><strong>Save</strong> the <code>.mxd</code> project before moving to calculations. <strong>Open</strong> the <em>Raster Calculator</em> via <em>Search</em>. If you receive an install warning, simply enact the <em>Spatial Analyst Extension</em> from <em>Customize &gt; Extensions</em>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c5_lecture_demo_files/img/5_esri.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Raster Calculator</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c5_lecture_demo_files/img/6_esri.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Raster Calculator Extension Error</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c5_lecture_demo_files/img/7_esri.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Raster Calculator Extension Error Correction - Enact Spatial Analyst Extention</em></figcaption><p></p>
+</figure>
+</div>
+<p>Within the <em>Raster Calculator</em>, raster bands are displayed in upper left of the tool interface. The calculation that will be utilized to derive change is simple raster math - in this case subtraction formatted as follows:</p>
+<p><span class="math display">\[
+Population Raster2020 - Population Raster2010
+\]</span></p>
+<p><code>"gpw_v4_population_count_rev11_2020_2pt5_min.tif" - "gpw_v4_population_count_rev11_2010_2pt5_min.tif"</code></p>
+<p><strong>Output</strong> the result to the <em>Default.gdb</em> as <code>population_change_2010_2020.tif</code>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c5_lecture_demo_files/img/8_esri.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Raster Calculator Inputs &amp; Output</em></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="step-4" class="level2">
+<h2 class="anchored" data-anchor-id="step-4">Step 4:</h2>
+<ul>
+<li><p><strong>Visualize</strong> the results with a <em>Manual</em> classification using 4 class breaks. Here we give an ordinal value to the colors beyond their original position within the dataset. Four discrete values with corresponding unique colors will be used to break the broad theme of <em>population change</em> into meaningful categories:</p>
+<ul>
+<li>Decline | <code>-100</code></li>
+<li>Neutral | <code>100</code></li>
+<li>Growth | <code>1,000</code></li>
+<li>High Growth | <code>2,000,000</code></li>
+</ul></li>
+</ul>
+<p>Within the <code>population_change_2010_2020.tif</code> layer , <strong>navigate</strong> to <em>layer properties &gt; symbology</em>. Choose <em>Manual</em> method:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c5_lecture_demo_files/img/9_esri.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Discrete Symbolization Interface</em></figcaption><p></p>
+</figure>
+</div>
+<p>Each of the four discrete breaks will be entered manually. Start with <em>Decline</em>, setting the break to <code>-100</code> and color to dark blue, then selecting <em>Apply</em>. Continue with the other values in the proposed ordinal scale from <em>Decline</em> to <em>High Growth</em>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c5_lecture_demo_files/img/10_esri.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Manual Breaks Applied; Labeling Adjusted to Ordinal Scale</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c5_lecture_demo_files/img/11_esri.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Cartographic Result</em></figcaption><p></p>
+</figure>
+</div>
+<p><strong>Zoom</strong> into larger scale geographies (the northeast US shown below) and notice population spatial patterns. ‘Rustbelt’ cities in the northeast US feature prominently in the Decline class:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c5_lecture_demo_files/img/12_esri.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Explore Results</em></figcaption><p></p>
+</figure>
+</div>
+<p><strong>Zoom</strong> further to the <em>City of Detroit</em> and <em>City of Flint</em> to see the large scale pattern <code>2010 - 2020</code>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c5_lecture_demo_files/img/5_esri.gif" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Explore Results</em></figcaption><p></p>
+</figure>
+</div>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>To install a basemap for locational comparison of the <em>Population Difference Raster</em>, utilize the <em>Add Basemap</em> option from the main <em>File</em> menu.</p>
+</div>
+</div>
+</section>
+<section id="step-5" class="level2">
+<h2 class="anchored" data-anchor-id="step-5">Step 5:</h2>
+<p>In addition to performing spatial operations between raster layers, a typical analysis tactic is to create statistic aggregations of raster cells within vector features. This is known as a <a href="https://gisgeography.com/zonal-statistics/">Zonal Statistics</a>.</p>
+<p>To start, input <code>ne_10m_admin_0_countries_lakes.shp</code> - country polygons - to the <code>.mxd</code>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c5_lecture_demo_files/img/13_esri.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Vector Zones atop Raster Cells</em></figcaption><p></p>
+</figure>
+</div>
+<p>Next, use <em>Search</em> to find <em>Zonal Statistics as Table</em> tool:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c5_lecture_demo_files/img/14_esri.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Search via ‘Zonal’</em></figcaption><p></p>
+</figure>
+</div>
+<p>Open the tool and populate as follows, setting the statistic to <code>SUM</code> and exporting the tabular result to the <code>Default.gdb</code>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c5_lecture_demo_files/img/17_esri.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Zonal Statistics as Table</em></figcaption><p></p>
+</figure>
+</div>
+<p>Once complete, <em>Table Join</em> the resulting zone table to the <code>ne_10m_admin_0_countries_lakes.shp</code> using the join field <code>ADM0_A3</code>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c5_lecture_demo_files/img/18_esri.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Table Join</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c5_lecture_demo_files/img/19_esri.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Table Join Result</em></figcaption><p></p>
+</figure>
+</div>
+<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For records that do not join, a <code>NULL</code> value will be produced. If selected, it will be clear that the <code>NULL</code> value in this <em>table join</em> is the result of land mass polygons that do <em>not</em> possess input cells, i.e.&nbsp;there is no population recording in these particular geographies.</p>
+</div>
+</div>
+<p>Next, classify the variable <code>SUM</code> via <em>Natural Breaks</em> with 5 classes. While <code>SUM</code> has not been normalized for a <em>population density</em> value, the raw count for countries is still valid showing which countries possess most/least population counts.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c5_lecture_demo_files/img/20_esri.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em><code>SUM</code> symbolized via Natural Breaks with 5 classes</em></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="concluding-remarks" class="level2">
+<h2 class="anchored" data-anchor-id="concluding-remarks">Concluding Remarks</h2>
+<p>In this fifth demonstration lab, we explored important dimensions of raster data; conducted a simple overlay analysis via the <em>Raster Calculator</em>, and applied an ordinal scale to discrete class breaks to produce a global population result that helps us understand both decline and growth at both small and regional scales. Further, we explored <a href="https://gisgeography.com/zonal-statistics/">Zonal Statistics</a> - an important, valuable aggregation tool commonly applied to raster layers.</p>
+<p>The <em>Gridded Population of the World (GPW), v4</em> used in this demonstration lab is one of several global population datasets readily available for GIS analysis. Two products worth exploring further are as follows:</p>
+<ul>
+<li><a href="https://www.worldpop.org/">WorldPop - Open Spatial Demographic Data and Research</a></li>
+<li><a href="https://dataforgood.facebook.com/dfg/tools/high-resolution-population-density-maps#overview">Data for Good - High Resolution Population Density Maps</a></li>
+</ul>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp(/^(?:http:|https:)\/\/www\.quarto\.org\/custom/);
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          // default icon
+          link.classList.add("external");
+      }
+    }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+<script src="c5_lecture_demo_files/libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
