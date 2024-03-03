@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.280">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2024-03-03">
+
+<title>Class 6 Assignment: Map Projections</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="STGIS_assignment-6_SP24_files/libs/clipboard/clipboard.min.js"></script>
+<script src="STGIS_assignment-6_SP24_files/libs/quarto-html/quarto.js"></script>
+<script src="STGIS_assignment-6_SP24_files/libs/quarto-html/popper.min.js"></script>
+<script src="STGIS_assignment-6_SP24_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="STGIS_assignment-6_SP24_files/libs/quarto-html/anchor.min.js"></script>
+<link href="STGIS_assignment-6_SP24_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="STGIS_assignment-6_SP24_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="STGIS_assignment-6_SP24_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="STGIS_assignment-6_SP24_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="STGIS_assignment-6_SP24_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<link rel="stylesheet" href="STGIS_assignment-6_SP24_files/styles.css">
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#preamble" id="toc-preamble" class="nav-link active" data-scroll-target="#preamble">Preamble</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
+  <li><a href="#class-6-readings" id="toc-class-6-readings" class="nav-link" data-scroll-target="#class-6-readings">Class 6 Readings:</a></li>
+  <li><a href="#assignment-step-1" id="toc-assignment-step-1" class="nav-link" data-scroll-target="#assignment-step-1">Assignment Step 1</a></li>
+  <li><a href="#assignment-step-2" id="toc-assignment-step-2" class="nav-link" data-scroll-target="#assignment-step-2">Assignment Step 2</a></li>
+  <li><a href="#assignment-step-3" id="toc-assignment-step-3" class="nav-link" data-scroll-target="#assignment-step-3">Assignment Step 3</a></li>
+  <li><a href="#assignment-step-4" id="toc-assignment-step-4" class="nav-link" data-scroll-target="#assignment-step-4">Assignment Step 4</a></li>
+  <li><a href="#assignment-step-5" id="toc-assignment-step-5" class="nav-link" data-scroll-target="#assignment-step-5">Assignment Step 5</a></li>
+  <li><a href="#assignment-step-5-1" id="toc-assignment-step-5-1" class="nav-link" data-scroll-target="#assignment-step-5-1">Assignment Step 5</a></li>
+  <li><a href="#assignment-step-6" id="toc-assignment-step-6" class="nav-link" data-scroll-target="#assignment-step-6">Assignment Step 6</a></li>
+  <li><a href="#assignment-step-7" id="toc-assignment-step-7" class="nav-link" data-scroll-target="#assignment-step-7">Assignment Step 7</a></li>
+  <li><a href="#map-layout-deliverable" id="toc-map-layout-deliverable" class="nav-link" data-scroll-target="#map-layout-deliverable">Map layout &amp; Deliverable:</a></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources:</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Class 6 Assignment: Map Projections</h1>
+<p class="subtitle lead">Spring 2024 | <a href="https://courses.newschool.edu/courses/UENV3200/">UENV3200</a>, <a href="https://courses.newschool.edu/courses/UURB3210/">UURB3210</a></p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">March 3, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_assignment-6_SP24_files/img/header.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Map Projections - Goode Homolosine Projection (equal area - often used in Rand McNally atlas) </em></figcaption><p></p>
+</figure>
+</div>
+<section id="preamble" class="level2">
+<h2 class="anchored" data-anchor-id="preamble">Preamble</h2>
+<p>Map projections and datums are fundamental to the core framework of GIS systems. Both raster and vector data types can be displayed in GIS <em>without</em> projection information; however, it is only with correct map projections that any analysis between raster and vector layers can be conducted. In other words, anything beyond simple visibility within GIS requires associated map projection information for all analysis layers in a GIS project.</p>
+<p>In this week’s assignment, both vector features and raster tiles will be procured online; as is the case with most data posted online, the attendant projection system will be a geographic coordinate system (GCS). Early processing in this assignment will utilize this GCS, but towards the end of the project, a map projection transformation will be performed in order to achieve a planar, projected coordinate system for areal calculations; and importantly preserves the actual shape of a city well as it is a <em>Conformal</em> map system.</p>
+<p>This week’s assignment will draw on the primary concepts covered in Class 6 lecture &amp; lab sessions:</p>
+<ul>
+<li>Overview of Map Projections</li>
+<li>Small Scale vs.&nbsp;Large Scale mapping techniques for Map Projections</li>
+<li>Project projections (project properties) vs.&nbsp;layer projection operations</li>
+<li>‘On-the-fly’ transformation capacities in QGIS</li>
+<li>Measurements &amp; Areal calculations based on CRS parameters</li>
+</ul>
+<p>Specific techniques covered this week will include:</p>
+<ul>
+<li>Defining Projections</li>
+<li>Reprojections</li>
+<li>Datum Transformations</li>
+<li>Angular units vs.&nbsp;planar units</li>
+</ul>
+<p>In this sixth assignment, you will utilize the <a href="https://gis-nspe-tns.github.io/STGIS_UENV3200_UURB3210_sp24/labs/STGIS_lab-6_SP24.html">Class 6 Technical Lab</a> as a guide to complete your sixth mapping project utilizing both an administrative vector and a discrete raster product wherein you will determine land cover types and percentages within the boundary of your global city of choice.</p>
+<p>A synopsis of the technical steps of the assignment listed as follows:</p>
+<ul>
+<li>Acquire Vector boundary data for a global city of your choice. This feature will have an initial CRS <code>WGS84</code> - geographic coordinate system.</li>
+<li>Acquire a Raster tile that is consistent with your global city of choice. This raster will have an initial CRS <code>WGS84</code> - geographic coordinate system.</li>
+<li>Mask (clip) the raster to the global city boundary.</li>
+<li>Convert to Polygon vector format.</li>
+<li>Dissolve to land use categories; reproject the vector feature to its appropriate <code>UTM Zone</code> - projected coordinate system.</li>
+<li>Create an nominal thematic map and respective legend for land use categories.</li>
+<li>Incorporate a summary table into the final layout.</li>
+<li>Complete assignment submission layout; load to assignment 6 PDF at CANVAS.</li>
+</ul>
+</section>
+<section id="data" class="level2">
+<h2 class="anchored" data-anchor-id="data">Data</h2>
+<p>The primary vector feature needed for this assignment will be derived by you from <a href="https://www.openstreetmap.org/">OpenStreetMap</a> via <a href="https://overpass-turbo.eu/">Overpass Turbo</a>. A secondary vector feature representing the UTM zones needed also for this assignment is linked as follows:</p>
+<ul>
+<li><a href="https://www.dropbox.com/s/9o2mymccyxxdady/c6_UTM-zones.zip?dl=1">UTM Zones Vector Feature</a></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_assignment-6_SP24_files/img/4.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>UTM Zones Vector Feature</em></figcaption><p></p>
+</figure>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Note the <code>.prj</code> file which states the <code>GCS</code> for this feature: <code>GEOGCS["GCS_WGS_1984",DATUM["D_WGS_1984",SPHEROID["WGS_1984",6378137,298.257223563]],PRIMEM["Greenwich",0],UNIT["Degree",0.017453292519943295]]</code></p>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_assignment-6_SP24_files/img/1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>OpenStreetMap representation for Atlanta, GA</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_assignment-6_SP24_files/img/2.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Overpass Turbo Extraction for Atlanta, GA</em></figcaption><p></p>
+</figure>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Atlanta, GA will be the example city utilized throughout the assignment guide(s). A good choice of city for this assignment is one that is very large and has varied land uses seen in OpenStreetMap (OSM). For instance, Atlanta has many green spaces to its west interspersed with urban impervious cover, resulting in a final mapping with several significant land cover classes beyond the impervious surfaces alone.</p>
+</div>
+</div>
+</section>
+<section id="class-6-readings" class="level2">
+<h2 class="anchored" data-anchor-id="class-6-readings">Class 6 Readings:</h2>
+<p>This week’s reading that will be featured on the upcoming quiz will be from <a href="https://students.flatworldknowledge.com/course/2607197">Essentials of Geographic Information Systems textbook</a>. There is a supplemental reading directory for your reference (Not featured on the quiz).</p>
+<p>The Class 6 quiz (open 03/11/2023 - Monday) will feature 10 questions covering content in the textbook <strong>Chapter 3</strong> as noted below:</p>
+<ul>
+<li>Essentials of Geographic Information Systems textbook - <strong>Chapter 3, pages 54 - 58</strong> (Coordinate Systems &amp; Map Projections)</li>
+</ul>
+<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This week’s reading stops at <strong>Section 3.3</strong> <em>Map Abstraction</em>.</p>
+</div>
+</div>
+<ul>
+<li><p>Supplemental reading directory:</p></li>
+<li><p><a href="https://www.dropbox.com/s/jzlodwkq02kecss/C6_Readings.zip?dl=1">Class 6 Supplemental Reading Directory</a></p></li>
+<li><p>Included Supplemental Readings:</p>
+<ul>
+<li>Radical Cartography - Bill Rankin Projection Charts (folder of PDFs)</li>
+<li>Chapter 3 - Map Projections</li>
+<li>Choosing a projection</li>
+<li>Chapter 9 ‘what projection should I use’</li>
+<li>An Album of map projections - John P. Snyder</li>
+</ul></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_assignment-6_SP24_files/img/3.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Class 6 Supplemental Reading Directory</em></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="assignment-step-1" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-1">Assignment Step 1</h2>
+<ul>
+<li><p>Download the <a href="https://www.dropbox.com/s/9o2mymccyxxdady/c6_UTM-zones.zip?dl=1">UTM Zones Vector Feature</a></p></li>
+<li><p>Create an assignment <code>.mxd</code>, placing it within your assignment 6 directory. Establish an <em>ArcCatalog</em> connection to the assignment 6 directory and place the <code>c6_UTM-zones</code> folder inside the assignment 6 directory that you create.</p></li>
+</ul>
+</section>
+<section id="assignment-step-2" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-2">Assignment Step 2</h2>
+<ul>
+<li><p>Refer to <a href="https://gis-nspe-tns.github.io/STGIS_UENV3200_UURB3210_sp24/labs/STGIS_lab-6_SP24.html">Class 6 Technical Lab</a> to derive your global city vector polygon feature and the <em>Copernicus Land Cover</em> raster tile that coincides with your global city.</p></li>
+<li><p><a href="https://lcviewer.vito.be/download">Copernicus Global Land Cover</a></p></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_assignment-6_SP24_files/img/5.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Copernicus Global Land Cover Web Interface</em></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="assignment-step-3" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-3">Assignment Step 3</h2>
+<ul>
+<li>Next, <em>Mask</em> the raster with the vector layer so that the full coverage raster tile is ‘clipped’ to the edge of the vector city feature. Going forward, this will be the input raster for initial processing steps below.</li>
+</ul>
+</section>
+<section id="assignment-step-4" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-4">Assignment Step 4</h2>
+<ul>
+<li>Utilize the <em>UTM Zones</em> feature to determine which zone encapsulates to full extent of your global city. If by chance your city straddles two <em>UTM Zones</em>, you are advised for this assignment to simply choose a different global city that indeed falls fully within one <em>UTM Zone</em>.</li>
+</ul>
+</section>
+<section id="assignment-step-5" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-5">Assignment Step 5</h2>
+<ul>
+<li><em>Polygonize</em> the raster cells within the new clipped raster.</li>
+<li><em>Dissolve</em> the new polygon feature, utilizing the <em>attribute</em> <code>VALUE</code> as the dissolve field.</li>
+</ul>
+</section>
+<section id="assignment-step-5-1" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-5-1">Assignment Step 5</h2>
+<ul>
+<li>Once the <em>Dissolve</em> is complete, <em>Reproject</em> the new <em>Dissolve</em> layer to its correct <em>UTM Zone</em>.</li>
+</ul>
+</section>
+<section id="assignment-step-6" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-6">Assignment Step 6</h2>
+<ul>
+<li>Next, create summary statistics for land cover categories within your city’s vector boundary. To do this, utilize the <em>Field Calculator</em> to create 3 new columns:</li>
+</ul>
+<ol type="1">
+<li><code>AREA</code> as a double column</li>
+<li><code>Class</code> as a text column</li>
+<li><code>% Land</code> as a double column</li>
+</ol>
+<ul>
+<li><p>Within the <code>AREA</code> column, you will run the <em>Calculate Geometry</em> tool accessed from the attribute table <code>AREA</code> column.</p></li>
+<li><p>Once complete, you will incorporate the output table into the final cartographic layout (use the same process as Assignment 2 and Assignment 5).</p></li>
+</ul>
+</section>
+<section id="assignment-step-7" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-7">Assignment Step 7</h2>
+<ul>
+<li>Proceed to the final map layout. Here you will also create a legend with the following nominal categories <code>Land Cover</code> which will be used in lieu of the <code>value</code> column:</li>
+</ul>
+<table class="table">
+<thead>
+<tr class="header">
+<th>VALUE</th>
+<th>Land Cover Category</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>unknown</td>
+</tr>
+<tr class="even">
+<td>111</td>
+<td>Evergreen needleleaf closed forest</td>
+</tr>
+<tr class="odd">
+<td>112</td>
+<td>Evergreen broadleaf closed forest</td>
+</tr>
+<tr class="even">
+<td>113</td>
+<td>Deciduous needleleaf closed forest</td>
+</tr>
+<tr class="odd">
+<td>114</td>
+<td>Deciduous broadleaf closed forest</td>
+</tr>
+<tr class="even">
+<td>115</td>
+<td>mixed closed forest</td>
+</tr>
+<tr class="odd">
+<td>116</td>
+<td>unknown closed forest</td>
+</tr>
+<tr class="even">
+<td>121</td>
+<td>Evergreen needleleaf open forest</td>
+</tr>
+<tr class="odd">
+<td>122</td>
+<td>Evergreen broadleaf open forest</td>
+</tr>
+<tr class="even">
+<td>123</td>
+<td>Deciduous needleleaf open forest</td>
+</tr>
+<tr class="odd">
+<td>124</td>
+<td>Deciduous broadleaf open forest</td>
+</tr>
+<tr class="even">
+<td>125</td>
+<td>mixed open forest</td>
+</tr>
+<tr class="odd">
+<td>126</td>
+<td>unknown open forest</td>
+</tr>
+<tr class="even">
+<td>20</td>
+<td>shrubland</td>
+</tr>
+<tr class="odd">
+<td>30</td>
+<td>herbaceous vegetation</td>
+</tr>
+<tr class="even">
+<td>40</td>
+<td>cropland</td>
+</tr>
+<tr class="odd">
+<td>50</td>
+<td>built-up</td>
+</tr>
+<tr class="even">
+<td>60</td>
+<td>bare sparse vegetation</td>
+</tr>
+<tr class="odd">
+<td>70</td>
+<td>snow ice</td>
+</tr>
+<tr class="even">
+<td>80</td>
+<td>permanent inland water</td>
+</tr>
+<tr class="odd">
+<td>90</td>
+<td>herbaceous wetland</td>
+</tr>
+<tr class="even">
+<td>100</td>
+<td>moss lichen</td>
+</tr>
+<tr class="odd">
+<td>200</td>
+<td>sea</td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://zenodo.org/record/4723921#.YWWKz9lBzPY">Copernicus Global Land Service: Land Cover 100m: version 3 Globe 2015-2019: Product User Manual</a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_assignment-6_SP24_files/img/6.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>23 Class Legend</em></figcaption><p></p>
+</figure>
+</div>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Only use the land cover categories that are included in your final chosen city extent. Those that are not within your city extent, simply don’t include those in the final legend. Try to replicate the respective colors per land cover class, i.e.&nbsp;utilze a bright-red for the class <code>Built-up</code>, a yellow-orange for <code>Shurbland</code>, ect.</p>
+</div>
+</div>
+<ul>
+<li>Refer to <em>Map Layout &amp; Deliverable</em> below for other cartographic details.</li>
+</ul>
+</section>
+<section id="map-layout-deliverable" class="level2">
+<h2 class="anchored" data-anchor-id="map-layout-deliverable">Map layout &amp; Deliverable:</h2>
+<ul>
+<li><p>To development the final map design, utilize the map example PDF below to help guide your process.</p></li>
+<li><p>Final map layout will include the following elements on either a 11x17” or 8.5x11” Portrait/Landscape 300 DPI:</p>
+<ul>
+<li>Main map frame featuring your cartographic output</li>
+<li>Insert summary table</li>
+<li>A map title</li>
+<li>Legend representing each nominal land cover category <em>within</em> your chosen city.</li>
+<li>Simple scale bar tailored to a meaningful distance(s) across chosen city.</li>
+<li>North Arrow</li>
+<li>Data source &amp; Author tag</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_assignment-6_SP24_files/img/final-output.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Example Layout - Assignment 6</em></figcaption><p></p>
+</figure>
+</div></li>
+<li><p>Utilize the following map example to guide your design process:</p></li>
+<li><p><a href="https://weekly-materials.s3-us-west-1.amazonaws.com/c6.land-cover.map.example.pdf">Example Layout - Assignment 6 PDF</a></p></li>
+</ul>
+</section>
+<section id="resources" class="level2">
+<h2 class="anchored" data-anchor-id="resources">Resources:</h2>
+<ul>
+<li><p><a href="https://observablehq.com/@floledermann/projection-playground">Projection Playground</a></p></li>
+<li><p><a href="https://drive.google.com/file/d/1OlsgJC-LLJcf18iLZD511T83VW4uuNl6/view?usp=sharing">An Album of Map Projections</a></p></li>
+<li><p><a href="https://drive.google.com/file/d/13jTOkPUXfDhBMpw5QglBl8GG-rrCF9c6/view?usp=sharing">Overview of Coordinate Reference Systems (CRS)</a></p></li>
+<li><p><a href="https://drive.google.com/file/d/1mHQRPdyjET_YrSji0uAm5iT38CQ5Fr8N/view?usp=sharing">The Universal Transverse Mercator (UTM) Grid</a></p></li>
+<li><p>Guide for working with Map Projections in QGIS <a href="https://t.co/p0SccUfn7j">REFERENCE GUIDE</a></p></li>
+<li><p>The IOGP’s <a href="http://www.epsg.org/">EPSG Geodetic Parameter Dataset</a> is a collection of definitions of <strong>coordinate reference systems and coordinate transformations</strong> which may be global, regional, national or local in application.</p></li>
+<li><p><a href="https://www.azavea.com/blog/2015/12/21/tools-for-getting-data-out-of-openstreetmap-and-into-desktop-gis/">Tools for extracting OpenStreetMap and into Desktop GIS</a></p></li>
+<li><p>Interesting Article on the Dymaxion Map Projection: <a href="http://architizer.com/blog/reinterpreting-bucky-fullers-dymaxion-map/">Reinterpreting Bucky Fuller’s Dymaxion Map</a></p></li>
+</ul>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp(/^(?:http:|https:)\/\/www\.quarto\.org\/custom/);
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          // default icon
+          link.classList.add("external");
+      }
+    }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+<script src="STGIS_assignment-6_SP24_files/libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

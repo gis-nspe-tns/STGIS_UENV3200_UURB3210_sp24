@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.280">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2024-03-03">
+
+<title>Class 6 Lab: Map Projections</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="STGIS_lab-6_SP24_files/libs/clipboard/clipboard.min.js"></script>
+<script src="STGIS_lab-6_SP24_files/libs/quarto-html/quarto.js"></script>
+<script src="STGIS_lab-6_SP24_files/libs/quarto-html/popper.min.js"></script>
+<script src="STGIS_lab-6_SP24_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="STGIS_lab-6_SP24_files/libs/quarto-html/anchor.min.js"></script>
+<link href="STGIS_lab-6_SP24_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="STGIS_lab-6_SP24_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="STGIS_lab-6_SP24_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="STGIS_lab-6_SP24_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="STGIS_lab-6_SP24_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<link rel="stylesheet" href="STGIS_lab-6_SP24_files/styles.css">
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#preamble" id="toc-preamble" class="nav-link active" data-scroll-target="#preamble">Preamble</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
+  <li><a href="#assignment-step-1" id="toc-assignment-step-1" class="nav-link" data-scroll-target="#assignment-step-1">Assignment Step 1</a></li>
+  <li><a href="#assignment-step-3" id="toc-assignment-step-3" class="nav-link" data-scroll-target="#assignment-step-3">Assignment Step 3</a></li>
+  <li><a href="#assignment-step-4" id="toc-assignment-step-4" class="nav-link" data-scroll-target="#assignment-step-4">Assignment Step 4</a></li>
+  <li><a href="#assignment-step-5" id="toc-assignment-step-5" class="nav-link" data-scroll-target="#assignment-step-5">Assignment Step 5</a></li>
+  <li><a href="#assignment-step-5-1" id="toc-assignment-step-5-1" class="nav-link" data-scroll-target="#assignment-step-5-1">Assignment Step 5</a></li>
+  <li><a href="#assignment-step-6" id="toc-assignment-step-6" class="nav-link" data-scroll-target="#assignment-step-6">Assignment Step 6</a></li>
+  <li><a href="#assignment-step-7" id="toc-assignment-step-7" class="nav-link" data-scroll-target="#assignment-step-7">Assignment Step 7</a></li>
+  <li><a href="#map-layout-deliverable" id="toc-map-layout-deliverable" class="nav-link" data-scroll-target="#map-layout-deliverable">Map layout &amp; Deliverable:</a></li>
+  <li><a href="#concluding-remarks" id="toc-concluding-remarks" class="nav-link" data-scroll-target="#concluding-remarks">Concluding Remarks:</a>
+  <ul class="collapse">
+  <li><a href="#further-reference" id="toc-further-reference" class="nav-link" data-scroll-target="#further-reference">Further Reference:</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Class 6 Lab: Map Projections</h1>
+<p class="subtitle lead">Spring 2024 | <a href="https://courses.newschool.edu/courses/UENV3200/">UENV3200</a>, <a href="https://courses.newschool.edu/courses/UURB3210/">UURB3210</a></p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">March 3, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-6_SP24_files/img/header.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Map Projections - Goode Homolosine Projection (equal area - often used in Rand McNally atlas) </em></figcaption><p></p>
+</figure>
+</div>
+<section id="preamble" class="level2">
+<h2 class="anchored" data-anchor-id="preamble">Preamble</h2>
+<p>In this sixth technical lab, we will complete steps necessary for the sixth assignment. These lab steps should be used extensively to aid with the completion of the sixth assignment due Sunday evening at 11:59pm.</p>
+<ul>
+<li><a href="https://gis-nspe-tns.github.io/STGIS_UENV3200_UURB3210_sp24/demos/c6_lecture_demo.html">Class 6 Demonstration Lab - Extra Materials</a></li>
+<li><a href="https://gis-nspe-tns.github.io/STGIS_UENV3200_UURB3210_sp24/assignments/STGIS_assignment-6_SP24.html">Class 6 Assignment</a></li>
+</ul>
+</section>
+<section id="data" class="level2">
+<h2 class="anchored" data-anchor-id="data">Data</h2>
+<p>The primary vector feature needed for this assignment will be derived by you from <a href="https://www.openstreetmap.org/">OpenStreetMap</a> via <a href="https://overpass-turbo.eu/">Overpass Turbo</a>. A secondary vector feature representing the UTM zones needed also for this assignment is linked as follows:</p>
+<ul>
+<li><a href="https://www.dropbox.com/s/9o2mymccyxxdady/c6_UTM-zones.zip?dl=1">UTM Zones Vector Feature</a></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-6_SP24_files/img/4.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>UTM Zones Vector Feature</em></figcaption><p></p>
+</figure>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Note the <code>.prj</code> file which states the <code>GCS</code> for this feature: <code>GEOGCS["GCS_WGS_1984",DATUM["D_WGS_1984",SPHEROID["WGS_1984",6378137,298.257223563]],PRIMEM["Greenwich",0],UNIT["Degree",0.017453292519943295]]</code></p>
+</div>
+</div>
+</section>
+<section id="assignment-step-1" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-1">Assignment Step 1</h2>
+<ul>
+<li><p>Download the <a href="https://www.dropbox.com/s/9o2mymccyxxdady/c6_UTM-zones.zip?dl=1">Class 6 assignment data</a></p></li>
+<li><p>Create an assignment <code>.mxd</code>, placing it within your assignment 6 directory. Establish your vector data connection via <em>ArcCatalog</em> to your assignment <code>.mxd</code>.</p></li>
+</ul>
+<p>Next, navigate via web browser to <a href="https://www.openstreetmap.org">OpenStreetMap (OSM)</a>. In the assignment example below, the city of Atlanta, Georgia will be used. In your own assignment submission choose a global city that features the following characteristics:</p>
+<ol type="1">
+<li>A very large city.</li>
+<li>Multiple land uses in addition to impervious, high urban surfaces.</li>
+<li>Falls within 1 UTM Zone.</li>
+</ol>
+<p>Search for your city of choice in the upper-left search box at OSM:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-6_SP24_files/img/atlanta.1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Wizard &gt; Build and Run Query</em></figcaption><p></p>
+</figure>
+</div>
+<p>OSM will return all results associated with your named city; make sure you are choosing the actual city:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-6_SP24_files/img/atlanta.2.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Returned Results for Atlanta, GA</em></figcaption><p></p>
+</figure>
+</div>
+<p>Note the attribute <code>name</code>; in this case its simply <code>Atlanta</code>. Use the following code construction for the next step using <a href="https://overpass-turbo.eu/">Overpass Turbo</a>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-6_SP24_files/img/atlanta.3.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Wizard &gt; Build and Run Query</em></figcaption><p></p>
+</figure>
+</div>
+<p><code>name = Atlanta</code></p>
+<p>Navigate to <a href="https://overpass-turbo.eu/">Overpass Turbo</a> and insert your city search construction into the <em>Query Wizard</em></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-6_SP24_files/img/atlanta.4.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Wizard &gt; Build and Run Query</em></figcaption><p></p>
+</figure>
+</div>
+<p>The result should produce a vector polygon feature highlighted for the administrative boundary of your city; see example to follow for Atlanta, GA:</p>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Make sure to position the bounding box over the city as the code is searching within a <code>bbox</code> which translates as the bounding box</p>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-6_SP24_files/img/2.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Overpass Turbo Extraction for Atlanta, GA</em></figcaption><p></p>
+</figure>
+</div>
+<p>At this juncture, <em>Export</em> the selection(s) for your city to the <code>geojson</code> format:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-6_SP24_files/img/atlanta.6.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Overpass Turbo Extraction for Atlanta, GA</em></figcaption><p></p>
+</figure>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Note the <code>.geojson</code> file defaults to a <code>GCS</code> of <code>WGS84</code>:</p>
+<p>“The coordinate reference system for all GeoJSON coordinates is a geographic coordinate reference system, using the World Geodetic System 1984 (WGS84) datum, with longitude and latitude units of decimal degrees.” <a href="http://cran.nexr.com/web/packages/geojsonio/vignettes/geojson_spec.html">reference</a></p>
+</div>
+</div>
+<p>With the <code>.geojson</code> file downloaded and placed into your assignment folder, navigate to <a href="https://Mapshaper.org/">mapshaper</a>. Next, import the <code>.geojson</code> file to Mapshaper:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-6_SP24_files/img/mapshaper.gif" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Mapshaper Import</em></figcaption><p></p>
+</figure>
+</div>
+<p>Following the Mapshaper import, its critical to remove any polyline or points features, and just keep only the polygon feature. Once this is complete, <em>Export</em> the polygon feature to your assignment folder:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-6_SP24_files/img/mapshaper2.gif" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Mapshaper Export excluding any points or polylines, keeping on the administrative polygon</em></figcaption><p></p>
+</figure>
+</div>
+<p>Next, unzip and import the administrative polygon to your assignment <code>.mxd</code>. Once complete, also import the UTM Zones shapefile. There should be no errors reported at this juncture for projection issues. All data thus far is explicitly within the <code>WGS84</code> coordinate system:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-6_SP24_files/img/atlanta.8.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Mapshaper Import to ArcMap</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-6_SP24_files/img/atlanta.7.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Mapshaper Import to ArcMap with UTM Zone Shapefile</em></figcaption><p></p>
+</figure>
+</div>
+<p>Label the <code>UTM_zones</code> shapefile so that its evident where your city of choice falls within the UTM zones. Here its clear that Atlanta, GA falls fully within the UTM Zone 16; since this is north of the equator, we use Zone 16N; if it were south of the equator we would use Zone 16S.</p>
+<p>Next, navigate to the <a href="https://lcviewer.vito.be/download">Copernicus Global Land Cover</a> dataset and download the tile that corresponds best with your city. Ideally you will only need to download 1 tile. If two are needed, utilize the <a href="https://pro.arcgis.com/en/pro-app/latest/help/analysis/raster-functions/mosaic-rasters.htm#:~:text=The%20Mosaic%20Rasters%20function%20creates,with%20which%20images%20are%20displayed.">Mosaic Rasters</a> process from <a href="https://gis-nspe-tns.github.io/STGIS_UENV3200_UURB3210_sp24/labs/STGIS_lab-5_SP24.html">Class 6 Technical Lab</a>.</p>
+<ul>
+<li><a href="https://lcviewer.vito.be/download">Copernicus Global Land Cover</a></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-6_SP24_files/img/5.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Copernicus Global Land Cover Web Interface</em></figcaption><p></p>
+</figure>
+</div>
+<p>Choose the <em>Discrete Classification</em> product for the year <code>2019</code> and download the <code>.TIF</code> product to the assignment folder:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-6_SP24_files/img/cover1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Copernicus Global Land Cover Web Interface - Project Selected</em></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="assignment-step-3" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-3">Assignment Step 3</h2>
+<ul>
+<li>Next, <em>Mask</em> the raster with the vector layer so that the full coverage raster tile is ‘clipped’ to the edge of the vector city feature. Going forward, this will be the input raster for initial processing steps below:</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-6_SP24_files/img/cover2.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Extract by Mask</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-6_SP24_files/img/cover3.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Extract by Mask result</em></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="assignment-step-4" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-4">Assignment Step 4</h2>
+<ul>
+<li>Utilize the <em>UTM Zones</em> feature to determine which zone encapsulates to full extent of your global city. If by chance your city straddles two <em>UTM Zones</em>, you are advised for this assignment to simply choose a different global city that indeed falls fully within one <em>UTM Zone</em>. As noted prior, the relevant UTM zone for Atlanta, Georgia is <code>UTM Zone 16N</code>. <em>Project</em> this vector feature and output to the assignment folder using the correct UTM Zone for your city:</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-6_SP24_files/img/project1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Project Tool</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-6_SP24_files/img/projection.gif" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Project Polygon boundary</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-6_SP24_files/img/project2.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Projection results for polygon boundary</em></figcaption><p></p>
+</figure>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Note the resulting projected vector polygon feature can reside within the larger project CRS which is <code>WGS84</code> at this juncture. This is the result of the ‘on-the-fly’ projection capacity of ArcMap.</p>
+</div>
+</div>
+</section>
+<section id="assignment-step-5" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-5">Assignment Step 5</h2>
+<p>Next, <em>Polygonize</em> the raster cells within the new clipped raster for your city.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-6_SP24_files/img/polygon1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Raster to Polygon Tool</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-6_SP24_files/img/polygon2.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Populate the Raster to Polygon Tool</em></figcaption><p></p>
+</figure>
+</div>
+<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Make sure to Toggle OFF <code>Simplify polygons</code>.</p>
+</div>
+</div>
+<ul>
+<li><em>Dissolve</em> the new polygon feature, utilizing the <em>attribute</em> <code>gridcode</code> as the dissolve field:</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-6_SP24_files/img/polygon3.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Initiate Dissolve</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-6_SP24_files/img/polygon4.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Populate Dissolve with Dissolve Field as <code>gridcode</code></em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-6_SP24_files/img/polygon5.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Note gridcode result in the attribute table</em></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="assignment-step-5-1" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-5-1">Assignment Step 5</h2>
+<ul>
+<li>Once the <em>Dissolve</em> is complete, <em>Reproject</em> the new <em>Dissolve</em> layer to its correct <em>UTM Zone</em>:</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-6_SP24_files/img/polygon6.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Note the UTM Zone 16N output coordinate system for the dissolved feature</em></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="assignment-step-6" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-6">Assignment Step 6</h2>
+<p>Utilize the <em>Field Calculator</em> to create 3 new columns:</p>
+<ol type="1">
+<li><code>AREA</code> as a <em>double</em> column</li>
+<li><code>Class</code> as a <em>text</em> column</li>
+<li><code>% Land</code> as a <em>double</em> column</li>
+</ol>
+<p>In the <code>AREA</code> column, run the <code>Calculate Geometry</code> tool accessed from the attribute table <code>AREA</code> column. Set the units to <em>Square Miles</em> and use the new UTM zone as the coordinate system:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-6_SP24_files/img/area.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em><code>Calculate Geometry</code> tool</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-6_SP24_files/img/area1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em><code>Calculate Geometry</code> in <code>AREA</code> column</em></figcaption><p></p>
+</figure>
+</div>
+<ul>
+<li>Next, create summary statistics for <code>AREA</code>; in the assignment example for Atlanta, Georgia the result is <code>134.707</code> square miles:</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-6_SP24_files/img/summary1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Summary Statistics for <code>AREA</code> column</em></figcaption><p></p>
+</figure>
+</div>
+<p>Next, in the <code>pct_land</code> column, set the <em>numeric rounding</em> to 2 digits, and run the percentage calculation in this column as follows replacing the <code>SUM AREA</code> value with your own city’s total:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-6_SP24_files/img/summary2.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>set rounding to 2 digits</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-6_SP24_files/img/summary3.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Derive % land for each gridcode category via formula</em></figcaption><p></p>
+</figure>
+</div>
+<ul>
+<li><strong>Formula</strong>:</li>
+</ul>
+<pre><code>([AREA]/134.707583)*100</code></pre>
+<p>Next, initiate an editing session; and highlight the <code>Class</code> column:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-6_SP24_files/img/summary4.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Initiate Editing Session</em></figcaption><p></p>
+</figure>
+</div>
+<p>With the <code>Class</code> column highlighted downward across all records, pick one row in which it operate <em>Field Calculator</em>. Use the table below in Assignment Step 7 for the correct <em>gridcode &gt; Land Cover Category</em> combinations. In the example below, gridcode <code>20</code> corresponds to <code>shrubland</code>. Remember to enter text into the <em>Field Calculator</em> encapsulated by double quotation marks - for example, <code>"sample word"</code>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-6_SP24_files/img/summary5.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Input Class Categories via Field Calculator</em></figcaption><p></p>
+</figure>
+</div>
+<p>With all classes complete with corresponding gridcodes, you will incorporate the output table into the final cartographic layout (use the same process as Assignment 2 and Assignment 5).</p>
+</section>
+<section id="assignment-step-7" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-7">Assignment Step 7</h2>
+<ul>
+<li>Proceed to the final map layout. Here you will also create a legend with the following nominal categories <code>Land Cover</code> which will be used in lieu of the <code>gridcode</code> column:</li>
+</ul>
+<table class="table">
+<thead>
+<tr class="header">
+<th>gridcode</th>
+<th>Land Cover Category</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>unknown</td>
+</tr>
+<tr class="even">
+<td>111</td>
+<td>Evergreen needleleaf closed forest</td>
+</tr>
+<tr class="odd">
+<td>112</td>
+<td>Evergreen broadleaf closed forest</td>
+</tr>
+<tr class="even">
+<td>113</td>
+<td>Deciduous needleleaf closed forest</td>
+</tr>
+<tr class="odd">
+<td>114</td>
+<td>Deciduous broadleaf closed forest</td>
+</tr>
+<tr class="even">
+<td>115</td>
+<td>mixed closed forest</td>
+</tr>
+<tr class="odd">
+<td>116</td>
+<td>unknown closed forest</td>
+</tr>
+<tr class="even">
+<td>121</td>
+<td>Evergreen needleleaf open forest</td>
+</tr>
+<tr class="odd">
+<td>122</td>
+<td>Evergreen broadleaf open forest</td>
+</tr>
+<tr class="even">
+<td>123</td>
+<td>Deciduous needleleaf open forest</td>
+</tr>
+<tr class="odd">
+<td>124</td>
+<td>Deciduous broadleaf open forest</td>
+</tr>
+<tr class="even">
+<td>125</td>
+<td>mixed open forest</td>
+</tr>
+<tr class="odd">
+<td>126</td>
+<td>unknown open forest</td>
+</tr>
+<tr class="even">
+<td>20</td>
+<td>shrubland</td>
+</tr>
+<tr class="odd">
+<td>30</td>
+<td>herbaceous vegetation</td>
+</tr>
+<tr class="even">
+<td>40</td>
+<td>cropland</td>
+</tr>
+<tr class="odd">
+<td>50</td>
+<td>built-up</td>
+</tr>
+<tr class="even">
+<td>60</td>
+<td>bare sparse vegetation</td>
+</tr>
+<tr class="odd">
+<td>70</td>
+<td>snow ice</td>
+</tr>
+<tr class="even">
+<td>80</td>
+<td>permanent inland water</td>
+</tr>
+<tr class="odd">
+<td>90</td>
+<td>herbaceous wetland</td>
+</tr>
+<tr class="even">
+<td>100</td>
+<td>moss lichen</td>
+</tr>
+<tr class="odd">
+<td>200</td>
+<td>sea</td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://zenodo.org/record/4723921#.YWWKz9lBzPY">Copernicus Global Land Service: Land Cover 100m: version 3 Globe 2015-2019: Product User Manual</a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-6_SP24_files/img/6.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>23 Class Legend</em></figcaption><p></p>
+</figure>
+</div>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Only use the land cover categories that are included in your final chosen city extent. Those that are not within your city extent, simply don’t include those in the final legend.</p>
+</div>
+</div>
+<ul>
+<li>Refer to <em>Map Layout &amp; Deliverable</em> below for other cartographic details.</li>
+</ul>
+</section>
+<section id="map-layout-deliverable" class="level2">
+<h2 class="anchored" data-anchor-id="map-layout-deliverable">Map layout &amp; Deliverable:</h2>
+<ul>
+<li><p>To development the final map design, utilize the map example PDF below to help guide your process.</p></li>
+<li><p>Final map layout will include the following elements on either a 11x17” or 8.5x11” Portrait/Landscape 300 DPI:</p>
+<ul>
+<li>Main map frame featuring your cartographic output</li>
+<li>Insert summary table</li>
+<li>A map title</li>
+<li>Legend representing each nominal land cover category <em>within</em> your chosen city.</li>
+<li>Simple scale bar tailored to a meaningful distance(s) across chosen city.</li>
+<li>North Arrow</li>
+<li>Data source &amp; Author tag</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-6_SP24_files/img/final-output.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Example Layout - Assignment 6</em></figcaption><p></p>
+</figure>
+</div></li>
+<li><p>Utilize the following map example to guide your design process:</p></li>
+<li><p><a href="https://weekly-materials.s3-us-west-1.amazonaws.com/c6.land-cover.map.example.pdf">Example Layout - Assignment 6 PDF</a></p></li>
+</ul>
+</section>
+<section id="concluding-remarks" class="level2">
+<h2 class="anchored" data-anchor-id="concluding-remarks">Concluding Remarks:</h2>
+<section id="further-reference" class="level3">
+<h3 class="anchored" data-anchor-id="further-reference">Further Reference:</h3>
+<ul>
+<li><p><a href="https://observablehq.com/@floledermann/projection-playground">Projection Playground</a></p></li>
+<li><p><a href="https://drive.google.com/file/d/1OlsgJC-LLJcf18iLZD511T83VW4uuNl6/view?usp=sharing">An Album of Map Projections</a></p></li>
+<li><p><a href="https://drive.google.com/file/d/13jTOkPUXfDhBMpw5QglBl8GG-rrCF9c6/view?usp=sharing">Overview of Coordinate Reference Systems (CRS)</a></p></li>
+<li><p><a href="https://drive.google.com/file/d/1mHQRPdyjET_YrSji0uAm5iT38CQ5Fr8N/view?usp=sharing">The Universal Transverse Mercator (UTM) Grid</a></p></li>
+<li><p>Guide for working with Map Projections in QGIS <a href="https://t.co/p0SccUfn7j">REFERENCE GUIDE</a></p></li>
+<li><p>The IOGP’s <a href="http://www.epsg.org/">EPSG Geodetic Parameter Dataset</a> is a collection of definitions of <strong>coordinate reference systems and coordinate transformations</strong> which may be global, regional, national or local in application.</p></li>
+<li><p><a href="https://www.azavea.com/blog/2015/12/21/tools-for-getting-data-out-of-openstreetmap-and-into-desktop-gis/">Tools for extracting OpenStreetMap and into Desktop GIS</a></p></li>
+<li><p>Interesting Article on the Dymaxion Map Projection: <a href="http://architizer.com/blog/reinterpreting-bucky-fullers-dymaxion-map/">Reinterpreting Bucky Fuller’s Dymaxion Map</a></p></li>
+</ul>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp(/^(?:http:|https:)\/\/www\.quarto\.org\/custom/);
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          // default icon
+          link.classList.add("external");
+      }
+    }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+<script src="STGIS_lab-6_SP24_files/libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
