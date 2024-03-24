@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.280">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2024-03-23">
+
+<title>Class 8 Assignment: Raster Spatial Analysis &amp; Suitability</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="STGIS_assignment-8_SP24_files/libs/clipboard/clipboard.min.js"></script>
+<script src="STGIS_assignment-8_SP24_files/libs/quarto-html/quarto.js"></script>
+<script src="STGIS_assignment-8_SP24_files/libs/quarto-html/popper.min.js"></script>
+<script src="STGIS_assignment-8_SP24_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="STGIS_assignment-8_SP24_files/libs/quarto-html/anchor.min.js"></script>
+<link href="STGIS_assignment-8_SP24_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="STGIS_assignment-8_SP24_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="STGIS_assignment-8_SP24_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="STGIS_assignment-8_SP24_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="STGIS_assignment-8_SP24_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<link rel="stylesheet" href="STGIS_assignment-8_SP24_files/styles.css">
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#preamble" id="toc-preamble" class="nav-link active" data-scroll-target="#preamble">Preamble</a></li>
+  <li><a href="#assignment-8---data" id="toc-assignment-8---data" class="nav-link" data-scroll-target="#assignment-8---data">Assignment 8 - Data</a></li>
+  <li><a href="#class-8-readings" id="toc-class-8-readings" class="nav-link" data-scroll-target="#class-8-readings">Class 8 Readings:</a></li>
+  <li><a href="#assignment-step-1" id="toc-assignment-step-1" class="nav-link" data-scroll-target="#assignment-step-1">Assignment Step 1</a></li>
+  <li><a href="#assignment-step-2---data-preprocessing-for-the-water-features" id="toc-assignment-step-2---data-preprocessing-for-the-water-features" class="nav-link" data-scroll-target="#assignment-step-2---data-preprocessing-for-the-water-features">Assignment Step 2 - Data preprocessing for the water features</a></li>
+  <li><a href="#assignment-step-3---rasterization-euclidean-distance-surface-for-water-features" id="toc-assignment-step-3---rasterization-euclidean-distance-surface-for-water-features" class="nav-link" data-scroll-target="#assignment-step-3---rasterization-euclidean-distance-surface-for-water-features">Assignment Step 3 - Rasterization + Euclidean Distance Surface for Water Features</a></li>
+  <li><a href="#assignment-step-4---data-preprocessing-for-the-roads-feature" id="toc-assignment-step-4---data-preprocessing-for-the-roads-feature" class="nav-link" data-scroll-target="#assignment-step-4---data-preprocessing-for-the-roads-feature">Assignment Step 4 - Data preprocessing for the roads feature</a></li>
+  <li><a href="#assignment-step-5---rasterization-euclidean-distance-surface-for-roads-features" id="toc-assignment-step-5---rasterization-euclidean-distance-surface-for-roads-features" class="nav-link" data-scroll-target="#assignment-step-5---rasterization-euclidean-distance-surface-for-roads-features">Assignment Step 5 - Rasterization + Euclidean Distance Surface for Roads Features</a></li>
+  <li><a href="#assignment-step-6---rasterization-of-protected-regions" id="toc-assignment-step-6---rasterization-of-protected-regions" class="nav-link" data-scroll-target="#assignment-step-6---rasterization-of-protected-regions">Assignment Step 6 - Rasterization of Protected Regions</a></li>
+  <li><a href="#assignment-step-7---reclassification-of-water-proximity-distances" id="toc-assignment-step-7---reclassification-of-water-proximity-distances" class="nav-link" data-scroll-target="#assignment-step-7---reclassification-of-water-proximity-distances">Assignment Step 7 - Reclassification of Water Proximity Distances</a></li>
+  <li><a href="#assignment-step-8---reclassification-of-roads-proximity-distances" id="toc-assignment-step-8---reclassification-of-roads-proximity-distances" class="nav-link" data-scroll-target="#assignment-step-8---reclassification-of-roads-proximity-distances">Assignment Step 8 - Reclassification of Roads Proximity Distances</a></li>
+  <li><a href="#assignment-step-9---suitability-combination" id="toc-assignment-step-9---suitability-combination" class="nav-link" data-scroll-target="#assignment-step-9---suitability-combination">Assignment Step 9 - Suitability Combination</a></li>
+  <li><a href="#assignment-step-10---preparation-for-cartographic-design---hillshade-surface" id="toc-assignment-step-10---preparation-for-cartographic-design---hillshade-surface" class="nav-link" data-scroll-target="#assignment-step-10---preparation-for-cartographic-design---hillshade-surface">Assignment Step 10 - Preparation for Cartographic Design - Hillshade Surface</a></li>
+  <li><a href="#assignment-step-11---preparation-for-cartographic-design---final-suitability-selection" id="toc-assignment-step-11---preparation-for-cartographic-design---final-suitability-selection" class="nav-link" data-scroll-target="#assignment-step-11---preparation-for-cartographic-design---final-suitability-selection">Assignment Step 11 - Preparation for Cartographic Design - Final Suitability Selection</a></li>
+  <li><a href="#map-layout-deliverable" id="toc-map-layout-deliverable" class="nav-link" data-scroll-target="#map-layout-deliverable">Map layout &amp; Deliverable:</a></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources:</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Class 8 Assignment: Raster Spatial Analysis &amp; Suitability</h1>
+<p class="subtitle lead">Spring 2024 | <a href="https://courses.newschool.edu/courses/UENV3200/">UENV3200</a>, <a href="https://courses.newschool.edu/courses/UURB3210/">UURB3210</a></p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">March 23, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_assignment-8_SP24_files/img/header.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Suitability Model Steps for Development Areas, State of Assam, Northeast India</em></figcaption><p></p>
+</figure>
+</div>
+<section id="preamble" class="level2">
+<h2 class="anchored" data-anchor-id="preamble">Preamble</h2>
+<p>In this eighth assignment, you will utilize the <a href="https://gis-nspe-tns.github.io/STGIS_UENV3200_UURB3210_sp24/labs/STGIS_lab-8_sp24.html">Class 8 Technical Lab</a> as a guide to complete your eighth mapping project utilizing <em>input</em> data representing <a href="https://en.wikipedia.org/wiki/Assam">features for the State of Assam, Northeast India”</a>. In this suitability assignment, you will utilize several criteria and areal allotment to ascertain land locations that fit the suitability requirements.</p>
+<p>The assignment features several sections as follows:</p>
+<ul>
+<li>Rasterization of input features that have been derived from OpenStreetMap.</li>
+<li>Development of various raster surfaces needed for proximity criteria.</li>
+<li>Analysis of distance threshold criteria upon raster surfaces.</li>
+<li>Final suitability combination layer.</li>
+<li>Subset of ‘Most Suitable’ locations.</li>
+<li>Cartographic design for the preceding raster analysis suitability model.</li>
+</ul>
+</section>
+<section id="assignment-8---data" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-8---data">Assignment 8 - Data</h2>
+<p><a href="https://www.dropbox.com/s/cqwr5cp0n850qqp/C8.assignment-DATA.zip?dl=1">Location of Class 8 suitability inputs for download</a></p>
+</section>
+<section id="class-8-readings" class="level2">
+<h2 class="anchored" data-anchor-id="class-8-readings">Class 8 Readings:</h2>
+<p>This week’s reading that will be featured on the upcoming quiz will be from <a href="https://students.flatworldknowledge.com/course/2607197">Essentials of Geographic Information Systems textbook</a>.</p>
+<p>The Class 8 quiz on Monday 04/01/23 will feature 10 questions covering content in the textbook <strong>Chapter 7</strong>:</p>
+<p>Essentials of Geographic Information Systems textbook - <strong>Chapter 7, pages 147 - 162 (Spatial Analysis of Raster Data)</strong></p>
+<p>Supplemental reading (not featured on Quiz):</p>
+<p><a href="https://www.dropbox.com/s/eaox5lif2iuve61/Class_9_Readings.zip?dl=1">Finding Suitable Locations | Chapter 2 (Suitability Overview)</a></p>
+<ul>
+<li><p>What is Map Algebra?</p></li>
+<li><p>Raster Calculator Overview</p></li>
+<li><p>Raster Calculator Appendix - Map Algebra</p></li>
+</ul>
+</section>
+<section id="assignment-step-1" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-1">Assignment Step 1</h2>
+<ul>
+<li><p>Input <code>envelop</code>, <code>boundary</code>, <code>protected_regions</code>, <code>roads</code>, <code>water_polygons</code> and <code>water_polylines</code>into the project <code>.mxd</code>.</p></li>
+<li><p>Set geoprocessing parameters for the raster suitability analysis.</p></li>
+</ul>
+</section>
+<section id="assignment-step-2---data-preprocessing-for-the-water-features" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-2---data-preprocessing-for-the-water-features">Assignment Step 2 - Data preprocessing for the water features</h2>
+<p>In this step, water features will be prepared in vector format, dissolved then rasterized in preparation for a Euclidean Distance output which is a <a href="https://pro.arcgis.com/en/pro-app/latest/tool-reference/spatial-analyst/understanding-euclidean-distance-analysis.htm"><em>Global</em> processing function</a>.</p>
+</section>
+<section id="assignment-step-3---rasterization-euclidean-distance-surface-for-water-features" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-3---rasterization-euclidean-distance-surface-for-water-features">Assignment Step 3 - Rasterization + Euclidean Distance Surface for Water Features</h2>
+<p>With the water vector feature prepared, move to the rasterization and distance surface process. Here the vector feature for water will be first rasterized with a new cell size of 15 meters. Once complete, a distance surface <em>from</em> the rasterized water will be conducted.</p>
+</section>
+<section id="assignment-step-4---data-preprocessing-for-the-roads-feature" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-4---data-preprocessing-for-the-roads-feature">Assignment Step 4 - Data preprocessing for the roads feature</h2>
+<p>With the distance surface complete for the water features, move along to a very similar process for the road feature.</p>
+</section>
+<section id="assignment-step-5---rasterization-euclidean-distance-surface-for-roads-features" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-5---rasterization-euclidean-distance-surface-for-roads-features">Assignment Step 5 - Rasterization + Euclidean Distance Surface for Roads Features</h2>
+<p>Next, RASTERIZE the dissolved roads feature, followed by creating the Euclidean Distance Surface for roads.</p>
+</section>
+<section id="assignment-step-6---rasterization-of-protected-regions" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-6---rasterization-of-protected-regions">Assignment Step 6 - Rasterization of Protected Regions</h2>
+<p>With both water and road features processed to distance surfaces, the next step is to rasterize the protected regions. This feature will be represented by a boolean logic where the true value is inside the protected region as <code>1</code> and a false condition of <code>NoData</code>. In this way, no suitability will be allowed to partake of the protected region <code>1</code> value.</p>
+</section>
+<section id="assignment-step-7---reclassification-of-water-proximity-distances" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-7---reclassification-of-water-proximity-distances">Assignment Step 7 - Reclassification of Water Proximity Distances</h2>
+<p>With Rasterization and Euclidean Distance processing complete, continuous cell values for the various distances will be assigned. Here the goal is to produce meaningful, discrete ordinal scaling for suitability across the three input themes - water distances, roads distances and protected regions as a boolean condition true/false.</p>
+<p>This process will involve a RECLASS whereby continuous cell values are returned as discrete integer categorical values when they met certain conditions. This process can be done several ways, including <a href="https://pro.arcgis.com/en/pro-app/latest/tool-reference/spatial-analyst/reclassify.htm">RECLASSIFY</a> and a tailored equation constructed within <a href="https://desktop.arcgis.com/en/arcmap/latest/tools/spatial-analyst-toolbox/raster-calculator.htm">RASTER CALCULATOR</a></p>
+</section>
+<section id="assignment-step-8---reclassification-of-roads-proximity-distances" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-8---reclassification-of-roads-proximity-distances">Assignment Step 8 - Reclassification of Roads Proximity Distances</h2>
+<p>In this reclassification, the ordering of the ordinal values will be reversed. Here ‘closeness’ is an opportunity, whereas in water ‘closeness’ is a constraint.</p>
+</section>
+<section id="assignment-step-9---suitability-combination" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-9---suitability-combination">Assignment Step 9 - Suitability Combination</h2>
+<p>With all discrete raster outputs complete for water distance, roads distance and protected regions, the next step is to create a combination layer. Again the RASTER CALCULATOR can be used for this process.</p>
+</section>
+<section id="assignment-step-10---preparation-for-cartographic-design---hillshade-surface" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-10---preparation-for-cartographic-design---hillshade-surface">Assignment Step 10 - Preparation for Cartographic Design - Hillshade Surface</h2>
+<p>With the bulk of the suitability now complete, we will utilize a raster surface function known as <a href="https://pro.arcgis.com/en/pro-app/latest/help/analysis/raster-functions/hillshade-function.htm">hillshade</a> to augment the design process.</p>
+</section>
+<section id="assignment-step-11---preparation-for-cartographic-design---final-suitability-selection" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-11---preparation-for-cartographic-design---final-suitability-selection">Assignment Step 11 - Preparation for Cartographic Design - Final Suitability Selection</h2>
+<p>At this juncture, the <em>Highly Suitable</em> class is obviously dispersed through the project area. To subset to a final suitability, a total square area criteria is often applied to the suitability model. Here a site requirement is typically a threshold between the lowest and highest optimal areal size for a particular land use, project or development. Here we will assume a project site needs at least <strong>800 acres</strong>, but not more than <strong>1000 acres</strong>. We will make these selections in the vector model and show the results in the cartographic output as vector features atop the final suitability result.</p>
+</section>
+<section id="map-layout-deliverable" class="level2">
+<h2 class="anchored" data-anchor-id="map-layout-deliverable">Map layout &amp; Deliverable:</h2>
+<ul>
+<li><p>To development the final map design, utilize the map example PDF below to help guide your process. Here the baselayer for the main map frame is the hillshade layer; the raster suitability has 45% transparency applied to the layer; and the points features are symbolized for optimal legibility of both the highly suitable site locations, but also the underling raster suitability which has been thematically mapped.</p></li>
+<li><p>Final map layout will include the following elements on either a 11x17” or 8.5x11” Portrait 300 DPI:</p>
+<ul>
+<li>Main map frame featuring your cartographic output with thematic design</li>
+<li>Orientation inset map situating the Indian State of Assam relative to Country of India.</li>
+<li>A map title</li>
+<li>Legend representing each suitability category</li>
+<li>Legend vector feature representing the final high suitability criteria</li>
+<li>Data source &amp; Author tag</li>
+</ul></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_assignment-8_sp24_files/img/carto.example.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Example Layout - Assignment 7</em></figcaption><p></p>
+</figure>
+</div>
+<ul>
+<li><p>Utilize the following map example to guide your design process:</p></li>
+<li><p><a href="https://mapexamples.s3.us-east-2.amazonaws.com/c8/c8-assam-state-suitability-example.pdf">Example Layout - Assignment 8 PDF</a></p></li>
+</ul>
+</section>
+<section id="resources" class="level2">
+<h2 class="anchored" data-anchor-id="resources">Resources:</h2>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Shuttle_Radar_Topography_Mission">SRTM shuttle satellite</a></li>
+<li><a href="https://blogs.esri.com/esri/arcgis/2007/06/12/setting-the-z-factor-parameter-correctly/">Z factor corrections</a></li>
+<li><a href="http://desktop.arcgis.com/en/arcmap/10.3/manage-data/raster-and-images/bil-bip-and-bsq-raster-files.htm">ESRI raster formats</a></li>
+<li><a href="http://slideplayer.com/slide/5822630/">University of Leeds Slides Overview of Cartographic Modeling</a></li>
+<li><a href="http://wiki.gis.com/wiki/index.php/Weighted_Linear_Combination">Weighted Linear Combination</a></li>
+<li><a href="http://desktop.arcgis.com/en/analytics/case-studies/understanding-the-suitability-modeling-workflow.htm">Suitability</a></li>
+<li><a href="http://desktop.arcgis.com/en/arcmap/10.3/guide-books/extensions/spatial-analyst/map-algebra/an-overview-of-the-rules-for-map-algebra.htm">Map Algebra Tools</a></li>
+<li><a href="http://desktop.arcgis.com/en/arcmap/10.3/guide-books/extensions/spatial-analyst/map-algebra/essential-map-algebra-vocabulary.htm">Map Algebra Terminology</a></li>
+<li><a href="https://weekly-reading-research.s3.amazonaws.com/MapAlgebra_presentation.pdf">Map Algebra Guide #1</a></li>
+<li><a href="https://weekly-reading-research.s3.amazonaws.com/Map+Algebra.pdf">Map Algebra Guide #2</a></li>
+</ul>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp(/^(?:http:|https:)\/\/www\.quarto\.org\/custom/);
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          // default icon
+          link.classList.add("external");
+      }
+    }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+<script src="STGIS_assignment-8_SP24_files/libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

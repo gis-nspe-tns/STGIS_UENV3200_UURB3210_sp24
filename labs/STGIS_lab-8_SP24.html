@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.280">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2024-03-23">
+
+<title>Class 8 Lab: Spatial Analysis of Raster Data + Suitability Model</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="STGIS_lab-8_SP24_files/libs/clipboard/clipboard.min.js"></script>
+<script src="STGIS_lab-8_SP24_files/libs/quarto-html/quarto.js"></script>
+<script src="STGIS_lab-8_SP24_files/libs/quarto-html/popper.min.js"></script>
+<script src="STGIS_lab-8_SP24_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="STGIS_lab-8_SP24_files/libs/quarto-html/anchor.min.js"></script>
+<link href="STGIS_lab-8_SP24_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="STGIS_lab-8_SP24_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="STGIS_lab-8_SP24_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="STGIS_lab-8_SP24_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="STGIS_lab-8_SP24_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<link rel="stylesheet" href="STGIS_lab-8_SP24_files/styles.css">
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#preamble" id="toc-preamble" class="nav-link active" data-scroll-target="#preamble">Preamble</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
+  <li><a href="#assignment-step-1" id="toc-assignment-step-1" class="nav-link" data-scroll-target="#assignment-step-1">Assignment Step 1</a></li>
+  <li><a href="#assignment-step-2---data-preprocessing-for-the-water-features" id="toc-assignment-step-2---data-preprocessing-for-the-water-features" class="nav-link" data-scroll-target="#assignment-step-2---data-preprocessing-for-the-water-features">Assignment Step 2 - Data preprocessing for the water features</a></li>
+  <li><a href="#assignment-step-3---rasterization-euclidean-distance-surface-for-water-features" id="toc-assignment-step-3---rasterization-euclidean-distance-surface-for-water-features" class="nav-link" data-scroll-target="#assignment-step-3---rasterization-euclidean-distance-surface-for-water-features">Assignment Step 3 - Rasterization + Euclidean Distance Surface for Water Features</a></li>
+  <li><a href="#assignment-step-4---data-preprocessing-for-the-roads-feature" id="toc-assignment-step-4---data-preprocessing-for-the-roads-feature" class="nav-link" data-scroll-target="#assignment-step-4---data-preprocessing-for-the-roads-feature">Assignment Step 4 - Data preprocessing for the roads feature</a></li>
+  <li><a href="#assignment-step-5---rasterization-euclidean-distance-surface-for-roads-features" id="toc-assignment-step-5---rasterization-euclidean-distance-surface-for-roads-features" class="nav-link" data-scroll-target="#assignment-step-5---rasterization-euclidean-distance-surface-for-roads-features">Assignment Step 5 - Rasterization + Euclidean Distance Surface for Roads Features</a></li>
+  <li><a href="#assignment-step-6---rasterization-of-protected-regions" id="toc-assignment-step-6---rasterization-of-protected-regions" class="nav-link" data-scroll-target="#assignment-step-6---rasterization-of-protected-regions">Assignment Step 6 - Rasterization of Protected Regions</a></li>
+  <li><a href="#assignment-step-7---reclassification-of-water-proximity-distances" id="toc-assignment-step-7---reclassification-of-water-proximity-distances" class="nav-link" data-scroll-target="#assignment-step-7---reclassification-of-water-proximity-distances">Assignment Step 7 - Reclassification of Water Proximity Distances</a></li>
+  <li><a href="#assignment-step-8---reclassification-of-roads-proximity-distances" id="toc-assignment-step-8---reclassification-of-roads-proximity-distances" class="nav-link" data-scroll-target="#assignment-step-8---reclassification-of-roads-proximity-distances">Assignment Step 8 - Reclassification of Roads Proximity Distances</a></li>
+  <li><a href="#assignment-step-9---suitability-combination" id="toc-assignment-step-9---suitability-combination" class="nav-link" data-scroll-target="#assignment-step-9---suitability-combination">Assignment Step 9 - Suitability Combination</a></li>
+  <li><a href="#assignment-step-10---preparation-for-cartographic-design---hillshade-surface" id="toc-assignment-step-10---preparation-for-cartographic-design---hillshade-surface" class="nav-link" data-scroll-target="#assignment-step-10---preparation-for-cartographic-design---hillshade-surface">Assignment Step 10 - Preparation for Cartographic Design - Hillshade Surface</a></li>
+  <li><a href="#assignment-step-11---preparation-for-cartographic-design---final-suitability-selection" id="toc-assignment-step-11---preparation-for-cartographic-design---final-suitability-selection" class="nav-link" data-scroll-target="#assignment-step-11---preparation-for-cartographic-design---final-suitability-selection">Assignment Step 11 - Preparation for Cartographic Design - Final Suitability Selection</a></li>
+  <li><a href="#map-layout-deliverable" id="toc-map-layout-deliverable" class="nav-link" data-scroll-target="#map-layout-deliverable">Map layout &amp; Deliverable:</a></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources:</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Class 8 Lab: Spatial Analysis of Raster Data + Suitability Model</h1>
+<p class="subtitle lead">Spring 2024 | <a href="https://courses.newschool.edu/courses/UENV3200/">UENV3200</a>, <a href="https://courses.newschool.edu/courses/UURB3210/">UURB3210</a></p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">March 23, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/header.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Suitability Model Steps for Development Areas, State of Assam, Northeast India</em></figcaption><p></p>
+</figure>
+</div>
+<section id="preamble" class="level2">
+<h2 class="anchored" data-anchor-id="preamble">Preamble</h2>
+<p>In this eighth technical lab, we will complete any remaining steps of Monday’s demonstration lab then turn to steps necessary for the eighth assignment. These lab steps should be used extensively to aid with the completion of the eighth assignment due Sunday evening at 11:59pm.</p>
+<ul>
+<li><a href="https://gis-nspe-tns.github.io/STGIS_UENV3200_UURB3210_sp24/labs/STGIS_lab-8_SP24.html">Class 8 Technical Lab</a></li>
+<li><a href="https://gis-nspe-tns.github.io/STGIS_UENV3200_UURB3210_sp24/assignments/STGIS_assignment-8_SP24.html">Class 8 Assignment</a></li>
+</ul>
+</section>
+<section id="data" class="level2">
+<h2 class="anchored" data-anchor-id="data">Data</h2>
+<p><a href="https://www.dropbox.com/s/cqwr5cp0n850qqp/C8.assignment-DATA.zip?dl=1">Location of Class 8 suitability inputs for download</a></p>
+<p>To begin the assignment, download and access the assignment directory. Create a new assignment <code>.mxd</code> and connect <em>ArcCatalog</em> to the assignment directory:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/data.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Assignment Structure</em></figcaption><p></p>
+</figure>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>All assignment data - including <code>STRM_DEM_30M.tif</code> raster - are already projected to the appropriate UTM Zone for the target geography.</p>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/prj.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>CRS for Assignment</em></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="assignment-step-1" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-1">Assignment Step 1</h2>
+<p>Input <code>envelop</code>, <code>boundary</code>, <code>protected_regions</code>, <code>roads</code>, <code>water_polygons</code> and <code>water_polylines</code>into the project <code>.mxd</code>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/start.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Load input features for State of Assam, Northeast India</em></figcaption><p></p>
+</figure>
+</div>
+<p>With the features loaded, navigate to the top menu *Geoprocessing &gt; Environments:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/environment.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Geoprocessing &gt; Environments</em></figcaption><p></p>
+</figure>
+</div>
+<p>Next, set the following parameters for the project processing environment. Once complete, save the <code>.mxd</code> so that the parameters are set into the project <code>.mxd</code>:</p>
+<ol type="1">
+<li>Output Location: The default location is <code>default.gdb</code>; change this to the <code>exports</code> directory in the assignment data directory:</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/p1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Set Output Location</em></figcaption><p></p>
+</figure>
+</div>
+<ol start="2" type="1">
+<li>Processing Extent: Set the processing extent to the <code>envelop</code> layer. This will allow processing outwards to this polygon edge, but not further:</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/p2.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Processing Extent</em></figcaption><p></p>
+</figure>
+</div>
+<ol start="3" type="1">
+<li>No Pyramids: As default, pyramids are built with each raster geoprocessing step. However, they are not needed for this project so toggle OFF this default:</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/p3.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Set Pyramids to OFF</em></figcaption><p></p>
+</figure>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In the future, a project <code>.mxd</code> geoprocessing parameters can be tailored to the needs and specifics of a project and its processing tasks beyond the three parameters noted above.</p>
+</div>
+</div>
+</section>
+<section id="assignment-step-2---data-preprocessing-for-the-water-features" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-2---data-preprocessing-for-the-water-features">Assignment Step 2 - Data preprocessing for the water features</h2>
+<p>In this step, the water features will be prepared in vector format, dissolved then rasterized in preparation for a Euclidean Distance output which is a <a href="https://pro.arcgis.com/en/pro-app/latest/tool-reference/spatial-analyst/understanding-euclidean-distance-analysis.htm"><em>Global</em> processing function</a>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/ed.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Euclidean Distance Diagram for Input Raster</em></figcaption><p></p>
+</figure>
+</div>
+<p>First, create <code>BUFFER</code>:</p>
+<p><code>water_polylines</code> Buffer = <code>15 meters</code></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/wp_buffer.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>15m buffer for water polylines</em></figcaption><p></p>
+</figure>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>By creating a buffer for the water polylines, this will allow a polygon type to then be unioned with the water polygons. Further, but giving the water polylines some actual width, the creation of a rasterized representation will be made a bit easier (and accurate) at 15 meters.</p>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/wp-buffer-r.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>15m buffer for water polylines - result</em></figcaption><p></p>
+</figure>
+</div>
+<p>Next, <code>UNION</code> the resulting water polylines buffer and the water polygons:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/water-union.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Union Water Features</em></figcaption><p></p>
+</figure>
+</div>
+<p>Next, within the water UNION result, create a dissolve and grid ID that will be used for both the dissolve process and the rasterization and distance geoprocessing steps forthcoming:</p>
+<ul>
+<li>Name: <code>grid_ID</code></li>
+<li>Type: Short Integer</li>
+<li><em>Set the value in the field to <code>1</code> with the Field Calculator</em></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/gridID.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Grid ID</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/gridID-1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Grid ID - set value to <code>1</code></em></figcaption><p></p>
+</figure>
+</div>
+<p>Next, DISSOLVE the UNION utilzing the `grid_ID as the dissolve field:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/water-dissolve.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Grid ID - set value to <code>1</code> as Dissolve Field</em></figcaption><p></p>
+</figure>
+</div>
+<p>Result:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/water-dissolve-1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Dissolve Result</em></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="assignment-step-3---rasterization-euclidean-distance-surface-for-water-features" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-3---rasterization-euclidean-distance-surface-for-water-features">Assignment Step 3 - Rasterization + Euclidean Distance Surface for Water Features</h2>
+<p>With the water vector feature prepared, move to the rasterization and distance surface process. Here the vector feature for water will be first rasterized with a new cell size of 15 meters. Once complete, a distance surface <em>from</em> the rasterized water will be conducted.</p>
+<p>First, RASTERIZE the water union feature. Use <em>Search</em> for <em>Feature to Raster</em>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/f2r.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Feature to Raster Search</em></figcaption><p></p>
+</figure>
+</div>
+<p>Parameters for the <em>Feature to Raster</em> tool:</p>
+<ul>
+<li>Input Features: the water-feature dissolve from step #2 above</li>
+<li>Field: <code>grid_ID</code> (value = 1)</li>
+<li>Output raster: exports &gt; <code>water_15m.tif</code></li>
+<li>Output cell size: 15 meters</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/f2r_1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Feature to Raster Tool Parameters</em></figcaption><p></p>
+</figure>
+</div>
+<p>Result:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/raster.water.compare.gif" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Rasterization Result for the Water Feature</em></figcaption><p></p>
+</figure>
+</div>
+<p>With RASTERIZATION complete, move to the distance surface creation. Here distances will be assigned to each raster cell across the analysis surface outwards to 20,000 meters (the assigned stop distance).</p>
+<p>Use <em>Search</em> for <em>Euclidean Distance</em>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/ed_search.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Euclidean Distance</em></figcaption><p></p>
+</figure>
+</div>
+<p>Parameters for the <em>Euclidean Distance</em> tool:</p>
+<ul>
+<li>Input Raster: <code>water_15m.tif</code></li>
+<li>Maximum Distance: 20,000</li>
+<li>Output raster: exports &gt; <code>water_distance_60m.tif</code></li>
+<li>Output cell size: 60 meters</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/ed_pop.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Euclidean Distance Parameters</em></figcaption><p></p>
+</figure>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Surface tools and their resulting outputs can be very memory intensive. To save processing resources, the cell size is increased to a resolution of 60 meters; and a ‘stop’ distance is given of 20,000 meters. This distance is enough to cover the the full area outwards to the project boundary, but it doesn’t go much further into the bounding geometry feature - <code>envelop</code> which is perfectly fine for the assignment purposes.</p>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/ed-water.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Euclidean Distance Result Surface for water distance; 60 meter spatial resolution</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/ed-water-3.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Euclidean Distance Result Surface for water distance; 60 meter spatial resolution - Close Up</em></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="assignment-step-4---data-preprocessing-for-the-roads-feature" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-4---data-preprocessing-for-the-roads-feature">Assignment Step 4 - Data preprocessing for the roads feature</h2>
+<p>With the distance surface complete for the water features, move along to a very similar process for the road feature.</p>
+<p>Create the <code>grid_ID</code> for the roads features in the attribute table for this layer. When set, move to DISSOLVE.</p>
+<p>Parameters:</p>
+<ul>
+<li>Name: <code>grid_ID</code></li>
+<li>Type: Short Integer</li>
+<li><em>Set the value in the field to <code>1</code> with the Field Calculator</em></li>
+</ul>
+<p>DISSOLVE with Parameters filled for <code>grid_ID</code>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/gridID-road.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Grid ID complete in attribute table</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/gridID-dissolve.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Dissolve on Grid ID</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/gridID-result.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Dissolved Result for Roads Feature</em></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="assignment-step-5---rasterization-euclidean-distance-surface-for-roads-features" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-5---rasterization-euclidean-distance-surface-for-roads-features">Assignment Step 5 - Rasterization + Euclidean Distance Surface for Roads Features</h2>
+<p>Next, RASTERIZE the dissolved roads feature. Use <em>Search</em> for <em>Feature to Raster</em>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/f2r.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Feature to Raster Search</em></figcaption><p></p>
+</figure>
+</div>
+<p>Parameters for the <em>Feature to Raster</em> tool:</p>
+<ul>
+<li>Input Features: the roads dissolve</li>
+<li>Field: <code>grid_ID</code> (value = 1)</li>
+<li>Output raster: exports &gt; <code>roads_15m.tif</code></li>
+<li>Output cell size: 15 meters</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/road_parameters.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Feature to Raster</em></figcaption><p></p>
+</figure>
+</div>
+<p>Next, move to creating the Euclidean Distance Surface for roads.</p>
+<p>Use <em>Search</em> for <em>Euclidean Distance</em>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/ed_search.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Euclidean Distance</em></figcaption><p></p>
+</figure>
+</div>
+<p>Parameters for the <em>Euclidean Distance</em> tool:</p>
+<ul>
+<li>Input Raster: <code>road_15m.tif</code></li>
+<li>Maximum Distance: 20,000</li>
+<li>Output raster: exports &gt; <code>roads_distance_60m.tif</code></li>
+<li>Output cell size: 60 meters</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/ed-road_pop.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Euclidean Distance Parameters</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/ed-road-result.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Euclidean Distance Result Surface for roads distance; 60 meter spatial resolution</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/ed-road-result-1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Euclidean Distance Result Surface for roads distance; 60 meter spatial resolution - Close Up</em></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="assignment-step-6---rasterization-of-protected-regions" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-6---rasterization-of-protected-regions">Assignment Step 6 - Rasterization of Protected Regions</h2>
+<p>With both water and road features processed to distance surfaces, the next step is to rasterize the protected regions. This feature will be represented by a boolean logic where the true value is inside the protected region as <code>1</code> and a false condition of <code>NoData</code>. In this way, no suitability will be allowed to partake of the protected region <code>1</code> value.</p>
+<p>Create the <code>grid_ID</code> for the protected regions feature in the attribute table for this layer. When set, move to DISSOLVE.</p>
+<p>Parameters:</p>
+<ul>
+<li>Name: <code>grid_ID</code></li>
+<li>Type: Short Integer</li>
+<li><em>Set the value in the field to <code>1</code> with the Field Calculator</em></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/pa1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em><code>grid_ID</code> assignment for Protected Regions</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/pa2.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Dissolve for Protected Regions</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/pa3.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Dissolve Result for Protected Regions</em></figcaption><p></p>
+</figure>
+</div>
+<p>Next, RASTERIZE the dissolved protected regions feature. Use <em>Search</em> for <em>Feature to Raster</em>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/f2r.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Feature to Raster Search</em></figcaption><p></p>
+</figure>
+</div>
+<p>Parameters for the <em>Feature to Raster</em> tool:</p>
+<ul>
+<li>Input Features: the protected regions dissolve</li>
+<li>Field: <code>grid_ID</code> (value = 1)</li>
+<li>Output raster: exports &gt; <code>protected_areas_60m.tif</code></li>
+<li>Output cell size: 60 meters</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/pa4.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Rasterize Parameters for Protected Regions</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/PA.compare.gif" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Rasterize Result compared to original vector feature for Protected Regions</em></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="assignment-step-7---reclassification-of-water-proximity-distances" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-7---reclassification-of-water-proximity-distances">Assignment Step 7 - Reclassification of Water Proximity Distances</h2>
+<p>With Rasterization and Euclidean Distance processing complete, continuous cell values for the various distances will be assigned. Here the goal is to produce meaningful, discrete ordinal scaling for suitability across the three input themes - water distances, roads distances and protected regions as a boolean condition true/false.</p>
+<p>This process will involve a RECLASS whereby continuous cell values are returned as discrete integer categorical values when they met certain conditions. This process can be done several ways, including <a href="https://pro.arcgis.com/en/pro-app/latest/tool-reference/spatial-analyst/reclassify.htm">RECLASSIFY</a> and a tailored equation constructed within <a href="https://desktop.arcgis.com/en/arcmap/latest/tools/spatial-analyst-toolbox/raster-calculator.htm">RASTER CALCULATOR</a></p>
+<p>To start, highlight the <code>water_distance_60m.tif</code> raster layer in the TOC and then search for <em>Raster Calculator</em> in <em>Search</em>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/RC.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Raster Calculator Search</em></figcaption><p></p>
+</figure>
+</div>
+<p>Next, populate the RASTER CALCULATOR with the following equation for <code>10</code>, <code>50</code> and <code>100</code> discrete suitability classes; export as <code>water_class</code>:</p>
+<p>Reclassification Assignments:</p>
+<pre><code>0-1000m –&gt; 10
+
+1000 -5000m —&gt; 50
+
+5000m –&gt; 100</code></pre>
+<pre><code>100*("water_distance_60m.tif"&gt;5000) + 50*("water_distance_60m.tif"&gt;1000)*("water_distance_60m.tif"&lt;=5000) + 10*("water_distance_60m.tif"&lt;1000)</code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/water-class-cal.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Raster Calculator Calculation</em></figcaption><p></p>
+</figure>
+</div>
+<p>The result features the respective discrete classes:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/water-class.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Raster Discrete Classes for Water Distance</em></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="assignment-step-8---reclassification-of-roads-proximity-distances" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-8---reclassification-of-roads-proximity-distances">Assignment Step 8 - Reclassification of Roads Proximity Distances</h2>
+<p>In this reclassification, the ordering of the ordinal values will be reversed. Here ‘closeness’ is an opportunity, whereas in water ‘closeness’ is a constraint:</p>
+<p>Reclassification Assignments:</p>
+<pre><code>0-1000m –&gt; 100
+
+1000-5000m –&gt; 50
+
+5000m –&gt; 10
+</code></pre>
+<pre><code>100*("roads_distance_60m.tif"&lt;=1000) + 50*("roads_distance_60m.tif"&gt;1000)*("roads_distance_60m.tif"&lt;=5000) + 10*("roads_distance_60m.tif"&gt;5000)
+</code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/roads-class-1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Raster Calculator Calculation</em></figcaption><p></p>
+</figure>
+</div>
+<p>The result features the respective discrete classes:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/roads-class-2.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Raster Discrete Classes for Roads Distance</em></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="assignment-step-9---suitability-combination" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-9---suitability-combination">Assignment Step 9 - Suitability Combination</h2>
+<p>With all discrete raster outputs complete for water distance, roads distance and protected regions, the next step is to create a combination layer. Again the RASTER CALCULATOR can be used for this process.</p>
+<p>To start, we will need the snap our results to the state boundary. This can be added to our equation, but first we need to RASTERIZE the <code>boundary</code> layer using the same <code>grid_ID</code> process as with prior layers:</p>
+<p>Parameters for the <em>Feature to Raster</em> tool:</p>
+<ul>
+<li>Input Features: boundary feature</li>
+<li>Field: <code>grid_ID</code> (value = 1)</li>
+<li>Output raster: exports &gt; <code>boundary_r.tif</code></li>
+<li>Output cell size: 60 meters</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/boundary-r.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Raster Calculator Calculation</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/boundary_result.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Rasterize Result for Boundary</em></figcaption><p></p>
+</figure>
+</div>
+<p>Next, before proceding to the combination equation, the protected areas raster produced previously is currently classed as <code>1</code> inside protected areas; and <code>NoData</code> in any area outside protected areas. But for the combination equation, we need to turn the <code>NoData</code> values into the boolean value <code>0</code>. Here we will use the <a href="https://desktop.arcgis.com/en/arcmap/latest/tools/spatial-analyst-toolbox/reclassify.htm">RECLASSIFY</a> tool:</p>
+<p>Search for <em>Reclassify</em> in <em>Search</em>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/pa_r1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Search for Reclassify Tool</em></figcaption><p></p>
+</figure>
+</div>
+<p>Parameters for the <em>Reclassify</em> tool:</p>
+<ul>
+<li>Input Features: <code>protected_areas_60.tif</code></li>
+<li>Reclass Field: <code>VALUE</code> (this is the default)</li>
+<li>Output raster: exports &gt; <code>pro_areas_rc.tif</code></li>
+<li>New Values: Old <code>NoData</code> becomes <code>0</code> in <em>New Values</em></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/pa_r2.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Parameters for Reclassify Tool</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/pa_r3.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Boolean Values for Protected Areas</em></figcaption><p></p>
+</figure>
+</div>
+<p>With the final boundary and protected regions fully processed, the combination for suitability is now ready. Populate the RASTER CALCULATOR with the following equation:</p>
+<pre><code>("roads_class" + "water_class")*("pro_areas_rcl" != 1)*("boundary_r")</code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/suit-1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Suitability Equation input into Raster Calculator</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/suit-2.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Suitability Raster Result</em></figcaption><p></p>
+</figure>
+</div>
+<p>For the final suitability thematic, the following suitability matrix will be applied to the map:</p>
+<p>Suitability Matrix:</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Cell Value</th>
+<th style="text-align: center;">Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td style="text-align: center;">Unsuitable</td>
+</tr>
+<tr class="even">
+<td>20</td>
+<td style="text-align: center;">Least Suitable</td>
+</tr>
+<tr class="odd">
+<td>60</td>
+<td style="text-align: center;">Least Suitable</td>
+</tr>
+<tr class="even">
+<td>100</td>
+<td style="text-align: center;">Suitable</td>
+</tr>
+<tr class="odd">
+<td>110</td>
+<td style="text-align: center;">Moderately Suitable</td>
+</tr>
+<tr class="even">
+<td>150</td>
+<td style="text-align: center;">Moderately Suitable</td>
+</tr>
+<tr class="odd">
+<td>200</td>
+<td style="text-align: center;">Highly Suitable</td>
+</tr>
+</tbody>
+</table>
+<p>As there are duplicate classes for both Least Suitable and Moderately Suitable, we can run one final reclassification via RECLASSIFY to merge cell values <code>20</code> and <code>60</code> to value <code>50</code>; and cell values <code>110</code> and <code>150</code> to value <code>150</code>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/final-suit-1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Final Suitability Reclass</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/final-suit-2.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Final Suitability Reclass Classes + Labels</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/final-suit-3.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Final Suitability Reclass Cartographic Result</em></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="assignment-step-10---preparation-for-cartographic-design---hillshade-surface" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-10---preparation-for-cartographic-design---hillshade-surface">Assignment Step 10 - Preparation for Cartographic Design - Hillshade Surface</h2>
+<p>With the bulk of the suitability now complete, we will utilize a raster surface function known as <a href="https://pro.arcgis.com/en/pro-app/latest/help/analysis/raster-functions/hillshade-function.htm">hillshade</a> to augment the design process:</p>
+<blockquote class="blockquote">
+<p>Multidirectional hillshade improves terrain visualization. It combines light from six different directions to represent an enhanced visualization of the terrain and to improve the appearance of regions with low relief. It improves the balance between the overexposed and shadow areas of the map. The output is suitable to use as a relief backdrop for topographical, soil, hydrological, land cover, or other thematic maps in which the data will be enhanced with topography.</p>
+</blockquote>
+<p>To start, import the raster layer <code>STRM_DEM_30M.tif</code>. This layer is 30 meter resolution Digital Elevation covering the Assam state boundary.</p>
+<p>Search for <em>Hillshade</em> in <em>Search</em>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/hillshade-4.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Hillshade Cartographic Result</em></figcaption><p></p>
+</figure>
+</div>
+<p>Parameters for the <em>Hillshade</em> tool:</p>
+<ul>
+<li>Input Features: <code>STRM_DEM_30M.tif</code></li>
+<li>Z factor: <code>1</code> (this is the default)</li>
+<li>Output raster: exports &gt; <code>hillshade</code></li>
+<li>Accept Azimuth and Altitude Defaults</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/hillshade-1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Hillshade Parameters</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/hillshade-2.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Hillshade Cartographic Result</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/hillshade-3.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Hillshade Cartographic Result with slight transparency applied to <code>suitability_final</code></em></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="assignment-step-11---preparation-for-cartographic-design---final-suitability-selection" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-11---preparation-for-cartographic-design---final-suitability-selection">Assignment Step 11 - Preparation for Cartographic Design - Final Suitability Selection</h2>
+<p>At this juncture, the <em>Highly Suitable</em> class is obviously dispersed through the project area. To subset to a final suitability, a total square area criteria is often applied to the suitability model. Here a site requirement is typically a threshold between the lowest and highest optimal areal size for a particular land use, project or development. Here we will assume a project site needs at least <strong>800 acres</strong>, but not more than <strong>1000 acres</strong>. We will make these selections in the vector model and show the results in the cartographic output as vector features atop the final suitability result.</p>
+<p>To start, RECLASSIFY the final suitability layer to <em>isolate</em> just those cells in the 200 class, and save the result as <code>HS</code> for <em>high suitability</em>. Here all values that are NOT the 200 class become <code>NoData</code>; the 200 class then becomes <code>1</code>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/hs-1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Hillshade Cartographic Result with slight transparency applied to <code>suitability_final</code></em></figcaption><p></p>
+</figure>
+</div>
+<p>Next, search for, then utilize the <em>Raster to Polygon</em> tool. Input the reclassed <code>HS</code> raster layer, outputting the vector polygon features as <code>HS_vector</code>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/hs-2.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Raster to Polygon Toolset</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/hs-4.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Raster to Polygon Toolset</em></figcaption><p></p>
+</figure>
+</div>
+<p>Within the newly created <code>HS_vector</code> layer, create a new field <code>ACRES</code> and then <em>Calculate Geometry</em> within the field, with Units specified as <code>Acres US [ac]</code>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/hs-5.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Create New Column <code>Acres</code> as Type <code>Double</code></em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/hs-6.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Calculate Geometry as Area, Units as <code>Acres US (ac)</code></em></figcaption><p></p>
+</figure>
+</div>
+<p>With the Areal, Units as <em>Acres US</em> complete, move to <em>Select by Attributes</em> for the threshold values between <strong>800</strong> and <strong>1000</strong> acres:</p>
+<pre><code>"ACRES"&gt;=800 AND "ACRES"&lt;=1000</code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/select-1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Suitability Selection within vector feature <code>HS_vector</code></em></figcaption><p></p>
+</figure>
+</div>
+<p>Selection Result:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/polygon-selection.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Vector Polygons meeting the Areal requirements for Highly Suitable</em></figcaption><p></p>
+</figure>
+</div>
+<p>Next, export the selected features:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/export-1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Export selected features from vector feature <code>HS_vector</code> as <code>Highly_Suitable.shp</code></em></figcaption><p></p>
+</figure>
+</div>
+<p>Once exported, search for, then utilize,the <em>Feature to Point</em> tool to transform the Highly Suitable polygon features to points features as <code>Highly_Suitable_pts.shp</code>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/feature-point.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Search for Feature to Point Tool</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/transform-1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Transform Highly Suitable polygons to points</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/design-1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Highly Suitable Points atop Suitability + Hillshade baselayer</em></figcaption><p></p>
+</figure>
+</div>
+<p>With Final Suitability Selection complete, move to the final cartographic design for the deliverable to follow:</p>
+</section>
+<section id="map-layout-deliverable" class="level2">
+<h2 class="anchored" data-anchor-id="map-layout-deliverable">Map layout &amp; Deliverable:</h2>
+<ul>
+<li><p>To development the final map design, utilize the map example PDF below to help guide your process. Here the baselayer for the main map frame is the hillshade layer; the raster suitability has 45% transparency applied to the layer; and the points features are symbolized for optimal legibility of both the highly suitable site locations, but also the underling raster suitability which has been thematically mapped.</p></li>
+<li><p>Final map layout will include the following elements on either a 11x17” or 8.5x11” Portrait 300 DPI:</p>
+<ul>
+<li>Main map frame featuring your cartographic output with thematic design</li>
+<li>Orientation inset map situating the Indian State of Assam relative to Country of India.</li>
+<li>A map title</li>
+<li>Legend representing each suitability category</li>
+<li>Legend vector feature representing the final high suitability criteria</li>
+<li>Data source &amp; Author tag</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-8_SP24_files/img/cartographic-example.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Example Layout - Assignment 8</em></figcaption><p></p>
+</figure>
+</div></li>
+<li><p>Utilize the following map example to guide your design process:</p></li>
+<li><p><a href="https://mapexamples.s3.us-east-2.amazonaws.com/c8/c8-assam-state-suitability-example.pdf">Example Layout - Assignment 8 PDF</a></p></li>
+</ul>
+</section>
+<section id="resources" class="level2">
+<h2 class="anchored" data-anchor-id="resources">Resources:</h2>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Shuttle_Radar_Topography_Mission">SRTM shuttle satellite</a></li>
+<li><a href="https://blogs.esri.com/esri/arcgis/2007/06/12/setting-the-z-factor-parameter-correctly/">Z factor corrections</a></li>
+<li><a href="http://desktop.arcgis.com/en/arcmap/10.3/manage-data/raster-and-images/bil-bip-and-bsq-raster-files.htm">ESRI raster formats</a></li>
+<li><a href="http://slideplayer.com/slide/5822630/">University of Leeds Slides Overview of Cartographic Modeling</a></li>
+<li><a href="http://wiki.gis.com/wiki/index.php/Weighted_Linear_Combination">Weighted Linear Combination</a></li>
+<li><a href="http://desktop.arcgis.com/en/analytics/case-studies/understanding-the-suitability-modeling-workflow.htm">Suitability</a></li>
+<li><a href="http://desktop.arcgis.com/en/arcmap/10.3/guide-books/extensions/spatial-analyst/map-algebra/an-overview-of-the-rules-for-map-algebra.htm">Map Algebra Tools</a></li>
+<li><a href="http://desktop.arcgis.com/en/arcmap/10.3/guide-books/extensions/spatial-analyst/map-algebra/essential-map-algebra-vocabulary.htm">Map Algebra Terminology</a></li>
+<li><a href="https://weekly-reading-research.s3.amazonaws.com/MapAlgebra_presentation.pdf">Map Algebra Guide #1</a></li>
+<li><a href="https://weekly-reading-research.s3.amazonaws.com/Map+Algebra.pdf">Map Algebra Guide #2</a></li>
+</ul>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp(/^(?:http:|https:)\/\/www\.quarto\.org\/custom/);
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          // default icon
+          link.classList.add("external");
+      }
+    }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+<script src="STGIS_lab-8_SP24_files/libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
