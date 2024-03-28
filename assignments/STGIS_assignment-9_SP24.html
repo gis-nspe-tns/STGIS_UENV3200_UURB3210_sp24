@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.280">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2024-03-28">
+
+<title>Class 9 Assignment: Mapping Vulnerability</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="STGIS_assignment-9_SP24_files/libs/clipboard/clipboard.min.js"></script>
+<script src="STGIS_assignment-9_SP24_files/libs/quarto-html/quarto.js"></script>
+<script src="STGIS_assignment-9_SP24_files/libs/quarto-html/popper.min.js"></script>
+<script src="STGIS_assignment-9_SP24_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="STGIS_assignment-9_SP24_files/libs/quarto-html/anchor.min.js"></script>
+<link href="STGIS_assignment-9_SP24_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="STGIS_assignment-9_SP24_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="STGIS_assignment-9_SP24_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="STGIS_assignment-9_SP24_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="STGIS_assignment-9_SP24_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<link rel="stylesheet" href="STGIS_assignment-9_SP24_files/styles.css">
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#preamble" id="toc-preamble" class="nav-link active" data-scroll-target="#preamble">Preamble</a></li>
+  <li><a href="#assignment-9---data" id="toc-assignment-9---data" class="nav-link" data-scroll-target="#assignment-9---data">Assignment 9 - Data</a></li>
+  <li><a href="#class-8-readings" id="toc-class-8-readings" class="nav-link" data-scroll-target="#class-8-readings">Class 8 Readings:</a></li>
+  <li><a href="#assignment-step-1" id="toc-assignment-step-1" class="nav-link" data-scroll-target="#assignment-step-1">Assignment Step 1</a></li>
+  <li><a href="#assignment-step-2---overlay-geoprocessing" id="toc-assignment-step-2---overlay-geoprocessing" class="nav-link" data-scroll-target="#assignment-step-2---overlay-geoprocessing">Assignment Step 2 - Overlay Geoprocessing</a></li>
+  <li><a href="#assignment-step-4---table-development" id="toc-assignment-step-4---table-development" class="nav-link" data-scroll-target="#assignment-step-4---table-development">Assignment Step 4 - Table Development</a></li>
+  <li><a href="#assignment-step-5---normalization-by-geography-attribute" id="toc-assignment-step-5---normalization-by-geography-attribute" class="nav-link" data-scroll-target="#assignment-step-5---normalization-by-geography-attribute">Assignment Step 5 - Normalization by Geography Attribute</a></li>
+  <li><a href="#assignment-step-6---rank-assignments" id="toc-assignment-step-6---rank-assignments" class="nav-link" data-scroll-target="#assignment-step-6---rank-assignments">Assignment Step 6 - Rank Assignments</a></li>
+  <li><a href="#assignment-step-7---thematic-design" id="toc-assignment-step-7---thematic-design" class="nav-link" data-scroll-target="#assignment-step-7---thematic-design">Assignment Step 7 - Thematic Design</a></li>
+  <li><a href="#map-layout-deliverable" id="toc-map-layout-deliverable" class="nav-link" data-scroll-target="#map-layout-deliverable">Map layout &amp; Deliverable:</a></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources:</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Class 9 Assignment: Mapping Vulnerability</h1>
+<p class="subtitle lead">Spring 2024 | <a href="https://courses.newschool.edu/courses/UENV3200/">UENV3200</a>, <a href="https://courses.newschool.edu/courses/UURB3210/">UURB3210</a></p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">March 28, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_assignment-9_SP24_files/img/header.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Historical Tornado Strikes, United States. Source - https://www.noaa.gov/</em></figcaption><p></p>
+</figure>
+</div>
+<section id="preamble" class="level2">
+<h2 class="anchored" data-anchor-id="preamble">Preamble</h2>
+<p>In this ninth assignment, you will utilize the <a href="https://gis-nspe-tns.github.io/STGIS_UENV3200_UURB3210_sp24/labs/STGIS_lab-9_SP24.html">Class 9 Technical Lab</a> as a guide to complete your ninth mapping project utilizing <em>input</em> data representing <a href="https://www.spc.noaa.gov/gis/svrgis/">tornado strikes in the United States</a>. In this vulnerability assignment, you will utilize two variables - one for hazard and one for vulnerability and exposure - to map tornado vulnerability across the conterminous United States.</p>
+<p>A custom scoring mechanism will be utilized to thematically map four conditions:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_assignment-9_SP24_files/img/risk.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Risk Matrix across 4 Conditions</em></figcaption><p></p>
+</figure>
+</div>
+<p>The assignment features several sections as follows:</p>
+<ul>
+<li>Mapping Vulnerability - Hazard x Vulnerability = Risk</li>
+<li>Vector Geoprocessing</li>
+<li>Attribute Summarization</li>
+<li>Custom Scoring Mechanism</li>
+<li>Thematic map design for Mapping Vulnerability</li>
+</ul>
+</section>
+<section id="assignment-9---data" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-9---data">Assignment 9 - Data</h2>
+<p>Original Data Source:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_assignment-9_SP24_files/img/header.1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Assignment Data Structure</em></figcaption><p></p>
+</figure>
+</div>
+<ul>
+<li><a href="http://www.spc.noaa.gov/gis/svrgis/">Tornado RISK</a></li>
+<li><a href="http://www.spc.noaa.gov/wcm/data/SPC_severe_database_description.pdf">Metadata</a></li>
+</ul>
+<p><a href="https://www.dropbox.com/s/c4z3zjdj4ljvsdm/c9_assignment_data.zip?dl=1">Location of Class 9 Assignment Direct Data Download</a></p>
+<p>To begin the assignment, download and access the assignment directory. Create a new assignment <code>.mxd</code> and connect <em>Data Source Manager</em> to the assignment directory to import assignment input vector features:</p>
+<ul>
+<li>Data download includes:
+<ul>
+<li><code>mobile_home_percentage_county.zip</code></li>
+<li><code>1950-2021-torn-aspath.zip</code> (Tornado Paths, not points)</li>
+</ul></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_assignment-9_SP24_files/img/data.1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Assignment Data Structure</em></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="class-8-readings" class="level2">
+<h2 class="anchored" data-anchor-id="class-8-readings">Class 8 Readings:</h2>
+<p>This week’s readings are <em>NOT</em> from the course textbook, and there will be no quiz for this week’s content. For context readings, refer to the <strong>Further References</strong> section at the bottom of the assignment.</p>
+</section>
+<section id="assignment-step-1" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-1">Assignment Step 1</h2>
+<p>With the assignment data downloaded to your local drive, make a connection via <em>ArcCatalog</em>. Make sure to load the mobile home data first to set the project CRS. Then load the tornado data, and immediately reproject the tornado data to the project CRS <code>USA Contiguous Lambert Conformal Conic</code> with the EPSG code as <code>EPSG:102004</code>.</p>
+</section>
+<section id="assignment-step-2---overlay-geoprocessing" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-2---overlay-geoprocessing">Assignment Step 2 - Overlay Geoprocessing</h2>
+<p>Currently many tornado paths in the historical dataset <code>tornado_paths</code> cross multiple counties. In order to derive a count of tornadoes per county, there are several overlay techniques that could be utilized. Here we will use <em>Identify</em>; the result will be a polyline dataset that contains the attributes of the counties in the <code>mobile_home_counties</code> along with those of the original <code>tornado_paths</code>.</p>
+</section>
+<section id="assignment-step-4---table-development" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-4---table-development">Assignment Step 4 - Table Development</h2>
+<p>With the <em>Identify</em> complete, a summarization will be developed for a total count of tornadoes per county.</p>
+</section>
+<section id="assignment-step-5---normalization-by-geography-attribute" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-5---normalization-by-geography-attribute">Assignment Step 5 - Normalization by Geography Attribute</h2>
+<p><em>Normalize</em> to constant of 100 sq. miles to account for county areal differences between the various county sizes.</p>
+</section>
+<section id="assignment-step-6---rank-assignments" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-6---rank-assignments">Assignment Step 6 - Rank Assignments</h2>
+<blockquote class="blockquote">
+<p>Use the <strong>median</strong> societal exposure and tornado incidence scores as the break between high and low exposure and incidence - <a href="https://www.scribd.com/document/361951273/Tornado-Vulnerability-in-Texas">source</a></p>
+</blockquote>
+<ul>
+<li><strong>4 Rank Conditions</strong>:
+<ul>
+<li>11.22% = Median Mobile Home per County</li>
+<li>3.22 Median Tornado segments per county</li>
+</ul></li>
+<li>Condition #1 -
+<ul>
+<li>Low Incidence, Low Exposure
+<ul>
+<li>LI = &lt;3.22</li>
+<li>LE = &lt;11.22</li>
+</ul></li>
+</ul></li>
+<li>Condition #2 -
+<ul>
+<li>Low Incidence, High Exposure
+<ul>
+<li>LI = &lt;3.22</li>
+<li>HE = &gt;=11.22</li>
+</ul></li>
+</ul></li>
+<li>Condition #3 -
+<ul>
+<li>High Incidence, Low Exposure
+<ul>
+<li>HI = &gt;=3.22</li>
+<li>LE = &lt;11.22</li>
+</ul></li>
+</ul></li>
+<li>Condition #4 -
+<ul>
+<li>High Incidence, High Exposure
+<ul>
+<li>HI = &gt;=3.22</li>
+<li>HE = &gt;=11.22</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="assignment-step-7---thematic-design" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-7---thematic-design">Assignment Step 7 - Thematic Design</h2>
+<p>With ranking complete, a thematic map will be develop for the four rank conditions and those counties that have no incidence of tornadoes.</p>
+</section>
+<section id="map-layout-deliverable" class="level2">
+<h2 class="anchored" data-anchor-id="map-layout-deliverable">Map layout &amp; Deliverable:</h2>
+<ul>
+<li><p>To development the final map design, utilize the map example PDF below to help guide your process.</p></li>
+<li><p>Final map layout will include the following elements on either a 11x17” or 8.5x11” Portrait 300 DPI:</p>
+<ul>
+<li>Main map frame featuring your cartographic output with thematic design</li>
+<li>A map title</li>
+<li>Legend representing each thematic rank category</li>
+<li>Data source &amp; Author tag</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_assignment-9_SP24_files/img/map.1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Example Layouts - Assignment 9</em></figcaption><p></p>
+</figure>
+</div></li>
+<li><p>Utilize the following map example to guide your design process:</p></li>
+<li><p><a href="https://mapexamples.s3.us-east-2.amazonaws.com/c7/c7_map-examples_v2.pdf">Example Layout - Assignment 9 PDF</a></p></li>
+</ul>
+</section>
+<section id="resources" class="level2">
+<h2 class="anchored" data-anchor-id="resources">Resources:</h2>
+<ul>
+<li><a href="https://education.nationalgeographic.org/resource/tornadoes-and-global-warming-there-connection/">Tornadoes and Global Warming: Is There a Connection?</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Social_vulnerability">Social Vulnerability</a></li>
+<li><a href="https://svi.cdc.gov/SVIDataToolsDownload.html">SVI Tools</a></li>
+<li><a href="https://svi.cdc.gov/Documents/Data/2014_SVI_Data/SVI2014Documentation.pdf">SVI methods &amp; metadata</a></li>
+<li><a href="https://cleantechnica.com/2017/09/14/low-income-communities-hardest-hit-hurricane-harvey/">Hurricane Harvey Vulnerability Mapping</a></li>
+<li><a href="https://www.scribd.com/document/361958444/A-New-Study-Explores-the-Complexities-of-Tornadoes-Risk-Poverty-And-Housing">Double danger in the double wide: Dimensions of poverty, housing quality and tornado impacts</a></li>
+<li><a href="https://www.scribd.com/document/361951273/Tornado-Vulnerability-in-Texas">Tornado Vulnerability in Texas - Methods</a></li>
+<li><a href="https://d3.maps.arcgis.com/apps/Cascade/index.html?appid=31d1199ec45b4475aa4698f5e7010422">Turning the Corner (TTC) - Vulnerability Housing Index for Detroit, MN</a></li>
+<li><a href="https://anhd.org/blog/introducing-displacement-alert-map-20">NYC Displacement Alert Map (DAP Map)</a></li>
+<li><a href="https://www.gislounge.com/visualizing-climate-change-maps/">Climate Change Mapping</a></li>
+<li><a href="https://www.nytimes.com/interactive/2018/05/24/us/disasters-hurricanes-wildfires-storms.html">NY Times - disasters over time</a></li>
+<li><a href="https://www.vox.com/a/lead-exposure-risk-map">Lead Exposure Risk Map</a></li>
+<li><a href="https://medium.com/spatialist/making-maps-useful-for-addressing-disasters-and-climate-change-530751966a3f">‘useful’ disaster and climate change maps</a></li>
+<li><a href="https://www.citylab.com/equity/2017/12/economic-inequality-and-health-inequality-are-inextricably-linked/547349/?utm_source=SFTwitter">Distressed Communities Index (DCI)</a></li>
+<li><a href="https://s3.amazonaws.com/weekly-reading-research/Cutter_VulnerabilityToEnvironmentalHazards.pdf">Vulnerability to Environmental Hazards - Susan Cutter</a></li>
+<li><a href="https://s3.amazonaws.com/weekly-reading-research/Ashley_Strader_tornado_housing_vulnerability.pdf">Finescale Assessment of Mobile Home Tornado Vulnerability in the Central and Southeast United States - Stradler + Ashley</a></li>
+<li><a href="https://s3.amazonaws.com/weekly-reading-research/26081_kp1concepdisasterrisk1.pdf">INTRODUCTION TO DISASTER RISK REDUCTION</a></li>
+<li><a href="https://s3.amazonaws.com/weekly-reading-research/bams-d-15-00150.1.pdf">RECIPE FOR DISASTER -How the Dynamic Ingredients of Risk and Exposure Are Changing the Tornado Disaster Landscape</a></li>
+<li><a href="https://www.cnn.com/2019/03/06/us/alabama-tornadoes-before-and-after/index.html">CNN Alabama Tornadoes 3/6/2019</a></li>
+<li><a href="https://understandrisk.org/resources/">Understanding Risk</a></li>
+<li><a href="https://www.cnbc.com/2019/04/08/climate-change-will-crush-real-estate-values-for-unprepared-investors-report.html">CNBC Climate Change and Insurance</a></li>
+<li><a href="https://www.nytimes.com/interactive/2019/08/06/climate/world-water-stress.html">World water stress</a></li>
+<li><a href="https://www.npr.org/2019/09/03/754044732/as-rising-heat-bakes-u-s-cities-the-poor-often-feel-it-most">NPR income &amp; urban heat</a></li>
+<li><a href="https://www.unisdr.org/2016/iddr/IDDR2018_Economic%20Losses.pdf">Economic Losses,Poverty &amp; Disasters 1998-2017</a></li>
+</ul>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp(/^(?:http:|https:)\/\/www\.quarto\.org\/custom/);
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          // default icon
+          link.classList.add("external");
+      }
+    }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+<script src="STGIS_assignment-9_SP24_files/libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

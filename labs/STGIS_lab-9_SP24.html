@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.280">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2024-03-28">
+
+<title>Class 9 Lab: Mapping Vulnerability</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="STGIS_lab-9_SP24_files/libs/clipboard/clipboard.min.js"></script>
+<script src="STGIS_lab-9_SP24_files/libs/quarto-html/quarto.js"></script>
+<script src="STGIS_lab-9_SP24_files/libs/quarto-html/popper.min.js"></script>
+<script src="STGIS_lab-9_SP24_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="STGIS_lab-9_SP24_files/libs/quarto-html/anchor.min.js"></script>
+<link href="STGIS_lab-9_SP24_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="STGIS_lab-9_SP24_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="STGIS_lab-9_SP24_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="STGIS_lab-9_SP24_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="STGIS_lab-9_SP24_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<link rel="stylesheet" href="STGIS_lab-9_SP24_files/styles.css">
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#preamble" id="toc-preamble" class="nav-link active" data-scroll-target="#preamble">Preamble</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
+  <li><a href="#assignment-step-1" id="toc-assignment-step-1" class="nav-link" data-scroll-target="#assignment-step-1">Assignment Step 1</a></li>
+  <li><a href="#assignment-step-2---overlay-geoprocessing" id="toc-assignment-step-2---overlay-geoprocessing" class="nav-link" data-scroll-target="#assignment-step-2---overlay-geoprocessing">Assignment Step 2 - Overlay Geoprocessing</a></li>
+  <li><a href="#assignment-step-3---table-development" id="toc-assignment-step-3---table-development" class="nav-link" data-scroll-target="#assignment-step-3---table-development">Assignment Step 3 - Table Development</a></li>
+  <li><a href="#assignment-step-5---normalization-by-geography-attribute" id="toc-assignment-step-5---normalization-by-geography-attribute" class="nav-link" data-scroll-target="#assignment-step-5---normalization-by-geography-attribute">Assignment Step 5 - Normalization by Geography Attribute</a></li>
+  <li><a href="#assignment-step-6---rank-assignments" id="toc-assignment-step-6---rank-assignments" class="nav-link" data-scroll-target="#assignment-step-6---rank-assignments">Assignment Step 6 - Rank Assignments</a></li>
+  <li><a href="#assignment-step-7---thematic-design" id="toc-assignment-step-7---thematic-design" class="nav-link" data-scroll-target="#assignment-step-7---thematic-design">Assignment Step 7 - Thematic Design</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Class 9 Lab: Mapping Vulnerability</h1>
+<p class="subtitle lead">Spring 2024 | <a href="https://courses.newschool.edu/courses/UENV3200/">UENV3200</a>, <a href="https://courses.newschool.edu/courses/UURB3210/">UURB3210</a></p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">March 28, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-9_SP24_files/img/header.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><strong>Historical Tornado Strikes, United States. Source - https://www.noaa.gov/</strong></figcaption><p></p>
+</figure>
+</div>
+<section id="preamble" class="level2">
+<h2 class="anchored" data-anchor-id="preamble">Preamble</h2>
+<p>In this ninth technical lab, we will complete any remaining steps of Monday’s demonstration lab then turn to steps necessary for the ninth assignment. These lab steps should be used extensively to aid with the completion of the eighth assignment due Sunday evening at 11:59pm.</p>
+<ul>
+<li><a href="https://gis-nspe-tns.github.io/STGIS_UENV3200_UURB3210_SP24/labs/STGIS_lab-9_SP24.html">Class 9 Technical Lab</a></li>
+<li><a href="https://gis-nspe-tns.github.io/STGIS_UENV3200_UURB3210_SP24/assignments/STGIS_assignment-9_SP24.html">Class 9 Assignment</a></li>
+</ul>
+</section>
+<section id="data" class="level2">
+<h2 class="anchored" data-anchor-id="data">Data</h2>
+<p>Original Data Source:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-9_SP24_files/img/header.1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Assignment Data Structure</em></figcaption><p></p>
+</figure>
+</div>
+<ul>
+<li><a href="http://www.spc.noaa.gov/gis/svrgis/">Tornado RISK</a></li>
+<li><a href="http://www.spc.noaa.gov/wcm/data/SPC_severe_database_description.pdf">Metadata</a></li>
+</ul>
+<p><a href="https://www.dropbox.com/s/c4z3zjdj4ljvsdm/c9_assignment_data.zip?dl=1">Location of Class 9 Assignment Direct Data Download</a></p>
+<p>To begin the assignment, download and access the assignment directory. Create a new assignment <code>.mxd</code> and connect <em>Data Source Manager</em> to the assignment directory to import assignment input vector features:</p>
+<ul>
+<li>Data download includes:
+<ul>
+<li><code>mobile_home_percentage_county.zip</code></li>
+<li><code>1950-2021-torn-aspath.zip</code> (Tornado Paths, not points)</li>
+</ul></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-9_SP24_files/img/data.1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Assignment Data Structure</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-9_SP24_files/img/prj.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>.prj files for data inputs</em></figcaption><p></p>
+</figure>
+</div>
+<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Note that the Tornado data <code>.prj</code> (top) is not the same as the <code>.prj</code> for the mobile home data(bottom). Utilize the projected mobile home data as the project and layer CRS. Thus, reproject the Tornado data from <code>WGS84</code> to <code>USA Contiguous Lambert Conformal Conic</code>.</p>
+</div>
+</div>
+</section>
+<section id="assignment-step-1" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-1">Assignment Step 1</h2>
+<p>With the assignment data downloaded to your local drive, make a connection via <em>ArcCatalog</em>. Make sure to load the mobile home data first to set the project CRS. Then load the tornado data, and immediately reproject the tornado data to the project CRS <code>USA Contiguous Lambert Conformal Conic</code> with the EPSG code as <code>EPSG:102004</code>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-9_SP24_files/img/xdata.1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Original Data Layer in ArcCatalog</em></figcaption><p></p>
+</figure>
+</div>
+<p>Search for <em>Project</em> tool:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-9_SP24_files/img/x.pro.tool.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Project CRS - <code>EPSG:102004</code></em></figcaption><p></p>
+</figure>
+</div>
+<ul>
+<li><strong>Next</strong>, load <code>1950-2018-torn-aspath</code>. Reproject and export the layer to the project directory:</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-9_SP24_files/img/x.pro.tool.1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Search for <code>EPSG:102004</code></em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-9_SP24_files/img/x.pro.tool.2.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Reproject to <code>EPSG:102004</code></em></figcaption><p></p>
+</figure>
+</div>
+<p>Export the reprojected feature as <code>tornado_paths.shp</code> into your assignment folder:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-9_SP24_files/img/x.pro.tool.3.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Reproject complete; all layers and project are now in CRS <code>EPSG:102004</code></em></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="assignment-step-2---overlay-geoprocessing" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-2---overlay-geoprocessing">Assignment Step 2 - Overlay Geoprocessing</h2>
+<p>Currently many tornado paths in the historical dataset <code>tornado_paths</code> cross multiple counties. In order to derive a count of tornadoes per county, there are several overlay techniques that could be utilized. Here we will use <a href="https://desktop.arcgis.com/en/arcmap/latest/tools/analysis-toolbox/identity.htm">Identify</a>; the result will be a polyline dataset that contains the attributes of the counties in the <code>mobile_home_counties</code> along with those of the original <code>tornado_paths</code>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-9_SP24_files/img/identity.show.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Identify Tool</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-9_SP24_files/img/x.identity.1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Search for Identify Tool</em></figcaption><p></p>
+</figure>
+</div>
+<p><strong>Run</strong> <em>Identify</em> as follows and output as <code>tornado_county.shp</code>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-9_SP24_files/img/x.identity.2.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Populate Identify Tool</em></figcaption><p></p>
+</figure>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This geoprocessing step may take upwards 10 or 15 minutes.</p>
+</div>
+</div>
+<ul>
+<li>In review of the results, Abbeville, SC is the first county in the attribute table (sort on <code>RIGHT_COUN</code>). Note that the tornado segments are now cut at the county boundary as a result of the <em>Identify</em> geoprocess:</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-9_SP24_files/img/x.result.1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Identity Result Table</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-9_SP24_files/img/x.result.2.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Identity Result at county aggregation</em></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="assignment-step-3---table-development" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-3---table-development">Assignment Step 3 - Table Development</h2>
+<p>With the <em>Identity</em> complete, a summary table will be developed and joined to <code>mobile_home_counties</code>. The field <code>FIPS</code> will be utilized as the summarization column, gaining a summary count of each tornado segment per <code>FIPS</code> county code. This table will then be joined to <code>mobile_home_counties</code> via the <code>FIPS</code> column for further analysis in the attribute table.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-9_SP24_files/img/x.join.1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Summary column = <code>LEFT_FIPS</code></em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-9_SP24_files/img/x.join.2.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Summary tool activated on <code>LEFT_FIPS</code> column</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-9_SP24_files/img/x.join.3.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Summary tool activated on <code>LEFT_FIPS</code> column; export result as <code>FIPS_join.dbf</code></em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-9_SP24_files/img/x.join.5.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Export<code>FIPS_join.dbf</code> to assignment folder</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-9_SP24_files/img/x.join.4.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Summary result within<code>FIPS_join.dbf</code></em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-9_SP24_files/img/x.join.6.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Table Join between <code>FIPS_join.dbf</code> and `mobile_home_percentage_county.shp</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-9_SP24_files/img/x.join.7.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Table Join result - 3024 of 3238; 214 counties have no tornado incidence</em></figcaption><p></p>
+</figure>
+</div>
+<p>Export the joined feature as <code>tornado_counties_joined</code> as a feature class to the <code>default.gdb</code>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-9_SP24_files/img/x.gdb.1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Calculate Geometry</em></figcaption><p></p>
+</figure>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>By exporting to the <code>default.gdb</code>, calculations will all for <code>NULL</code> values where there are counties whose counts are zero.</p>
+</div>
+</div>
+</section>
+<section id="assignment-step-5---normalization-by-geography-attribute" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-5---normalization-by-geography-attribute">Assignment Step 5 - Normalization by Geography Attribute</h2>
+<p>As counties vary significantly in size, the absolute count of tornadoes per county is not yet comparable. To do so, a constant of <code>100 sq. miles</code> calculated per county, followed by the normalization of counts by geography.</p>
+<p>First, access <code>tornado_counties_joined</code> from within the <code>default.gdb</code>. Create a column with type double, titled <code>sq_miles</code>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-9_SP24_files/img/x.gdb.2.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>sq_miles column</em></figcaption><p></p>
+</figure>
+</div>
+<p>Next, create another column, type double, titled <code>count_100</code>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-9_SP24_files/img/x.gdb.3.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Calculate Geometry</em></figcaption><p></p>
+</figure>
+</div>
+<p>Next, use the following equation within the <em>Field Calculator</em> at the <code>sq_miles</code> column:</p>
+<pre><code>([Shape_Area]*0.00000038610)/100
+</code></pre>
+<p>This allows for the normalization of counties to <code>per 100 square miles</code> in place of absolute square miles.</p>
+<p>Next, divide the tornado count by the new square mile calculation within the new column <code>count_100</code>:</p>
+<pre><code>
+[Cnt_LEFT_F] / [sq_miles] 
+</code></pre>
+<p>The result will be new values for the normalized tornadoes per 100 square miles across each county:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-9_SP24_files/img/x.count.1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Count results</em></figcaption><p></p>
+</figure>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The very large count record in the attribute table is not an actual county; its the count of tornado incidents produced from the <em>Identify</em> geoprocess that fall outside any county polygon. It can be disregarded for the time being.</p>
+</div>
+</div>
+</section>
+<section id="assignment-step-6---rank-assignments" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-6---rank-assignments">Assignment Step 6 - Rank Assignments</h2>
+<p>The final step before thematic design is the assignment of four risk conditions based on tornado incidences and housing exposure.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-9_SP24_files/img/risk.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Risk Matrix for 4 conditions</em></figcaption><p></p>
+</figure>
+</div>
+<blockquote class="blockquote">
+<p>This risk maxtrix uses the <strong>median</strong> societal exposure and tornado incidence scores as the break between high and low exposure and incidence - <a href="https://www.scribd.com/document/361951273/Tornado-Vulnerability-in-Texas">source</a></p>
+</blockquote>
+<ul>
+<li><strong>4 Rank Conditions</strong>:</li>
+</ul>
+<blockquote class="blockquote">
+<p>11.22% = Median Mobile Home percentage per County</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>3.22 Median Tornado segments per 100 miles, per county (when producing this statistic, NULL values are assumed to be value 0.</p>
+</blockquote>
+<ul>
+<li>Condition #1 -
+<ul>
+<li>Low Incidence, Low Exposure
+<ul>
+<li>LI = &lt;3.22</li>
+<li>LE = &lt;11.22</li>
+</ul></li>
+</ul></li>
+<li>Condition #2 -
+<ul>
+<li>Low Incidence, High Exposure
+<ul>
+<li>LI = &lt;3.22</li>
+<li>HE = &gt;=11.22</li>
+</ul></li>
+</ul></li>
+<li>Condition #3 -
+<ul>
+<li>High Incidence, Low Exposure
+<ul>
+<li>HI = &gt;=3.22</li>
+<li>LE = &lt;11.22</li>
+</ul></li>
+</ul></li>
+<li>Condition #4 -
+<ul>
+<li>High Incidence, High Exposure
+<ul>
+<li>HI = &gt;=3.22</li>
+<li>HE = &gt;=11.22</li>
+</ul></li>
+</ul></li>
+</ul>
+<p>Assign each rank 1 - 4 based on the conditions via <em>Select by Attributes</em> within the <code>tornado_county_joined</code> feature class. Remember to clear selections after each rank assignment:</p>
+<p>Utilize fields <code>count_100</code> and <code>MobileHome</code> for <strong>Incidence</strong> and <strong>Exposure</strong>, respectively.</p>
+<p>To Start, make each selection condition #1 through #4 within <code>count_100</code> and <code>MobileHome</code>. Create a new column <code>rank</code>, type short integer and make assignment 1, 2 , 3 and 4 in this new column based on each selection, respectively.</p>
+<blockquote class="blockquote">
+<p>Populate with value -999 to start. Any records with -999 resulting are simply the NULL values - counties that have no tornadoes. Those can either be symbolized in the final map as ‘low’ or as ‘No Incidence Records’:</p>
+</blockquote>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-9_SP24_files/img/rr.1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Create new column <code>rank</code></em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-9_SP24_files/img/rr.2.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>populate default value -999 with new column <code>rank</code></em></figcaption><p></p>
+</figure>
+</div>
+<p><strong>Selection and Assignments for Conditions</strong>:</p>
+<p>Make sure to clear selections after each condition is assigned in the <code>rank</code> column:</p>
+<ul>
+<li><p>Condition #1:</p>
+<ul>
+<li>Select by Expression: <code>count_100 &lt;3.22 AND MobileHome &lt;11.22</code></li>
+<li>Field Calculator within <code>rank</code> = 1</li>
+</ul></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-9_SP24_files/img/condition.1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Condition 1 Selection</em></figcaption><p></p>
+</figure>
+</div>
+<p>Condition <code>1</code> should result in <code>629</code> records assigned this #1 Low Incidence, Low Exposure rank.</p>
+<p>Condition <code>1</code> Assignment via <em>Field Calculator</em>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-9_SP24_files/img/fc_1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Condition 1 Assignment</em></figcaption><p></p>
+</figure>
+</div>
+<ul>
+<li><p>Condition #2:</p>
+<ul>
+<li>Select by Expression: <code>count_100 &lt;3.22 AND MobileHome" &gt;=11.22</code></li>
+<li>Field Calculator within <code>rank</code>:</li>
+</ul></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-9_SP24_files/img/cal.2.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Condition 2 Selection</em></figcaption><p></p>
+</figure>
+</div>
+<p>Condition <code>2</code> should result in <code>889</code> records assigned this #2 Low Incidence, High Exposure rank.</p>
+<p>Condition <code>2</code> Assignment via <em>Field Calculator</em>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-9_SP24_files/img/fc_2.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Condition 2 Assignment</em></figcaption><p></p>
+</figure>
+</div>
+<ul>
+<li><p>Condition #3:</p>
+<ul>
+<li>Select by Expression: <code>count_100 &gt;=3.22 AND MobileHome &lt;11.22</code></li>
+<li>Field Calculator within <code>rank</code>:</li>
+</ul></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-9_SP24_files/img/cal.3.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Condition 3 Selection</em></figcaption><p></p>
+</figure>
+</div>
+<p>Condition <code>3</code> should result in <code>850</code> records assigned this #3 High Incidence, Low Exposure rank.</p>
+<p>Condition <code>3</code> Assignment via <em>Field Calculator</em>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-9_SP24_files/img/fc_3.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Condition 3 Assignment</em></figcaption><p></p>
+</figure>
+</div>
+<ul>
+<li><p>Condition #4:</p>
+<ul>
+<li>Select by Expression: <code>count_100" &gt;=3.22 AND MobileHome &gt;=11.22</code></li>
+<li>Field Calculator within <code>rank</code>:</li>
+</ul></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-9_SP24_files/img/cal.4.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Condition 4 Selection</em></figcaption><p></p>
+</figure>
+</div>
+<p>Condition <code>4</code> should result in <code>656</code> records assigned this #4 High Incidence, High Exposure rank.</p>
+<p>Condition <code>4</code> Assignment via <em>Field Calculator</em>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-9_SP24_files/img/fc_4.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Condition 4 Assignment</em></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="assignment-step-7---thematic-design" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-7---thematic-design">Assignment Step 7 - Thematic Design</h2>
+<p>If you have not done so, save the assignment project <code>.mxd</code> with calculations now completed. Once complete, thematic assignments will be given as follows:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-9_SP24_files/img/theme.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Thematic Design for combination ranks 1 to 4, -999 None</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-9_SP24_files/img//theme.1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Thematic Design result for combination ranks 1 to 4, -999 None</em></figcaption><p></p>
+</figure>
+</div>
+<p>As seen in the resulting map, condition 4 exhibits a spatial pattern of concentration centered on the southeastern US counties due to the frequency of tornadoes (Hazard) intersecting human geography by building type (Vulnerability + Exposure).</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp(/^(?:http:|https:)\/\/www\.quarto\.org\/custom/);
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          // default icon
+          link.classList.add("external");
+      }
+    }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+<script src="STGIS_lab-9_SP24_files/libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
