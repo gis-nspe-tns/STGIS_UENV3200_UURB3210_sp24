@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.280">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2024-04-06">
+
+<title>Class 10 Lecture Demonstration Lab</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="c10_lecture_demo_files/libs/clipboard/clipboard.min.js"></script>
+<script src="c10_lecture_demo_files/libs/quarto-html/quarto.js"></script>
+<script src="c10_lecture_demo_files/libs/quarto-html/popper.min.js"></script>
+<script src="c10_lecture_demo_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="c10_lecture_demo_files/libs/quarto-html/anchor.min.js"></script>
+<link href="c10_lecture_demo_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="c10_lecture_demo_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="c10_lecture_demo_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="c10_lecture_demo_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="c10_lecture_demo_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<link rel="stylesheet" href="c10_lecture_demo_files/styles.css">
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#remote-sensing---image-composites-classification" id="toc-remote-sensing---image-composites-classification" class="nav-link active" data-scroll-target="#remote-sensing---image-composites-classification">Remote Sensing - Image Composites &amp; Classification</a></li>
+  <li><a href="#part-i" id="toc-part-i" class="nav-link" data-scroll-target="#part-i">Part I</a>
+  <ul class="collapse">
+  <li><a href="#remote-sensing---multiband-imagery" id="toc-remote-sensing---multiband-imagery" class="nav-link" data-scroll-target="#remote-sensing---multiband-imagery">Remote Sensing - Multiband Imagery</a></li>
+  </ul></li>
+  <li><a href="#part-ii" id="toc-part-ii" class="nav-link" data-scroll-target="#part-ii">Part II</a>
+  <ul class="collapse">
+  <li><a href="#composite-bands-in-arcgis" id="toc-composite-bands-in-arcgis" class="nav-link" data-scroll-target="#composite-bands-in-arcgis">Composite Bands in ArcGIS</a></li>
+  </ul></li>
+  <li><a href="#part-iii" id="toc-part-iii" class="nav-link" data-scroll-target="#part-iii">Part III</a>
+  <ul class="collapse">
+  <li><a href="#iso-clustered-unsupervised-classification" id="toc-iso-clustered-unsupervised-classification" class="nav-link" data-scroll-target="#iso-clustered-unsupervised-classification">ISO Clustered Unsupervised Classification</a></li>
+  </ul></li>
+  <li><a href="#part-iv" id="toc-part-iv" class="nav-link" data-scroll-target="#part-iv">Part IV</a>
+  <ul class="collapse">
+  <li><a href="#supervised-classification" id="toc-supervised-classification" class="nav-link" data-scroll-target="#supervised-classification">Supervised Classification</a></li>
+  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Class 10 Lecture Demonstration Lab</h1>
+<p class="subtitle lead">Spring 2024 | <a href="https://courses.newschool.edu/courses/NINT5380/2115/">NINT5380 CRN2115</a></p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 6, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="remote-sensing---image-composites-classification" class="level2">
+<h2 class="anchored" data-anchor-id="remote-sensing---image-composites-classification">Remote Sensing - Image Composites &amp; Classification</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c10_lecture_demo_files/img/header.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Multi-band Imagery | Red, Green and Blue Chanels</em></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="part-i" class="level2">
+<h2 class="anchored" data-anchor-id="part-i">Part I</h2>
+<section id="remote-sensing---multiband-imagery" class="level3">
+<h3 class="anchored" data-anchor-id="remote-sensing---multiband-imagery">Remote Sensing - Multiband Imagery</h3>
+<p>Unlike single-band imagery, creating a composite image requires multiple band inputs, typically derived from a spectral sensor product like that of the Landsat program.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c10_lecture_demo_files/img/3.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Electromagnetic Specturm Band Composites for Multibanded Imagery</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c10_lecture_demo_files/img/1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Input &gt; Output for Composite Imagery diagram 1</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c10_lecture_demo_files/img/6.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Input &gt; Output for Composite Imagery diagram 2</em></figcaption><p></p>
+</figure>
+</div>
+</section>
+</section>
+<section id="part-ii" class="level2">
+<h2 class="anchored" data-anchor-id="part-ii">Part II</h2>
+<section id="composite-bands-in-arcgis" class="level3">
+<h3 class="anchored" data-anchor-id="composite-bands-in-arcgis">Composite Bands in ArcGIS</h3>
+<p>In order to composite bands, its critical to understand which input bands will create desired composite outputs. One output is ‘natural color’ or ‘true color’ (432); all other band combinations are various ‘false color’ composites.</p>
+<blockquote class="blockquote">
+<p>In contrast to a true-color image, a false-color image sacrifices natural color rendition in order to ease the detection of features that are not readily discernible otherwise – for example the use of near infrared for the detection of vegetation in satellite images.</p>
+</blockquote>
+<p>To start, review the two following charts for band themes and combinations for the Landsat 8 program:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c10_lecture_demo_files/img/7.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Landsat 8 Bands</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c10_lecture_demo_files/img/8.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Landsat 8 Band Combinations</em></figcaption><p></p>
+</figure>
+</div>
+<p>Utilize the following data location for this Lecture Demonstration:</p>
+<ul>
+<li><a href="https://www.dropbox.com/s/il7hu9anppl8ctc/c10_lecture_demo_classification.zip?dl=1">Class 10 Lecture Demo Classification Input Data</a></li>
+</ul>
+<p>Next, point to the <code>.tar</code> compressed directory and utilize <a href="https://www.7-zip.org/">7-zip</a> to fully uncompress. Connect the <code>.mxd</code> for this lecture demo to the directory that now contains the uncompressed Landsat data:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c10_lecture_demo_files/img/1-band.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Landsat 08 <code>.tar</code> compressed directory</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c10_lecture_demo_files/img/2-band.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Landsat 08 <code>.tar</code> uncompressed directory in ArcCatalog</em></figcaption><p></p>
+</figure>
+</div>
+<p>Note the bands 1 through 7 with the prefix <code>SR</code>; these are the surface reflectance bands that are the standard band input for composite imagery:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c10_lecture_demo_files/img/2b-band.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em><code>SR</code> bands 1 through 7</em></figcaption><p></p>
+</figure>
+</div>
+<p>Next, search for <em>Composite Bands</em> tool:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c10_lecture_demo_files/img/3-band.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em><code>SR</code> bands 1 through 7</em></figcaption><p></p>
+</figure>
+</div>
+<p>Input the bands <code>4,3,2</code> in this correct order:</p>
+<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The order in which the tool is populated preserves the order of the resulting band combination composite, i.e.&nbsp;<code>4,3,2</code> is <code>4</code> first, <code>3</code> second and <code>2</code> third in order.</p>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c10_lecture_demo_files/img/4-band.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Input Raster to the Composite Bands Tool</em></figcaption><p></p>
+</figure>
+</div>
+<p>Run the tool and check results:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c10_lecture_demo_files/img/5-band.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Composite Bands Tool Result</em></figcaption><p></p>
+</figure>
+</div>
+<p>Note the ordering of input bands to the color channels red, green and blue:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c10_lecture_demo_files/img/6-band.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Composite Bands Tool Result Channel to Band relationship</em></figcaption><p></p>
+</figure>
+</div>
+</section>
+</section>
+<section id="part-iii" class="level2">
+<h2 class="anchored" data-anchor-id="part-iii">Part III</h2>
+<section id="iso-clustered-unsupervised-classification" class="level3">
+<h3 class="anchored" data-anchor-id="iso-clustered-unsupervised-classification">ISO Clustered Unsupervised Classification</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c10_lecture_demo_files/img/cluster.1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Unsupervised Cluster Process</em></figcaption><p></p>
+</figure>
+</div>
+<blockquote class="blockquote">
+<p>The iso cluster algorithm is an iterative process for computing the minimum Euclidean distance when assigning each candidate cell to a cluster. The process starts with arbitrary means being assigned by the software, one for each cluster (you dictate the number of clusters). Every cell is assigned to the closest of these means.</p>
+</blockquote>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c10_lecture_demo_files/img/cluster.2.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Cluster Example: The mean vectors of the 20 clusters displayed using bands 3 and 4 data.</em></figcaption><p></p>
+</figure>
+</div>
+<p>To start, input the <code>boston_masked.tif</code> to the TOC. Once complete, search for <em>ISO Cluster Unsupervised</em> tool:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c10_lecture_demo_files/img/class-2.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>ISO Cluster Unsupervised Tool</em></figcaption><p></p>
+</figure>
+</div>
+<p>Input the following parameters to the tool:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c10_lecture_demo_files/img/class-3.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>ISO Cluster Unsupervised Tool Parmeters</em></figcaption><p></p>
+</figure>
+</div>
+<p>Review the classed result based on 2 simple classes:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c10_lecture_demo_files/img/class-4.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>ISO Cluster Unsupervised Tool Result</em></figcaption><p></p>
+</figure>
+</div>
+</section>
+</section>
+<section id="part-iv" class="level2">
+<h2 class="anchored" data-anchor-id="part-iv">Part IV</h2>
+<section id="supervised-classification" class="level3">
+<h3 class="anchored" data-anchor-id="supervised-classification">Supervised Classification</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c10_lecture_demo_files/img/cluster-3.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Supervised Cluster Process</em></figcaption><p></p>
+</figure>
+</div>
+<p>The most common supervised classification methods include:</p>
+<ul>
+<li>Maximum likelihood</li>
+<li>Iso cluster</li>
+<li>Class probability</li>
+<li>Principal components</li>
+<li>Support vector machine (SVM)</li>
+</ul>
+<p>ArcGIS has a tool for the <em>Maximum likelihood</em> method that we will use for a supervised classification, compared to the unsupervised result from Part I above.</p>
+<p>To start, download a revised training shapefile and place it inside the <code>.mxd</code> directory linked currently in <em>ArcCatalog</em>:</p>
+<ul>
+<li><a href="https://www.dropbox.com/s/pqp1nl0e2zm4tqr/training_revised.zip?dl=1">revised training shapefile</a></li>
+</ul>
+<p>Next, open the attribute table for this training shapefile and note the <code>classvalue</code> attribute. To produce a training signature file, this attribute must feature a <em>Long Integer</em> field type with the heading <code>classvalue</code>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c10_lecture_demo_files/img/super.1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>training attribute table</em></figcaption><p></p>
+</figure>
+</div>
+<p>Next, search for the <em>Create Signatures Tool</em> which transforms a <code>.shp</code> of training polygons to a <code>.GSG</code> signature file:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c10_lecture_demo_files/img/super.2.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Create Signatures Tool</em></figcaption><p></p>
+</figure>
+</div>
+<p>Input the following tool parameters:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c10_lecture_demo_files/img/super.3.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Create Signatures Tool Parameters</em></figcaption><p></p>
+</figure>
+</div>
+<p>Once complete, find the <em>Maximum Likelihood Classification</em> tool:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c10_lecture_demo_files/img/super.4.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Search for Maximum Likelihood Classification </em></figcaption><p></p>
+</figure>
+</div>
+<p>Input the following tool parameters:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c10_lecture_demo_files/img/super.5.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Search for Maximum Likelihood Classification </em></figcaption><p></p>
+</figure>
+</div>
+<p>Once complete, check the results and compare to the first unsupervised result. Its clear that the supervised classification was not as complete as the unsupervised run. This is likely due to the ‘underclassing’ of both land and water features in the original polygon creation in the training session. With more training polygons for both water and land, a supervised classification should be able to meet or exceed that of an unsupervised classification run.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c10_lecture_demo_files/img/cluster-compare.gif" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Compare Supervised to Unsupervised Results </em></figcaption><p></p>
+</figure>
+</div>
+</section>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<ul>
+<li><a href="https://www.dropbox.com/s/il7hu9anppl8ctc/c10_lecture_demo_classification.zip?dl=1">Class 10 Lecture Demonstration Classification Data</a></li>
+<li><a href="https://pro.arcgis.com/en/pro-app/latest/help/analysis/image-analyst/overview-of-image-classification.htm">Image Classification in ArcGIS</a></li>
+<li><a href="https://gisgeography.com/supervised-unsupervised-classification-arcgis/">Classification Methods in ArcGIS</a></li>
+</ul>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp(/^(?:http:|https:)\/\/www\.quarto\.org\/custom/);
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          // default icon
+          link.classList.add("external");
+      }
+    }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+<script src="c10_lecture_demo_files/libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

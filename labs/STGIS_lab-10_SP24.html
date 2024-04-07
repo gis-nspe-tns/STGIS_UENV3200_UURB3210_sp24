@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.280">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2024-04-06">
+
+<title>Class 10 Technical Lab: Surface Reflectance and NDVI Spectral Index for Urban Areas</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="STGIS_lab-10_SP24_files/libs/clipboard/clipboard.min.js"></script>
+<script src="STGIS_lab-10_SP24_files/libs/quarto-html/quarto.js"></script>
+<script src="STGIS_lab-10_SP24_files/libs/quarto-html/popper.min.js"></script>
+<script src="STGIS_lab-10_SP24_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="STGIS_lab-10_SP24_files/libs/quarto-html/anchor.min.js"></script>
+<link href="STGIS_lab-10_SP24_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="STGIS_lab-10_SP24_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="STGIS_lab-10_SP24_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="STGIS_lab-10_SP24_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="STGIS_lab-10_SP24_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<link rel="stylesheet" href="STGIS_lab-10_SP24_files/styles.css">
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#assignment-preamble" id="toc-assignment-preamble" class="nav-link active" data-scroll-target="#assignment-preamble">Assignment Preamble</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
+  <li><a href="#assignment-step-1" id="toc-assignment-step-1" class="nav-link" data-scroll-target="#assignment-step-1">Assignment Step 1</a></li>
+  <li><a href="#assignment-step-2" id="toc-assignment-step-2" class="nav-link" data-scroll-target="#assignment-step-2">Assignment Step 2</a></li>
+  <li><a href="#assignment-step-3" id="toc-assignment-step-3" class="nav-link" data-scroll-target="#assignment-step-3">Assignment Step 3</a></li>
+  <li><a href="#assignment-step-4" id="toc-assignment-step-4" class="nav-link" data-scroll-target="#assignment-step-4">Assignment Step 4</a></li>
+  <li><a href="#assignment-step-4-1" id="toc-assignment-step-4-1" class="nav-link" data-scroll-target="#assignment-step-4-1">Assignment Step 4</a></li>
+  <li><a href="#map-layout-deliverable" id="toc-map-layout-deliverable" class="nav-link" data-scroll-target="#map-layout-deliverable">Map layout &amp; Deliverable:</a></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources:</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Class 10 Technical Lab: Surface Reflectance and NDVI Spectral Index for Urban Areas</h1>
+<p class="subtitle lead">Spring 2024 | <a href="https://courses.newschool.edu/courses/UENV3200/">UENV3200</a>, <a href="https://courses.newschool.edu/courses/UURB3210/">UURB3210</a></p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 6, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-10_SP24_files/img/header.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Landsat 8 Surface Reflectance + NDVI Spectral Index</em></figcaption><p></p>
+</figure>
+</div>
+<section id="assignment-preamble" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-preamble">Assignment Preamble</h2>
+<p>This week’s assignment will encompass the following concepts covered in <strong>Class 10</strong> remote sensing (RS) lecture &amp; lab.</p>
+<p>In this RS assignment, you will first access and download Landsat ARD data for an urban area of your choice (Area of Interest - AOI). Once complete, you will create a Surface Temperature product to gauge potential urban heat island effect, coupled with a spectral index for NDVI - Normalized Difference Vegetation Index. When compared side by side, spatial patterns consistent across both raster surfaces should be evident.</p>
+<p>The assignment features several sections as follows:</p>
+<ul>
+<li>Landsat Analysis Ready Data (ARD) Program</li>
+<li>Surface Reflectance and Temperature Surface products</li>
+<li>Band Combinations</li>
+<li>Spectral Indices</li>
+</ul>
+<p>In the era of climate change, there has been significant research into the earth’s surface temperature, especially in urban areas where socio-economic, landcover, historical urban design all strongly correlate with increasing surface temperatures - often referred to as <a href="https://www.epa.gov/heatislands">Urban Heat Islands</a>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-10_SP24_files/img/temp.1.jpeg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Urban Heat Island Effect</em></figcaption><p></p>
+</figure>
+</div>
+<p>Through a socio-economic lens, income is often correlated with vegetative cover in urban areas:</p>
+<ul>
+<li><a href="https://www.nytimes.com/interactive/2021/06/30/opinion/environmental-inequity-trees-critical-infrastructure.html">Income and Vegetative Cover</a></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-10_SP24_files/img/income.green.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Urban Spatial Correlations Between Vegetative Cover &amp; Income</em></figcaption><p></p>
+</figure>
+</div>
+<p>Through a historical urban design lens, what is referred to as ‘red lining’ also often correlates with less vegetative cover:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-10_SP24_files/img/green.urban.2.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Redlining &amp; Vegetative Cover</em></figcaption><p></p>
+</figure>
+</div>
+<p>Particularly relevant for this assignment, rising surface temperatures are closely spatially correlated with landcover - all of which can be measured with a fair amount of precision at the municipal level via the Landsat program:</p>
+<ul>
+<li><p><a href="https://www.nasa.gov/topics/earth/features/heat-island-sprawl.html">Satellites Pinpoint Drivers of Urban Heat Islands in the Northeast</a></p></li>
+<li><p><a href="https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2021EF002016?stream=top&amp;utm_campaign=newsletter_axiosgenerate&amp;utm_medium=email&amp;utm_source=newsletter">Widespread Race and Class Disparities in Surface Urban Heat Extremes Across the United States</a></p></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-10_SP24_files/img/urban.heat.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Landcover and Surface Temperature in Urban Environments</em></figcaption><p></p>
+</figure>
+</div>
+<p>Various heat-producing surfaces can be found in the urban environment and categorized into landcover types. This research can be helpful in interpreting the results of remote sensing for both surface temperature and landcover:</p>
+<ul>
+<li><p><a href="https://www.sciencedirect.com/science/article/pii/S0303243419307275">Normalised difference spectral indices and urban land cover as indicators of land surface temperature (LST)</a></p></li>
+<li><p><a href="https://cleantechnica.com/2019/07/10/researchers-in-portland-study-urban-heat-island-effect/">Researchers In Portland Study Urban Heat Island Effect</a></p></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-10_SP24_files/img/types.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Landcover Types in Urban Environment Exhibiting Different Surface Temperature Profiles</em></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="data" class="level2">
+<h2 class="anchored" data-anchor-id="data">Data</h2>
+<ul>
+<li><a href="https://www.dropbox.com/s/p5sk8pd1qqiktrh/c10_assignment_data.zip?dl=1">C10 Assignment Data Package Download</a></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-10_SP24_files/img/data.1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">C10 Data Package</figcaption><p></p>
+</figure>
+</div>
+<blockquote class="blockquote">
+<p>Note: The <code>C10 Data Pacakge</code> features the ARD grid utilized early in the assignment to determine the horizontal and vertical position of the assignment AOI. Once done, two empty folders are provided for the surface temperature data (ARD_ST) and the surface reflectance data (ARD_SR). When accessing data at <a href="https://earthexplorer.usgs.gov/">EarthExplorer</a>, the results can be placed in the ARD_ST and ARD_SR folders, respectively, to keep assignment organization.</p>
+</blockquote>
+</section>
+<section id="assignment-step-1" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-1">Assignment Step 1</h2>
+<ul>
+<li><p><strong>To Start</strong>, this assignment will rely on both the general process and sample imagery found in this week’s <a href="https://www.dropbox.com/s/zao9ijc0k2juh10/c10_lecture_demo.data.zip?dl=1">Demonstration Data for Springfield, MO</a>. Here the city of Springfield, MO is the AOI; the imagery date is the height of summer on June 20th, 2021 at approximately 10:50 am (more on how to determine time of the imagery later in the assignment).</p></li>
+<li><p>Link to <a href="https://www.dropbox.com/s/zao9ijc0k2juh10/c10_lecture_demo.data.zip?dl=1">Demonstration Data for Springfield, MO</a></p></li>
+<li><p>For your own assignment, you will pick a US city as your AOI. Good picks are cities that are mid-sized to large. They must first meet the following criteria:</p></li>
+</ul>
+<ol type="1">
+<li>The AOI must fully fit within one ARD grid tile.</li>
+<li>Within the ARD grid tile, the city must be covered by just 1 Landsat ARD scene.</li>
+</ol>
+<p>The Springfield, MO AOI meets both criteria as seen below:</p>
+<ul>
+<li>Search for a city that falls within one ARD grid tile. Once found, select the grid tile and notate the <code>h</code> and <code>v</code> values in the attribute table for the grid tile. In the case of the grid tile containing Springfield, MO, the <code>h</code> value is <code>18</code> and the <code>v</code> value is <code>11</code>.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-10_SP24_files/img/grid.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">ARD Grid Structure overlay to basemap showing Springfield, MO</figcaption><p></p>
+</figure>
+</div>
+<p>Next, Navigate to <a href="https://earthexplorer.usgs.gov/">EarthExplorer</a>, making sure you are logged in as a user. Under Search Criteria, Navigate to the Landsat ARD tab for Collection 2 data:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-10_SP24_files/img/landsat.1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Landsat C2 US ARD</figcaption><p></p>
+</figure>
+</div>
+<p>Utilize the horizontal and vertical position of the ARD Grid to produce results just for that one grid space.</p>
+<blockquote class="blockquote">
+<p>The AOI is Springfield, Missouri which has a Horizontal ID of <code>18</code>, and Vertical ID of <code>11</code>:</p>
+</blockquote>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-10_SP24_files/img/landsat.2.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Horizontal/Vertical Position ID of AOI ARD Tile</figcaption><p></p>
+</figure>
+</div>
+<p>Next, the following four conditions are met from the returned results:</p>
+<ol type="1">
+<li><p>Cloud-free over Area of Interest - AOI - Springfield, Missouri as example.</p></li>
+<li><p>The tile preview shows full continuous pixel coverage over AOI.</p></li>
+<li><p>The ARD tile date is within ‘the growing season’, i.e.&nbsp;approximately late May through early August. Ideally, the ARD tile date is also in ‘high summer’ so that the surface temperature values will represent a typical hot day at the AOI.</p></li>
+<li><p>The ARD scene is part of the Landsat 8 Program, and the ARD scene is part of the Collection 2 segment of the program.</p></li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-10_SP24_files/img/landsat.3.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Criteria Met: this Tile is cloud-free, full coverage over the AOI, and is within the growing season and the high summer - 6/20/21</figcaption><p></p>
+</figure>
+</div>
+<p>The Download features two products - the Surface Reflectance Values; and secondly the Surface Temperature values. Make sure to download both bundles, <em>untar</em> them with keka or 7zip and place the uncompressed files into the <code>ARD_SR</code> and <code>ARD_ST</code>, respectively:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-10_SP24_files/img/landsat.4.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Surface Reflectance Bundle</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-10_SP24_files/img/landsat.5.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Surface Temperature Bundle</figcaption><p></p>
+</figure>
+</div>
+<p>Uncompress the download bundles into the assignment directory:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-10_SP24_files/img/landsat.gif" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Uncompressed bundles placed into assignment directories</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="assignment-step-2" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-2">Assignment Step 2</h2>
+<section id="verify-landsat-8-ard-imagery-date-time-azimuth-and-elevation" class="level4">
+<h4 class="anchored" data-anchor-id="verify-landsat-8-ard-imagery-date-time-azimuth-and-elevation">Verify Landsat 8 ARD Imagery Date, Time, Azimuth and Elevation</h4>
+<p>As we discussed in Lecture 11, the Landsat program instrument is a passive sensor which requires the sun to effectively record electromagnetic values. As Landsat 8 traverses the continental US, it travels in a north&gt;south direction, and it passes the equator heading southward mid-morning. As a result, the Landsat sensor should pass over a city in the continental US in the earlier part of the day. We can check the exact time that a Landsat scene is recorded, and we can also find the sun’s elevation and azimuth. The following graphic shows both elevation and azimuth where 0° elevation is at sunrise and 90° elevation when the sun is directly overhead:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-10_SP24_files/img/diagram.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Azimuth &amp; Elevation Diagram</figcaption><p></p>
+</figure>
+</div>
+<p>Landsat data acquisition times are expressed in Greenwich Mean Time (GMT), and can be converted to CST, PST and EST. Since Springfield, MO is CST, we subtract 6 hours from the GMT expression in the metadata:</p>
+<pre><code>CST = -6 GMT
+PST = -8 GMT
+EST = -5 GMT</code></pre>
+<p>We can also find the weather of a certain day for a certain city:</p>
+<ul>
+<li><a href="https://www.wunderground.com/history">Find weather of city on a date</a></li>
+</ul>
+<p>For Springfield, MO on the data of imagery acquistion (6-20-21) the temperature profile is as follows (hot by 10am!):</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-10_SP24_files/img/temp.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Temperature Profile on Date of Image Acquisition</figcaption><p></p>
+</figure>
+</div>
+<p>To Find the Date, Time, Elevation and Azimuth, access the .json file located in either the ARD_ST folder:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-10_SP24_files/img/json.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><code>.json</code> metadata file for ARD tile scene</figcaption><p></p>
+</figure>
+</div>
+<p>This file can be opened in a text editor. Once open, look for the section titled “SCENE_METADATA”:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-10_SP24_files/img/json.2.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Sections Highlighted in Magenta Include Date, Time, Elevation and Azimuth</figcaption><p></p>
+</figure>
+</div>
+<p>From this information, we can place the assignment example for Springfield, MO as follows:</p>
+<ul>
+<li>The image is taken on 6/20/21 at 10:48 AM.</li>
+<li>The Sun’s Elevation is relatively ‘high in the sky’ at 67 degrees.</li>
+<li>The Sun’s position is in the south-eastern sky with a Azimuth of 121 degrees.</li>
+</ul>
+<p>In effect, if we were standing facing south in Springfield, MO when this Landsat scene was recorded it would have been a hot morning approach 90 degrees; the sun would have been relatively high in the sky approaching a typical ‘noon’ position at 90 degrees; and the sun’s east&gt;west orientation would be southeast in the sky. Indeed, these conditions are pretty good to represent a typical ‘early, hot summer day’ in the midwest of the US in the city of Springfield, MO. This is the condition that we are seeking for our surface temperature analysis upcoming in the assignment. It is also appropriate for the vegetative cover analysis where we would expect the tree coverage to represent a ‘full-leaf’ summer day.</p>
+<p>Once the metadata has been checked for appropriateness of imagery to the analysis task, you can proceed with confidence that your Landsat imagery is portraying the date,time, ambient temperature and sun position that we seek: a typical warm to hot summer day with typical, full sun exposure.</p>
+</section>
+</section>
+<section id="assignment-step-3" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-3">Assignment Step 3</h2>
+<section id="processing-the-imagery-for-ndvi" class="level4">
+<h4 class="anchored" data-anchor-id="processing-the-imagery-for-ndvi">Processing the Imagery for NDVI</h4>
+<p>Import the Band 4 and Band 5 Surface Reflectance values into the TOC:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-10_SP24_files/img/4-5.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Input Bands 4 and 5 for NDVI into TOC Layers Panel</figcaption><p></p>
+</figure>
+</div>
+<p>To Start, the NDVI spectral index will be created based on the following formula:</p>
+<pre><code>NDVI = (NIR Band - Red Band / (NIR Band + Red Band)</code></pre>
+<p>As translated to the Landsat 8 band numbers:</p>
+<pre><code>NDVI = (Band 5 – Band 4) / (Band 5 + Band 4)</code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-10_SP24_files/img/4-5ndvi.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Utilize Bands 4 and 5 for NDVI output</figcaption><p></p>
+</figure>
+</div>
+<p>The following formula utilizes the SR values in Band 4 and Band 5 located in the ARD_SR folder:</p>
+<pre><code>Float("LC08_CU_018011_20210620_20210703_02_SR_B5.TIF"-"LC08_CU_018011_20210620_20210703_02_SR_B4.TIF")/("LC08_CU_018011_20210620_20210703_02_SR_B5.TIF"+"LC08_CU_018011_20210620_20210703_02_SR_B4.TIF")
+</code></pre>
+<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The above equation layer names are particular to the demonstration data; your layer names will be different; populate equations accordingly for your assignment NDVI and Surface Temperature calculations. Also note at the front of the equation is the function <code>Float</code>; what this does is take the integer values of the bands 4 and 5 and allows for a output of <code>Float</code> values, not integer values.</p>
+</div>
+</div>
+<p>Review the results with symbolization applied for values within the new NDVI Index:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-10_SP24_files/img/ndvi.2.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">NDVI low &gt; high Symbolization</figcaption><p></p>
+</figure>
+</div>
+<p>Save the results as <code>your_city_name_NDVI.tif</code> into the outputs folder. You can also save the <code>.mxd</code> project into the assignment folder before proceeding to the next steps.</p>
+</section>
+</section>
+<section id="assignment-step-4" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-4">Assignment Step 4</h2>
+<section id="processing-the-imagery-for-surface-temperature" class="level4">
+<h4 class="anchored" data-anchor-id="processing-the-imagery-for-surface-temperature">Processing the Imagery for Surface Temperature</h4>
+<p>With NDVI complete, turn to calculating the Surface Temperature utilizing the ST layer in the <code>ARD_ST</code> folder. Import this band layer into the <code>.mxd</code> project:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-10_SP24_files/img/st.1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><code>ST_B10</code> Layer</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-10_SP24_files/img/st.2.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><code>ST_B10</code> Layer loaded to Layers TOC Panel</figcaption><p></p>
+</figure>
+</div>
+<p>Based on the <a href="https://prd-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/atoms/files/LSDS-1619_Landsat-8-Collection2_Level-2_Science-Product-Guide-v3.pdf">metadata/product guide</a>, the thematic of this raster layer is as follows:</p>
+<blockquote class="blockquote">
+<p>Surface Temperature (ST) – Represents the temperature of the Earth’s surface in Kelvin (K).</p>
+</blockquote>
+<p>Also noted in the guide is a scale factor that is utilized for the product:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-10_SP24_files/img/st.3.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Kelvin Values for the <code>ST</code> band</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-10_SP24_files/img/st.4.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Application of Scale and Offset</figcaption><p></p>
+</figure>
+</div>
+<p>Application of Scale and Offset:</p>
+<ul>
+<li>More information on Scaling <a href="https://www.usgs.gov/faqs/how-do-i-use-scale-factor-landsat-level-2-science-products?qt-news_science_products=0#qt-news_science_products">USGS Landsat Level 2 FAQ</a></li>
+</ul>
+<p>Here the digital numbers need to be scaled accordingly, and an offset of <code>149</code> is also applied. If the value is to be expressed in Celcius or Fahrenheit, a further conversion needs to take place via the raster calculator. This will be accomplished in two steps:</p>
+<ol type="1">
+<li><p>Scale the raster values in Raster Calculator.</p></li>
+<li><p>Apply a temperature conversion where <code>K</code> is the scaled raster values and <code>F</code> is the Fahrenheit temperature measurement:</p></li>
+</ol>
+<pre><code>F = 1.8(K - 273) + 32</code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-10_SP24_files/img/st.6.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Step 1: Scaled + Offset Kelvin Values Equation in Raster Calculator</figcaption><p></p>
+</figure>
+</div>
+<p>Next, apply the temperature conversion based on the formula for kelvin to fahrenheit units, and output as <code>your_city_name_ST</code> in the typical, default GeoTiff format:</p>
+<pre><code>1.8 * ("st_scaled@1" - 273) + 32</code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-10_SP24_files/img/st.7a.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Step 2: Kelvin to Fahrenheit measured values</figcaption><p></p>
+</figure>
+</div>
+<p>Review the resulting raster values, original Kelvin vs new Fahrenheit:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-10_SP24_files/img/st.7.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Fahrenheit values</figcaption><p></p>
+</figure>
+</div>
+<p>Finally, apply an appropriate color ramp with the city focused in the canvas extent to ensure the surface temperature pattern appears correct where high values are located generally over impervious, high built-up areas; lower values in more suburban and rural areas, often towards the outer edges of cities:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-10_SP24_files/img/st-ndvi.gif" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Evaluate Resulting Surface Temperatures and NDVI Across the Urban Extent</figcaption><p></p>
+</figure>
+</div>
+</section>
+</section>
+<section id="assignment-step-4-1" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-step-4-1">Assignment Step 4</h2>
+<section id="mask-analysis-layers-to-a-common-aoi-extent" class="level4">
+<h4 class="anchored" data-anchor-id="mask-analysis-layers-to-a-common-aoi-extent">Mask Analysis Layers to a Common AOI Extent</h4>
+<p>At this juncture, both the NDVI and Surface Temperature Analysis Rasters have been created; but their extent is simply the extent of the original Landsat tile edge. As the goal of the assignment is to compare and evaluate the vegetative cover within the respective urban AOI relative to surface temperature, ‘cutting’, i.e.&nbsp;masking to the city AOI is valuable. To do so, we will query OpenStreetMap for the ID of the respective city; acquire this ID in Overpass Turbo and utilize it as polygon mask in QGIS. We’ve done this type of query in the <a href="https://gis-nspe-tns.github.io/STGIS_UENV3200_UURB3210_sp23/labs/STGIS_lab-6_SP23.html">Class 6 Technical Lab</a>.</p>
+<p>To Start, navigate to OpenStreetMap, and search for the city by name:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-10_SP24_files/img/op.1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Search by City Name and State</figcaption><p></p>
+</figure>
+</div>
+<p>Next, record the ID; in the case of Springfield, MO, this is a Relation geometry:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-10_SP24_files/img/op.2.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">ID of Feature in OSM</figcaption><p></p>
+</figure>
+</div>
+<p>Navigate to <a href="https://overpass-turbo.eu/">Overpass Turbo</a> and enter the query code for the Feature ID (replace your city ID with that of Springfield, MO in the example):</p>
+<pre><code>/*
+This query looks for a node, way or relation 
+with the given id.
+*/
+[out:json][timeout:25];
+// gather results
+(
+  // query part for: “id:141244”
+  relation(141244);
+);
+// print results
+out body;
+&gt;;
+out skel qt;</code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-10_SP24_files/img/op.4.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Overpass Turbo Query Result for Springfield, MO</figcaption><p></p>
+</figure>
+</div>
+<p>Download the result as <code>GeoJSON</code> and place into the <code>outputs</code> folder.</p>
+<p>Next, Utilize <a href="https://mapshaper.org/">mapshaper</a> as was done for <a href="https://gis-nspe-tns.github.io/STGIS_UENV3200_UURB3210_sp23/labs/STGIS_lab-6_SP23.html">Class 6 Technical Lab</a> to transform the city extent polygon to <code>.shp</code> format (shown as <code>export2.shp</code> below):</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-10_SP24_files/img/shp.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Process the ST layer, then the NDVI layer to the Fix Geometries Mask using the parameters in the tool</figcaption><p></p>
+</figure>
+</div>
+<p>Next, mask both the NDVI and Surface Temperature rasters and save them to the outputs folder as <code>NDVI_final.tif</code> and <code>ST_final.tif</code>, respectively:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-10_SP24_files/img/extract-1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Access Extract by Mask Tool</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-10_SP24_files/img/extract-2.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Extract by Mask Tool Parameters foor the Surface Temperature Raster</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-10_SP24_files/img/extract-3.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Extract by Mask Tool Parameters foor the NDVI Raster</figcaption><p></p>
+</figure>
+</div>
+<p>Before Proceeding to the final cartographic design, check the two results; they should be both clipped to the city boundary located at OpenStreetMap:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-10_SP24_files/img/op.9.gif" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Correctly Masked Layers for NDVI and ST Values</figcaption><p></p>
+</figure>
+</div>
+</section>
+</section>
+<section id="map-layout-deliverable" class="level2">
+<h2 class="anchored" data-anchor-id="map-layout-deliverable">Map layout &amp; Deliverable:</h2>
+<p>With both Raster Layers Prepared, save the <code>.mxd</code> project before proceeding. The map layout will feature a side-by-side comparison of the NDVI results to the Surface Temperature results. A Gradient Color Ramp will be provided for each raster theme; both will be displayed with the same map scale, so 1 scale bar can apply to both map layout frames.</p>
+<p>To Start, create a Gradient Color Ramp for the NDVI Spectral Index and Surface Temperature Gradient using the following short video as guide:</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Make sure to apply a pseudocolor color ramp for the legend development.</p>
+</div>
+</div>
+<p>With the pseudocolor color ramps applied to each layer, proceed to Map Layout and position both layers into a horizontal, landscape orientation:</p>
+<p>Next lay in the two analysis layers, and apply a continuous gradient legend to each. Make sure to retain the exact same map scale for each map frame.</p>
+<p>Use the following assignment draft as a general template for your map layout:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-10_SP24_files/img/layout.1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Assignment 12 Draft Layout Example</figcaption><p></p>
+</figure>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In the layout example provided, both legends are oriented with low values at top, high values at bottom. There’s a strong argument to flip these legends so they correspond better. Low NDVI values correspond with high surface temperatures; it would be appropriate and logical to flip the surface temperature legend so that its high values are on top and correspond with the low NDVI values at top of the respective NDVI legend.</p>
+</div>
+</div>
+<p>A PDF of the map layout template is located as Class 9 Assignment Template:</p>
+<ul>
+<li><a href="https://mapexamples.s3.us-east-2.amazonaws.com/c12/c12.assignment.example.pdf">Example Layout - Assignment 9 PDF</a></li>
+</ul>
+<p>The final map design should include the following:</p>
+<ul>
+<li><p>Landscape orientation map sheet.</p></li>
+<li><p>Graduated symbology legend for both NDVI and Surface Temperature raster surfaces.</p></li>
+<li><p>Titling that explains the location, date range and thematic purpose of the mapping.</p></li>
+<li><p>Source the data as follows: Landsat-8 analysis imagery courtesy of the U.S. Geological Survey.</p></li>
+</ul>
+</section>
+<section id="resources" class="level2">
+<h2 class="anchored" data-anchor-id="resources">Resources:</h2>
+<ul>
+<li><a href="https://www.usgs.gov/faqs/what-are-us-landsat-analysis-ready-data-ard">Landsat ARD Data</a></li>
+<li><a href="https://www.usgs.gov/landsat-missions/landsat-normalized-difference-vegetation-index">NDVI</a></li>
+</ul>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp(/^(?:http:|https:)\/\/www\.quarto\.org\/custom/);
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          // default icon
+          link.classList.add("external");
+      }
+    }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+<script src="STGIS_lab-10_SP24_files/libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
