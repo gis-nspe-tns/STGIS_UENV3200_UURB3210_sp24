@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.280">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2024-04-14">
+
+<title>Class 11 Technical Lab: Mapping and Analysis with ArcGIS Online (AGOL)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="STGIS_lab-11_SP24_files/libs/clipboard/clipboard.min.js"></script>
+<script src="STGIS_lab-11_SP24_files/libs/quarto-html/quarto.js"></script>
+<script src="STGIS_lab-11_SP24_files/libs/quarto-html/popper.min.js"></script>
+<script src="STGIS_lab-11_SP24_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="STGIS_lab-11_SP24_files/libs/quarto-html/anchor.min.js"></script>
+<link href="STGIS_lab-11_SP24_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="STGIS_lab-11_SP24_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="STGIS_lab-11_SP24_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="STGIS_lab-11_SP24_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="STGIS_lab-11_SP24_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<link rel="stylesheet" href="STGIS_lab-11_SP24_files/styles.css">
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#assignment-preamble" id="toc-assignment-preamble" class="nav-link active" data-scroll-target="#assignment-preamble">Assignment Preamble</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
+  <li><a href="#lab-step-1" id="toc-lab-step-1" class="nav-link" data-scroll-target="#lab-step-1">Lab Step 1</a></li>
+  <li><a href="#lab-step-2" id="toc-lab-step-2" class="nav-link" data-scroll-target="#lab-step-2">Lab Step #2</a></li>
+  <li><a href="#lab-step-3" id="toc-lab-step-3" class="nav-link" data-scroll-target="#lab-step-3">Lab Step #3</a></li>
+  <li><a href="#lab-step-4" id="toc-lab-step-4" class="nav-link" data-scroll-target="#lab-step-4">Lab Step #4</a></li>
+  <li><a href="#lab-step-4-1" id="toc-lab-step-4-1" class="nav-link" data-scroll-target="#lab-step-4-1">Lab Step #4</a></li>
+  <li><a href="#lab-step-5" id="toc-lab-step-5" class="nav-link" data-scroll-target="#lab-step-5">Lab Step #5</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Class 11 Technical Lab: Mapping and Analysis with ArcGIS Online (AGOL)</h1>
+<p class="subtitle lead">Spring 2024 | <a href="https://courses.newschool.edu/courses/UENV3200/">UENV3200</a>, <a href="https://courses.newschool.edu/courses/UURB3210/">UURB3210</a></p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 14, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-11_SP24_files/img/1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>ArcGIS Online Architecture</em></figcaption><p></p>
+</figure>
+</div>
+<section id="assignment-preamble" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-preamble">Assignment Preamble</h2>
+<p>This week’s assignment will further develop online, web-based mapping and analysis introduced in the lecture demo and in today’s 11th technical lab.</p>
+<p>In addition to creating web-based basemap products, ArcGIS Online offers a series of analysis tools that are significantly enhanced in the ArcGIS Online environment beyond desktop GIS capabilities. In this lab we will cover the following:</p>
+<ol type="1">
+<li>Finalizing and publishing via Share options a ArcGIS Online web map.</li>
+<li>Create <a href="https://en.wikipedia.org/wiki/Isochrone_map">Isochrones</a> from both polygon features and points.</li>
+<li>Geocode a table of addresses, also known as <a href="https://www.esri.com/content/dam/esrisites/en-us/about/events/media/UC-2019/technical-workshops/tw-6122-808.pdf">Batch Geocoding</a>.</li>
+<li>Enrich a feature layer with ArcGIS Online data through a process known as <a href="https://pro.arcgis.com/en/pro-app/latest/help/analysis/business-analyst/data-apportionment-and-layers.htm">geographic apportionment</a>.</li>
+<li>Create a <a href="https://enterprise.arcgis.com/en/portal/10.5/use/interpolate-points.htm">density/interpolation map</a> from a series of points.</li>
+</ol>
+</section>
+<section id="data" class="level2">
+<h2 class="anchored" data-anchor-id="data">Data</h2>
+<ul>
+<li><a href="https://www.dropbox.com/s/l1na5y8jlypz8ur/c11_lab_example-DATA.zip?dl=1">C11 Assignment Lab Data Package Download</a></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-11_SP24_files/img/37.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">C11 Data Package</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="lab-step-1" class="level2">
+<h2 class="anchored" data-anchor-id="lab-step-1">Lab Step 1</h2>
+<p>To start, we will navigate to the <a href="https://doc.arcgis.com/en/arcgis-online/reference/view-maps.htm">Map Viewer Classic</a> and discuss its difference with <a href="https://doc.arcgis.com/en/arcgis-online/get-started/get-started-with-mv.htm">Map Viewer</a>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-11_SP24_files/img/2.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Map Viewer Classic</em></figcaption><p></p>
+</figure>
+</div>
+<p>Next, we will navigate to our <em>Content</em> tab where are first web map should now be located:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-11_SP24_files/img/3.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Content Tab in Arcgis Online</em></figcaption><p></p>
+</figure>
+</div>
+<p>First, we will set the permissions for the web map to Public, and then create a Share URL and then view the results:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-11_SP24_files/img/4.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Within Content Tab, Toggle ON the web map and open Share Options</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-11_SP24_files/img/5.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Set Share Options to Everyone (public)</em></figcaption><p></p>
+</figure>
+</div>
+<p>Next, open in Map Viewer Classic and Toogle On the Share Tab located at the Top Ribbon:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-11_SP24_files/img/6.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Share Tab</em></figcaption><p></p>
+</figure>
+</div>
+<p>Copy/Paste the Share Link in a separate Incognito Web Browser Tab:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-11_SP24_files/img/7.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Share Link</em></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="lab-step-2" class="level2">
+<h2 class="anchored" data-anchor-id="lab-step-2">Lab Step #2</h2>
+<p>Next, we will connect ArcGIS Online to your ArcGIS ArcMap Desktop Software. To do this, open ArcGIS ArcMap Desktop and point to the Web Map first created in Mapbox, now located in Content at ArcGIS Online.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-11_SP24_files/img/8.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>ArcGIS Desktop - Connect to ArcGIS Online</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-11_SP24_files/img/9.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>ArcGIS Desktop signin to ArcGIS Online</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-11_SP24_files/img/10.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>ArcGIS Desktop pointed to Basemap served from ArcGIS Online Account</em></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="lab-step-3" class="level2">
+<h2 class="anchored" data-anchor-id="lab-step-3">Lab Step #3</h2>
+<p>With the <a href="https://www.dropbox.com/s/l1na5y8jlypz8ur/c11_lab_example-DATA.zip?dl=1">C11 Assignment Data Package Download</a> extracted to your working directory, we will load data needed to run two Isochrone Maps. The first will feature a 3 hour drive distance FROM polygon feature; the second 3 hours FROM the centroid of the polygon Features.</p>
+<blockquote class="blockquote">
+<p>For this demonstration we will use data that reflects the locations of abortion facilities in the lower 48, and those states polygons that have currently banned abortion. The data originates from <a href="https://www.ansirh.org/abortion-facility-database">Abortion Facility Database - ANSIRH</a>. Context for banned states is currently tracked by the <a href="https://www.nytimes.com/interactive/2022/us/abortion-laws-roe-v-wade.html">NYTIMES</a>. In our analysis, we want to know the geographic extent of traveling <em>from</em> the center (centroid) of each of the 12 states. We will compare this distance to a 180 mile straight-line buffer as well as abortion facilities located <em>outside</em> the banned states. We will then run a summarization to find the facilities that are within the Isochrone for 3 hours travel time.</p>
+</blockquote>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-11_SP24_files/img/11.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Analysis Locations - States that currently ban abortion access</em></figcaption><p></p>
+</figure>
+</div>
+<p>Within the Content Tab, open import to ArcGIS Online and point to the following features (ArcGIS Online requires uploads as <code>.zip</code> format:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-11_SP24_files/img/12.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Input Data shown in ArcCatalog, unzipped directory</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-11_SP24_files/img/13.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Input Data in compressed format within directory</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-11_SP24_files/img/14a.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>New Item loaded to ArcGIS Online</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-11_SP24_files/img/14.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Input Data compressed directory loaded to ArcGIS Online</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-11_SP24_files/img/15.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Input Data loaded to ArcGIS Online</em></figcaption><p></p>
+</figure>
+</div>
+<p>Once all necessary features are loaded to ArcGIS Online, we will run Isochrones (Create Drive-Time Areas):</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-11_SP24_files/img/16.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Input Data loaded to ArcGIS Online</em></figcaption><p></p>
+</figure>
+</div>
+<p>Populate the tool as follows:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-11_SP24_files/img/17.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Isochrone Parameters for the Tool</em></figcaption><p></p>
+</figure>
+</div>
+<p>Review the Isochrone Result at both small and large scales:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-11_SP24_files/img/18.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Isochrone Results - Small Scale</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-11_SP24_files/img/19.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Isochrone Results - Large Scale</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-11_SP24_files/img/20.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Summarize Within Tool</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-11_SP24_files/img/21.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Summarize Within Results</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-11_SP24_files/img/22.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Isochrone Results available for export</em></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="lab-step-4" class="level2">
+<h2 class="anchored" data-anchor-id="lab-step-4">Lab Step #4</h2>
+<p>Next, we will turn to Geocoding a table of addresses that do <em>NOT</em> have latitude and longitude necessary for mapping address points. This is a typical data management and preparation task in GIS: generating coordinates necessary for mapping from either 1 address or a ‘batch’ of addresses in tabular <code>.csv</code> format.</p>
+<p>The example dataset is from the <a href="https://www.nyc.gov/site/planning/data-maps/open-data/dwn-selfac.page">NY Facilities Database</a></p>
+<blockquote class="blockquote">
+<p>The Department of City Planning aggregates information about 30,000+ facilities and program sites that are owned, operated, funded, licensed, or certified by a City, State, or Federal agency in the City of New York into a central database called the City Planning Facilities Database (FacDB). These facilities generally help to shape quality of life in the city’s neighborhoods, and this dataset is the basis for a series of planning activities. This public data resource allows all New Yorkers to understand the breadth of government resources in their neighborhoods.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>Note to Users: FacDB is only as good as the source data it aggregates, and the Department of City Planning cannot verify the accuracy of all records. Please read more about specific data and analysis limitations before using this data. Limitations include missing records, duplicate records, and the inclusion of administrative sites instead of service locations.</p>
+</blockquote>
+<p>The results have been filtered to records where the owner is <em>Brooklyn Public Library</em>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-11_SP24_files/img/23.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Preview of the Dataset</em></figcaption><p></p>
+</figure>
+</div>
+<p>To start, create a New Items within your Content Section:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-11_SP24_files/img/14a.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>New Item loaded to ArcGIS Online</em></figcaption><p></p>
+</figure>
+</div>
+<p>Next, point to the <code>FacDB_20220630.csv</code> table, and create a feature layer from the table:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-11_SP24_files/img/24.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>New Item loaded to ArcGIS Online</em></figcaption><p></p>
+</figure>
+</div>
+<p>Next, match the table locational fields to the Location Types:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-11_SP24_files/img/25.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Match available Location Fields to Fields in the Table</em></figcaption><p></p>
+</figure>
+</div>
+<p>Check and proceed to review of the resulting Geocode:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-11_SP24_files/img/26.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Match available Location Fields to Fields in the Table</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-11_SP24_files/img/27.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Review the Mapped Point Features</em></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="lab-step-4-1" class="level2">
+<h2 class="anchored" data-anchor-id="lab-step-4-1">Lab Step #4</h2>
+<p>In this step, we will turn to <a href="https://doc.arcgis.com/en/arcgis-online/analyze/enrich-layer.htm">Enrichment Layer</a></p>
+<blockquote class="blockquote">
+<p>The Enrich Layer tool provides demographic and landscape data for the people, places, and businesses associated with point, line, or area data locations. It uses ArcGIS GeoEnrichment Service or a custom GeoEnrichment service.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>The input data to be enriched can be point, line, or area features. The Enrich Layer tool uses data apportionment to provide accurate data estimates, even for custom geometry.</p>
+</blockquote>
+<p>How data apportionment works:</p>
+<p>The Enrich Layer tools in ArcGIS Pro, ArcGIS Online, and the GeoEnrichment service use a data apportionment algorithm to redistribute demographic, business, economic, and landscape variables to input polygon features. The algorithm analyzes each polygon to be enriched relative to a point dataset and a detailed dataset of reporting unit polygons that contain attributes for the selected variables. Based on how each polygon being enriched overlays these datasets, the algorithm determines the appropriate amount of each variable to assign.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-11_SP24_files/img/2a.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Geographic Apportionment Example - Custom Geographic Overlay to Polygon Features</em></figcaption><p></p>
+</figure>
+</div>
+<p>The input will be <code>enrich_point.geojson</code> located at the intersection of 5th and 13th in front of our current building location:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-11_SP24_files/img/28.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Enrich Point Location</em></figcaption><p></p>
+</figure>
+</div>
+<p>Like data uploads thus far, load <code>enrich_point.geojson</code> to ArcGIS Online Contents section:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-11_SP24_files/img/29.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Enrich Point added to ArcGIS online</em></figcaption><p></p>
+</figure>
+</div>
+<p>Proceed to opening the new feature layer in Classic Map Viewer. Navigate to Analysis &gt; Enrich Layer:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-11_SP24_files/img/30.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Data Enrichment</em></figcaption><p></p>
+</figure>
+</div>
+<p>Input the <code>enrich_point</code> feature layer to the tool. We will select a series of variables to return, and then review the enriched result:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-11_SP24_files/img/31.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Data Enrichment Tool Parameters</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-11_SP24_files/img/32.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Data Enrichment Tool Results</em></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="lab-step-5" class="level2">
+<h2 class="anchored" data-anchor-id="lab-step-5">Lab Step #5</h2>
+<p>Finally we will turn to <a href="https://pro.arcgis.com/en/pro-app/2.8/tool-reference/spatial-analyst/understanding-interpolation-analysis.htm">Interpolation Surfaces</a> and <a href="https://doc.arcgis.com/en/arcgis-online/analyze/calculate-density.htm">Density Surfaces</a>. Sometimes referred to a ‘heat maps’, these types of surface accepts points features as an input, then interpolates values or estimate value concentrations in the spaces between the points in the case of interpolation; and at the points in the case of density,for a smooth, continuous surface. Interpolation and density can be helpful to better see the pattern of the points data, and it acts as a predictive surface with limited sample point locations.</p>
+<p>The data for the density example will be <a href="https://data.cityofnewyork.us/Public-Safety/Motor-Vehicle-Collisions-Crashes/h9gi-nx95/">Vehicle Crashes in NYC</a> within the time frame and latitude values as not NULL as noted below:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-11_SP24_files/img/33.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Crash Data Parameters</em></figcaption><p></p>
+</figure>
+</div>
+<p>To start, input the <code>Motor_Vehicle_Collisions_-_Crashes.csv</code> and accept Latitude and Longitude as the locational fields:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-11_SP24_files/img/34.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Crash Data input into ArcGIS Online</em></figcaption><p></p>
+</figure>
+</div>
+<p>Next, import the <code>NYC_borough_boundary.geojson</code> layer to ArcGIS Online Contents.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-11_SP24_files/img/35.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Borough Boundary input into ArcGIS Online</em></figcaption><p></p>
+</figure>
+</div>
+<p>Next, import the <code>NYC_borough_boundary.geojson</code> layer to ArcGIS Online Contents.</p>
+<p>Create a new map with both the Crash data and the NYC borough boundaries as layers in the new map. Next, navigate to Analysis &gt; Analyze Patterns &gt; Calculate Density and populate the tool as follows:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="STGIS_lab-11_SP24_files/img/36.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Calculate Density Tool Parameters</em></figcaption><p></p>
+</figure>
+</div>
+<p>Once complete, we will review the resulting density surface and compare it to the original crash points input.</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp(/^(?:http:|https:)\/\/www\.quarto\.org\/custom/);
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          // default icon
+          link.classList.add("external");
+      }
+    }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+<script src="STGIS_lab-11_SP24_files/libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

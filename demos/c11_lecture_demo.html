@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.280">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2023-04-16">
+
+<title>Class 11 Lecture Demonstration Lab</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="c11_lecture_demo_files/libs/clipboard/clipboard.min.js"></script>
+<script src="c11_lecture_demo_files/libs/quarto-html/quarto.js"></script>
+<script src="c11_lecture_demo_files/libs/quarto-html/popper.min.js"></script>
+<script src="c11_lecture_demo_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="c11_lecture_demo_files/libs/quarto-html/anchor.min.js"></script>
+<link href="c11_lecture_demo_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="c11_lecture_demo_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="c11_lecture_demo_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="c11_lecture_demo_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="c11_lecture_demo_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="c11_lecture_demo_files/libs/quarto-contrib/videojs/video.min.js"></script>
+<link href="c11_lecture_demo_files/libs/quarto-contrib/videojs/video-js.css" rel="stylesheet">
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<link rel="stylesheet" href="c11_lecture_demo_files/styles.css">
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#basemap-development-with-mapbox-arcgis-online" id="toc-basemap-development-with-mapbox-arcgis-online" class="nav-link active" data-scroll-target="#basemap-development-with-mapbox-arcgis-online">Basemap Development with Mapbox &amp; ArcGIS Online</a></li>
+  <li><a href="#part-i" id="toc-part-i" class="nav-link" data-scroll-target="#part-i">Part I</a>
+  <ul class="collapse">
+  <li><a href="#basemap-development---parameters" id="toc-basemap-development---parameters" class="nav-link" data-scroll-target="#basemap-development---parameters">Basemap Development - Parameters</a></li>
+  </ul></li>
+  <li><a href="#part-ii" id="toc-part-ii" class="nav-link" data-scroll-target="#part-ii">Part II</a>
+  <ul class="collapse">
+  <li><a href="#basemap-in-arcgis-desktop" id="toc-basemap-in-arcgis-desktop" class="nav-link" data-scroll-target="#basemap-in-arcgis-desktop">Basemap in ArcGIS Desktop</a></li>
+  </ul></li>
+  <li><a href="#part-iii" id="toc-part-iii" class="nav-link" data-scroll-target="#part-iii">Part III</a>
+  <ul class="collapse">
+  <li><a href="#arcgis-online" id="toc-arcgis-online" class="nav-link" data-scroll-target="#arcgis-online">ArcGIS Online</a></li>
+  </ul></li>
+  <li><a href="#part-iv" id="toc-part-iv" class="nav-link" data-scroll-target="#part-iv">Part IV:</a>
+  <ul class="collapse">
+  <li><a href="#mapbox-studio" id="toc-mapbox-studio" class="nav-link" data-scroll-target="#mapbox-studio">Mapbox Studio</a></li>
+  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Class 11 Lecture Demonstration Lab</h1>
+<p class="subtitle lead">Spring 2023 | <a href="https://courses.newschool.edu/courses/NINT5380/2115/">NINT5380 CRN2115</a></p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 16, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="basemap-development-with-mapbox-arcgis-online" class="level2">
+<h2 class="anchored" data-anchor-id="basemap-development-with-mapbox-arcgis-online">Basemap Development with Mapbox &amp; ArcGIS Online</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c11_lecture_demo_files/img/1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>http://openwhatevermap.xyz/ = preview of different out-of-the-box basemaps</em></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="part-i" class="level2">
+<h2 class="anchored" data-anchor-id="part-i">Part I</h2>
+<section id="basemap-development---parameters" class="level3">
+<h3 class="anchored" data-anchor-id="basemap-development---parameters">Basemap Development - Parameters</h3>
+<p>For interactive web mapping, the basemap typically operates as the ‘base’ layer that provides contextual information to the end user. Basemap layers are typically a <a href="https://en.wikipedia.org/wiki/Server-side">Server-side application</a> that is responsive to <a href="https://en.wikipedia.org/wiki/Client-side">Client-side actions</a>:</p>
+<blockquote class="blockquote">
+<p>Basemaps serve as a reference map on which you overlay data from layers and visualize geographic information. An individual basemap can be made of multiple feature, raster, or web layers. Basemaps are the foundation for your [interactive, online] maps and provide context for your work.</p>
+</blockquote>
+<p>A basemap service - often referred to as a <em>tiled service</em> - contains cached tiles that render the map in small tile images. This allows the map to perform much faster when panning and zooming. Most contemporary basemap services follow a typical web address structure.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c11_lecture_demo_files/img/2.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Basemap Options</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c11_lecture_demo_files/img/10.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Basemap Context</em></figcaption><p></p>
+</figure>
+</div>
+<p>To start, navigate to <a href="http://openwhatevermap.xyz/">openwhatevermap.xyz/</a> and take a look at a collection of out-of-the-box basemap options. Click on some of the gridded basemap options and notice the tile address structure:</p>
+<pre><code>https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.png</code></pre>
+<ul>
+<li>The first part of the web address specifies the origination of the tile service. The second <code>{z}/{x}/{y}{r}</code> structure allows for zoom and positioning provided by the user through the browser. The final <code>.png</code> refers to the image type for the tile service.</li>
+</ul>
+<p>Tile Services typically fall into one of two categories:</p>
+<ul>
+<li><p><strong>Raster map tiles</strong> are larger in size, less demanding on end-users’ hardware but more demanding on the server-side performance.</p></li>
+<li><p><strong>Vector map tiles</strong> are faster to load, and less demanding on the server-side performance but more demanding on end-users hardware.</p></li>
+</ul>
+<p>Often there is also a required <strong>API Access Token</strong> attached to both raster and vector tile services that have been customized by a particular user within the user’s account be it ArcGIS Online or Mapbox.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c11_lecture_demo_files/img/3.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Formatted URL structure for basemaps</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c11_lecture_demo_files/img/4.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Typical Parameters for basemaps</em></figcaption><p></p>
+</figure>
+</div>
+</section>
+</section>
+<section id="part-ii" class="level2">
+<h2 class="anchored" data-anchor-id="part-ii">Part II</h2>
+<section id="basemap-in-arcgis-desktop" class="level3">
+<h3 class="anchored" data-anchor-id="basemap-in-arcgis-desktop">Basemap in ArcGIS Desktop</h3>
+<p>In <em>ArcGIS Desktop</em>, if we add a basemap to a <code>.mxd</code> project, we can see the tile service address:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c11_lecture_demo_files/img/5.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Access basemaps in ArcGIS Desktop</em></figcaption><p></p>
+</figure>
+</div>
+<p>Behind the scenes, the basemap address is as follows:</p>
+<pre><code>https://services.arcgisonline.com/arcgis/rest/services/Canvas/World_Dark_Gray_Base/MapServer</code></pre>
+<p>If we go to the address, we can see the metadata for this standard basemap for ArcGIS, and view the zoom levels and Tile info available for this basemap:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c11_lecture_demo_files/img/6.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Tile Info for the </em>dark canvas* standard ArcGIS basemap</figcaption><p></p>
+</figure>
+</div>
+</section>
+</section>
+<section id="part-iii" class="level2">
+<h2 class="anchored" data-anchor-id="part-iii">Part III</h2>
+<section id="arcgis-online" class="level3">
+<h3 class="anchored" data-anchor-id="arcgis-online">ArcGIS Online</h3>
+<p>For this week’s assignment, you will need a login account for both <a href="https://account.mapbox.com/">Mapbox Studio</a> and <a href="https://www.esri.com/en-us/arcgis/products/create-account">ArcGIS Online</a>.</p>
+<p>To start, navigate to the <a href="https://www.esri.com/en-us/arcgis/products/create-account">21 day free trial option</a>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c11_lecture_demo_files/img/15.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">*Create ArcGIS Online Account</figcaption><p></p>
+</figure>
+</div>
+<p>You will want to enact the <em>ArcGIS Online trial for professionals</em>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c11_lecture_demo_files/img/16.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>ArcGIS Online for Professionals</em></figcaption><p></p>
+</figure>
+</div>
+<p>You will need to utilize an email address that is <em>NOT</em> an <code>.edu</code> or <code>gmail.com</code> account:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c11_lecture_demo_files/img/17.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>ArcGIS Online for Professionals - Warning for unacceptable email addresses</em></figcaption><p></p>
+</figure>
+</div>
+<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you enter a <code>.edu</code> or <code>gmail.com</code> account, you will receive the warning above, which will then point you to a degraded account option which you do not want for this week’s assignment.</p>
+</div>
+</div>
+<p>While ArcGIS Online has its own basemap collection and also basemap editor, <a href="https://www.mapbox.com/mapbox-studio">Mapbox Studio</a> is arguably the ‘go to’ basemap development service. With <a href="https://www.mapbox.com/mapbox-studio">Mapbox Studio</a> you have available on the free tier some impressive capabilities. In this lab, we will utilize <a href="https://www.mapbox.com/mapbox-studio">Mapbox Studio</a> on the free tier.</p>
+<p>Before proceeding to <a href="https://www.mapbox.com/mapbox-studio">Mapbox Studio</a>, take a quick look at <a href="https://www.arcgis.com/apps/vtseditor/en/#/styles">ArcGIS Online Vector Tile Style Editor</a>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c11_lecture_demo_files/img/7.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Editing a standard ArcGIS basemap</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c11_lecture_demo_files/img/8.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Results are saved to </em>My Content* in ArcGIS Online*</figcaption><p></p>
+</figure>
+</div>
+<p>IF you choose to work with basemaps in <a href="https://www.esri.com/en-us/arcgis/products/arcgis-online/overview">ArcGIS online</a>, a starter tutorial is located <a href="https://developers.arcgis.com/documentation/mapping-apis-and-services/visualization/basemap-styles/#create-a-custom-basemap-style">HERE</a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c11_lecture_demo_files/img/9.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>New, updated basemaps from ESRI</em></figcaption><p></p>
+</figure>
+</div>
+</section>
+</section>
+<section id="part-iv" class="level2">
+<h2 class="anchored" data-anchor-id="part-iv">Part IV:</h2>
+<section id="mapbox-studio" class="level3">
+<h3 class="anchored" data-anchor-id="mapbox-studio">Mapbox Studio</h3>
+<p>In order to use <a href="https://www.mapbox.com/mapbox-studio">Mapbox Studio</a>, you will need at least a free tier starter account. Utilize the unique email address that is NOT <code>.edu</code> or <code>.gmail.com</code> as noted in Part III above. We will use this unique email address for both <a href="https://www.mapbox.com/mapbox-studio">Mapbox Studio</a> and <a href="https://www.esri.com/en-us/arcgis/products/arcgis-online/overview">ArcGIS Online</a> for this upcoming week’s assignment and lab sessions:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c11_lecture_demo_files/img/11.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Create New Account at Mapbox</em></figcaption><p></p>
+</figure>
+</div>
+<p>Access Mapbox Signup <a href="https://account.mapbox.com/auth/signup/">HERE</a></p>
+<p>Next, navigate to Mapbox Studio once your account is created and login is complete:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c11_lecture_demo_files/img/12.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>New Account Landing at Mapbox</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c11_lecture_demo_files/img/13.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Mapbox Studio</em></figcaption><p></p>
+</figure>
+</div>
+<p>Before we begin, remember the cartographic design principles we learned in <a href="https://gis-nspe-tns.github.io/STGIS_UENV3200_UURB3210_sp23/agendas/STGIS_agenda-3_SP23.html">Class 3 Cartographic Design</a>. Particularly relevant for basemaps are the following four components on which good cartographic design rests:</p>
+<section id="scale" class="level4">
+<h4 class="anchored" data-anchor-id="scale">- Scale</h4>
+</section>
+<section id="hierarchy" class="level4">
+<h4 class="anchored" data-anchor-id="hierarchy">- Hierarchy</h4>
+</section>
+<section id="color" class="level4">
+<h4 class="anchored" data-anchor-id="color">- Color</h4>
+</section>
+<section id="symbology" class="level4">
+<h4 class="anchored" data-anchor-id="symbology">- Symbology</h4>
+<p>Within Mapbox, note that <strong>Tilesets</strong> are distinguished from <strong>Datasets</strong>. Via <strong>Datasets</strong> we can either load into Mapbox GIS data from an analysis workflow in desktop GIS; and Mapbox also allows for a development interface for points, lines and polygons as <strong>Datasets</strong>. Here we will make some data points around NYC within <strong>Datasets</strong> and save as <code>points test</code>:</p>
+<div class="quarto-video"><video id="video_shortcode_videojs_video1" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="c11_lecture_demo_files/img/1.mp4"></video></div>
+<p>Once saved as <code>points test</code> dataset, this vector points feature needs to be converted to a <strong>Tileset</strong>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c11_lecture_demo_files/img/14.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Mapbox Studio - Convert Dataset to Tileset</em></figcaption><p></p>
+</figure>
+</div>
+<p>In order to transform a <strong>Tileset</strong> into an actual <strong>Studio Layer</strong>, navigate to <em>Studio &gt; Styles &gt; add a New Style</em>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c11_lecture_demo_files/img/18.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Mapbox Studio - Create a New Style</em></figcaption><p></p>
+</figure>
+</div>
+<p>Next, we’ll choose <em>Monochrome</em>, and enter into an editing session for this baselayer:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c11_lecture_demo_files/img/19.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Mapbox Studio - Start with an existing templae, or choose the </em>Blank* template to start from scratch</figcaption><p></p>
+</figure>
+</div>
+<p>In order to add our <code>points test</code> <strong>Tileset</strong> to the current map style, navigate <em>Layers &gt; + New Layer &gt; Source &gt; Selected &gt; <code>points_test</code></em>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c11_lecture_demo_files/img/20.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Input a Tileset into a Styles Layer</em></figcaption><p></p>
+</figure>
+</div>
+<p>Once placed as a <em>Layer</em> into the <em>Style</em>, proceed to publishing the <em>Style</em>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c11_lecture_demo_files/img/21.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Layer now placed into Larger Style</em></figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="c11_lecture_demo_files/img/22.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><em>Extensive Share options are now available upon Publish</em></figcaption><p></p>
+</figure>
+</div>
+<p>As the <em>Style</em> is published, we will explore uses for the new <a href="https://docs.mapbox.com/studio-manual/reference/styles/">Mapbox Studio Layer</a> in third party applications or direct sharing options:</p>
+<ul>
+<li><a href="https://docs.mapbox.com/help/tutorials/arcgis-online-mapbox-basemap/">Incorporate into ArcGIS Online</a></li>
+<li><a href="https://docs.mapbox.com/studio-manual/guides/publish-your-style/">Direct Share Mapbox Styles</a></li>
+</ul>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Mapbox requires attribution as at least <code>Mapbox © OpenStreetMap</code>; review attribution at: https://docs.mapbox.com/help/getting-started/attribution/</p>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<ul>
+<li><a href="https://gisgeography.com/basemap/">Basemap Definitions and Terminology</a></li>
+<li><a href="http://openwhatevermap.xyz/">Basemap Gallery - out-of-the-box</a></li>
+<li><a href="https://www.esri.com/arcgis-blog/products/developers/developers/open-source-developers-time-to-upgrade-to-the-new-arcgis-basemap-layer-service/">Basemap Development - ArcGIS Online</a></li>
+<li><a href="https://developers.arcgis.com/documentation/mapping-apis-and-services/maps/basemap-layers/">How Basemaps Work - ArcGIS</a></li>
+<li><a href="https://docs.mapbox.com/studio-manual/guides/">Mapbox Studio Manual</a></li>
+</ul>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp(/^(?:http:|https:)\/\/www\.quarto\.org\/custom/);
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          // default icon
+          link.classList.add("external");
+      }
+    }
+});
+</script>
+</div> <!-- /content -->
+<script>videojs(video_shortcode_videojs_video1);</script>
+
+
+
+<script src="c11_lecture_demo_files/libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
