@@ -1,0 +1,150 @@
+---
+title: "Class 12 - Final Project Presentation Overview"
+subtitle: "Steps, Formatting, Visualization Strategies"
+format:
+  revealjs: 
+    slide-number: true
+    theme: [index_files/custom.scss]
+    touch: true
+    incremental: true   
+resources:
+  - demo.pdf
+---
+
+## Final Project
+
+### Steps:
+
+::: {.incremental}
+- GIS Question - Project Proposal #1 (completed) - Stage 1
+- GIS Question - Instructor Video Response (completed) - Stage 1
+- Develop GIS Methods - Project Methodology #2 (current) - Stage 2
+- Proceed to GIS Analysis
+- Complete Analysis | Derive Quantitative Results | Summarization | Conclusive Findings 
+:::
+
+## Final Project
+
+### Traditional Layout - GIS Poster Session
+
+![](index_files/img/2.png){.absolute top="170" left="130" width="800"}
+
+::: footer
+Source:[Guidelines for Poster Presentations](https://www.cerf.science/guidelines-for-poster-presentations)
+:::
+
+## Final Project
+
+### Wayfinding - Presentation Progression
+
+![](index_files/img/3.png){.absolute top="150" left="100" width="800"}
+
+## Final Project
+
+### Wayfinding - Font Selection | Hierarchy
+#### ( Droid Sans | Helvetica Neue)
+
+![](index_files/img/4.png){.absolute top="270" left="110" width="800"}
+
+## Final Project
+
+### Page Space - Grid Formats
+
+![](index_files/img/5.png){.absolute top="150" left="180" width="700"}
+
+::: footer
+Source:[Layout Design](https://visme.co/blog/layout-design/)
+:::
+
+## Final Project
+
+### Page Space - Grid Formats
+
+![](index_files/img/6.png){.absolute top="190" left="120" width="800"}
+
+::: footer
+Source:[Grids](http://printingcode.runemadsen.com/lecture-grid/)
+:::
+
+## Final Project
+
+### Page Space - Grid Formats
+
+![](index_files/img/7.png){.absolute top="190" left="120" width="800"}
+
+::: footer
+Source:[Grids](http://printingcode.runemadsen.com/lecture-grid/)
+:::
+
+## Final Project
+
+### Page Space - Grid Formats
+
+![](index_files/img/8.png){.absolute top="190" left="120" width="800"}
+
+::: footer
+Source:[Grids](http://printingcode.runemadsen.com/lecture-grid/)
+:::
+
+## Final Project
+
+### Variable Map Scales - Progression + Emphasis
+
+![](index_files/img/9.png){.absolute top="140" left="100" width="800"}
+
+## Final Project
+
+### Variable Map Scales - Progression + Emphasis
+
+![](index_files/img/10.png){.absolute top="140" left="100" width="800"}
+
+## Final Project
+
+### Variable Map Scales - Progression + Emphasis
+
+![](index_files/img/11.png){.absolute top="140" left="100" width="800"}
+
+
+## Final Project
+
+### Map Projections
+
+![](index_files/img/12.png){.absolute top="175" left="100" width="800"}
+
+
+## Final Project
+
+### Sequential Imaging using Identical Scale + Position
+
+![](index_files/img/13.png){.absolute top="150" left="190" width="745"}
+
+## Final Project
+
+### Sequential Imaging using Identical Scale + Position
+
+![](index_files/img/14.png){.absolute top="150" left="190" width="745"}
+
+
+## Final Project
+
+### Quantification & Summarization - Small Multiples
+
+![](index_files/img/15.png){.absolute top="190" left="140" width="740"}
+
+## Final Project
+
+### Quantification & Summarization - Change over Time
+
+![](index_files/img/17.png){.absolute top="150" left="160" width="800"}
+
+
+## Final Project
+
+### Quantification & Summarization - Charts + Plots
+
+![](index_files/img/16.png){.absolute top="200" left="150" width="800"}
+
+
+
+
+

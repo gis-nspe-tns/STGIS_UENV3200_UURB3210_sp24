@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.280">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2024-04-22">
+
+<title>Class 12 Assignment: Final Project Stage 2 - Developing a GIS Methodology</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="STGIS_assignment-12_SP24_files/libs/clipboard/clipboard.min.js"></script>
+<script src="STGIS_assignment-12_SP24_files/libs/quarto-html/quarto.js"></script>
+<script src="STGIS_assignment-12_SP24_files/libs/quarto-html/popper.min.js"></script>
+<script src="STGIS_assignment-12_SP24_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="STGIS_assignment-12_SP24_files/libs/quarto-html/anchor.min.js"></script>
+<link href="STGIS_assignment-12_SP24_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="STGIS_assignment-12_SP24_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="STGIS_assignment-12_SP24_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="STGIS_assignment-12_SP24_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="STGIS_assignment-12_SP24_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<link rel="stylesheet" href="STGIS_assignment-12_SP24_files/styles.css">
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#assignment-preamble" id="toc-assignment-preamble" class="nav-link active" data-scroll-target="#assignment-preamble">Assignment Preamble</a></li>
+  <li><a href="#class-11-readings" id="toc-class-11-readings" class="nav-link" data-scroll-target="#class-11-readings">Class 11 Readings</a></li>
+  <li><a href="#stage-2-process-part-i" id="toc-stage-2-process-part-i" class="nav-link" data-scroll-target="#stage-2-process-part-i">Stage 2 Process Part I:</a></li>
+  <li><a href="#developing-an-effective-gis-methodology" id="toc-developing-an-effective-gis-methodology" class="nav-link" data-scroll-target="#developing-an-effective-gis-methodology">Developing an effective GIS methodology:</a></li>
+  <li><a href="#stage-2-process-part-ii-the-gis-presentation" id="toc-stage-2-process-part-ii-the-gis-presentation" class="nav-link" data-scroll-target="#stage-2-process-part-ii-the-gis-presentation">Stage 2 Process Part II: The GIS Presentation</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Class 12 Assignment: Final Project Stage 2 - Developing a GIS Methodology</h1>
+<p class="subtitle lead">Spring 2024 | <a href="https://courses.newschool.edu/courses/UENV3200/">UENV3200</a>, <a href="https://courses.newschool.edu/courses/UURB3210/">UURB3210</a></p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 22, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="assignment-preamble" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-preamble">Assignment Preamble</h2>
+<p>This week’s assignment is <em>NOT</em> graded this week; it operates as a guide for developing the final project methodology over the next few weeks towards the final project deliverable. It offers design guidelines and references for the final project deliverable - both the GIS presentation and methods overview paper.</p>
+</section>
+<section id="class-11-readings" class="level2">
+<h2 class="anchored" data-anchor-id="class-11-readings">Class 11 Readings</h2>
+<p>No readings will be assigned for the remainder of the course.</p>
+</section>
+<section id="stage-2-process-part-i" class="level2">
+<h2 class="anchored" data-anchor-id="stage-2-process-part-i">Stage 2 Process Part I:</h2>
+<p>As discussed prior, the final project will be developed across 3 stages. The first stage has concluded - a proposed GIS question. The second stage leverages the refined GIS question into explicit data acquisition steps and spatial analysis methods designed to answer/solve the the GIS question/problem.</p>
+<p>Prior to the final project work period (April 15th - May 19th), review <strong>Assignment 12</strong> to follow:</p>
+<p><strong>To start</strong> we will review the methods sections from two past student projects. Note that the methods sections are generally technical steps designed to accomplish the task of the project. While they coincide with the larger findings and purpose of each methods paper, during this <strong>Stage 2 process</strong>, concentrate more narrowly on the steps necessary to conduct the GIS analysis of the project. There will be plenty of time and opportunity to contextualize the final methods with purpose, goals and ultimate findings of the project - all to be encapsulated by the project presentation and methods paper.</p>
+<p>Keep in mind that the project methods developed now during the <strong>Stage 2 Process</strong> will not only operate as both draft and guide for conducing the GIS analysis of the project, but will be developed into their own section - the methods section - of the project paper deliverable.</p>
+<ul>
+<li><p><a href="https://docs.google.com/document/d/e/2PACX-1vQAIRNjt08qqMdA4Ku3NDwcD-xvJ12tjG0Tf7Y3NdMjQ-eMUQ34egXWEBr4HydPLqvUrXbfKQ6QD5YD/pub">Final Project Paper I</a></p></li>
+<li><p><a href="https://docs.google.com/document/d/e/2PACX-1vTm7gLj1ZuKjDlqDmLxZPI8SwhbC5URAUDZEPbWwbUGEp2T8DL7vKprbZ5bqWVz_h3LFBL7vK8ELjbL/pub">Final Project Paper II</a></p></li>
+</ul>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Keep diligent notes on data gathering, as well as diary-like entries for early working sessions of the GIS project. These notes can significant advantage the development of the final methods paper.</p>
+</div>
+</div>
+</section>
+<section id="developing-an-effective-gis-methodology" class="level2">
+<h2 class="anchored" data-anchor-id="developing-an-effective-gis-methodology">Developing an effective GIS methodology:</h2>
+<p>The following Methods categories are typical of GIS methodologies. These sections can be used to prompt the development of your particular project methods:</p>
+<ul>
+<li><p><strong>Data acquisition</strong>: early phase of any project.</p>
+<ul>
+<li>Where was the data acquired ?</li>
+<li>What is the vintage of the data ?</li>
+<li>What is the source ?</li>
+<li>Is there accessible metadata ?</li>
+<li>Is the temporal and spatial resolution of the data appropriate to the project ?</li>
+<li>What limitations does the data pose for the GIS project ?</li>
+</ul></li>
+<li><p><strong>Data clearning &amp; formatting</strong>: following data acquisition, cleaning and formatting may need to occur.</p>
+<ul>
+<li>What format is the data ?</li>
+<li>Is there significant NULL records within the dataset(s) ?</li>
+<li>Do project issues exist both within and across dataset(s) ?</li>
+<li>Are there size and memory issues (file size) ?</li>
+</ul></li>
+<li><p><strong>GIS Method Categories</strong>: the following GIS project categories can be utilized as prompts for project methodology:</p>
+<ul>
+<li><p><strong>Spatial Data Development</strong>: GIS projects have to start with data, obviously. If the project features an unique dataset, or the development of a new data source, that can be a significant component of the project - one that can be evaluated as part of the project itself. An example of the emphasis on an unique data collection method is found in this <a href="https://drive.google.com/file/d/1z-xz7cPQGvl11tcXv1LWc8eRWFChcUM1/view?usp=sharing">paper regarding African Health Facilities</a>. Here the data had to be developed and Geocoded for hospital locations before inception of the GIS analysis.</p></li>
+<li><p><strong>Emphasis on Spatial Analysis, Geoprocessing</strong>: GIS projects that feature extensive overlay techniques to derive meaningful spatial outputs. In this type of project the bulk of methods is devoted to geoprocessing steps. An example of this type of work can be found in a ‘classic’ GIS project entitled <a href="https://drive.google.com/file/d/1c68dCbyEq0YMwTx0CWXqJ7on5gGlB_If/view?usp=sharing">Asthma and air pollution in the Bronx: Methodological and data considerations in using GIS for environmental justice and health research</a>.</p></li>
+<li><p><strong>Mapping Vulnerability</strong>: In this <a href="http://www.unep.fr/shared/publications/pdf/ANNEXES/3.2.4%20Risk%20assessment%20and%20vulnerability%20maps/Handbook%20for%20Vulnerability%20Mapping.pdf">project model</a>, a population is ascertained as vulnerable to a certain environmental, geographical risk. This model was covered during Class 7, and can be adapted for a final project method.</p></li>
+<li><p><strong>GIS Suitability</strong>: <a href="https://www.gislounge.com/overview-weighted-site-selection-suitability-analysis/">Suitability models</a> seek to find conditions across various spatial layers of information to determine unique geographies that are either of concern or opportunity. This is an ideal model for continous surfaces that well represented by the raster model. This model was covered during class 9, and can be adapted for a final project method.</p></li>
+<li><p><strong>Remote Sensing | Change over Time</strong>: The temporal dimension of project data can be utilized to detect change over time within geographies streching back often decades - in the case of Landsat, 40 years. This opens the opportunity to quantify change over time utilizing the raster model. At its core, raster cells that change from one value to another over a temporal analysis period are assessed and categorized. This brief introduction to <a href="https://pubs.usgs.gov/gip/133/pdf/RemSens-Student_web.pdf">Tracking Change Over Time</a> gives a preview of a topic that was covered in class 10; it can be adapted for a final project method.</p></li>
+<li><p><strong>Spatial Statistics</strong>: In addition to overlay methods, GIS has a suite of statistical tools that can be utilized to access spatial patterns, correlations and their strengths. Like statistics in general, spatial statistics seeks to understand the relationship between multiple variables - the addition here is the spatial component. While we will not cover spatial statistics in depth during this course, it is a method that can be utilized for a final GIS project. The following document serves as introduction to <a href="http://desktop.arcgis.com/en/arcmap/10.3/tools/spatial-statistics-toolbox/spatial-statistics-toolbox-sample-applications.htm">spatial statistics within the ESRI ArcGIS package</a>. For each method listed, there are similar methods available in QGIS.</p></li>
+</ul></li>
+<li><p><strong>Quantification and Summarization</strong>: typically the last step in a GIS methodology.</p>
+<ul>
+<li>What are the key findings of the GIS analysis ?</li>
+<li>Are there important rankings across the units of analysis for the project ?</li>
+<li>What classification methods are deployed to best capture project findings ?</li>
+<li>Are the project findings categorical or strictly quantitative ? Is there a mix of both ?</li>
+<li>Are there important correlations and variable relationships that can be explored and augmented along with project cartographic outputs ?</li>
+</ul></li>
+</ul>
+</section>
+<section id="stage-2-process-part-ii-the-gis-presentation" class="level2">
+<h2 class="anchored" data-anchor-id="stage-2-process-part-ii-the-gis-presentation">Stage 2 Process Part II: The GIS Presentation</h2>
+<p>Following the development of the GIS methods and project analysis, you will move along to quantification of your results as well as design and development of the project presentation.</p>
+<p>Following the final submission, each student project will be archived at a course project site. To follow is the archived site for Fall 2019 student projects:</p>
+<ul>
+<li><a href="https://gis-nspe-tns.github.io/fall19-projects">Fall 2019 projects</a></li>
+<li><a href="https://gis-nspe-tns.github.io/fall2023-projects_NINT5380/">Fall 2023 projects</a></li>
+</ul>
+<p>Following this week’s <a href="https://gis-nspe-tns.github.io/STGIS_UENV3200_UURB3210_sp24/lectures/lecture.12">Lecture 12</a>, we will turn to a short review of two student project presentations that follow guidelines set out in <a href="https://gis-nspe-tns.github.io/STGIS_UENV3200_UURB3210_sp24/lectures/lecture.12">Lecture l2</a>.</p>
+<p>During the <a href="https://gis-nspe-tns.github.io/STGIS_UENV3200_UURB3210_sp24/lectures/lecture.12">Lecture 12</a>, the following prompts and strategies will be covered:</p>
+<ul>
+<li><p><strong>Wayfinding - progress bars, numbering</strong></p></li>
+<li><p><strong>Font Hierarchy</strong></p></li>
+<li><p><strong>Page Space - Grid Formats</strong></p></li>
+<li><p><strong>Variable Map Scales</strong></p></li>
+<li><p><strong>Projection Systems</strong></p></li>
+<li><p><strong>Slide progression and ArcMap bookmarks</strong></p></li>
+<li><p><strong>Quantification + Summarization: Charts &amp; Maps</strong></p></li>
+<li><p><a href="https://docs.google.com/presentation/d/e/2PACX-1vRPiCIBelXXasZgDQdhi6_yvHsD2_siQ5bDnS5oPszNsWGm7zGweZ43xLCvd9mLUErgyOqgpzxZoM23/pub?start=false&amp;loop=false&amp;delayms=5000">Project Presentation I</a></p></li>
+<li><p><a href="https://docs.google.com/presentation/d/e/2PACX-1vTU6vqpc9bGWgVwO18LSpATgAkxsMdEZ4Snzo5HlSGbqQYpSTGtLAwVrhh2DCaaAQ/pub?start=false&amp;loop=false&amp;delayms=15000">Project Presentation II</a></p></li>
+</ul>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp(/^(?:http:|https:)\/\/www\.quarto\.org\/custom/);
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          // default icon
+          link.classList.add("external");
+      }
+    }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+<script src="STGIS_assignment-12_SP24_files/libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
